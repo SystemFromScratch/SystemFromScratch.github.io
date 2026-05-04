@@ -1,0 +1,27 @@
+.md-header__button.md-logo {
+  display: flex !important;
+  align-items: center;
+  width: auto;
+  max-width: min(220px, 28vw);
+  margin: 0;
+  padding: 0;
+}
+
+.md-header__button.md-logo img {
+  display: block;
+  height: auto;
+  width: auto;
+  max-height: 56px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 76.234375em) {
+  .md-header__button.md-logo {
+    max-width: 160px;
+  }
+
+  .md-header__button.md-logo img {
+    max-height: 40px;
+  }
+}

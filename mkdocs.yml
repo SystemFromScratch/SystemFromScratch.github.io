@@ -1,0 +1,49 @@
+site_name: SystemFromScratch®
+site_url: http://systemfromscratch.com
+site_description: Secure Embedded Systems | Compliance Engineering | CRA Readiness
+site_author: Anton Vynohradov
+
+repo_url: https://github.com/SystemFromScratch
+repo_name: SystemFromScratch
+
+theme:
+  name: material
+  logo: assets/logo-header.png
+  favicon: assets/favicon.png
+  palette:
+    scheme: slate
+    primary: black
+    accent: blue
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.highlight
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Services: services.md
+  - Cybersecurity: cybersecurity.md
+  - CRA Readiness: cra.md
+  - About: about.md
+  - Contact: contact.md
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - footnotes
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/SystemFromScratch
+    - icon: fontawesome/solid/globe
+      link: http://systemfromscratch.com
+
+extra_css:
+  - stylesheets/extra.css
+
+copyright: Copyright © 2026 SystemFromScratch®
