@@ -25,7 +25,7 @@ This repository contains source files, documentation, branding assets, and deplo
 
 - Static HTML / CSS / vanilla JavaScript (no build step)
 - GitHub Pages (deployed from `website/` to the `gh-pages` branch by GitHub Actions)
-- Custom domain
+- Served at https://systemfromscratch.github.io (custom domain temporarily disabled until DNS at nazwa.pl is configured; to re-enable, add `website/CNAME` and `cname:` in the deploy workflow)
 
 ## Structure
 
@@ -33,7 +33,6 @@ This repository contains source files, documentation, branding assets, and deplo
 website/
 ├── index.html              Home page (hero, services, expertise, projects, about, contact)
 ├── projects.html           Full portfolio with category filters
-├── CNAME
 └── assets/
     ├── css/style.css
     ├── img/                Logos, favicon (add project photos under img/projects/)
