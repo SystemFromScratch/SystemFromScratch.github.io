@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Website: serve",
+      "detail": "Serve ./website at http://localhost:8000 (Python standard library, no venv needed)",
+      "type": "process",
+      "command": "python3",
+      "windows": {
+        "command": "python"
+      },
+      "args": ["-u", "-m", "http.server", "8000", "--bind", "127.0.0.1", "--directory", "website"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "problemMatcher": {
+        "owner": "website",
+        "pattern": {
+          "regexp": "^__never_matches__$"
+        },
+        "background": {
+          "activesBegin": true,
+          "beginsPattern": "^Serving HTTP",
+          "endsPattern": "^Serving HTTP"
+        }
+      }
+    },
+    {
+      "label": "Website: preview",
+      "detail": "Start the local server and open the site in the default browser",
+      "dependsOn": "Website: serve",
+      "type": "shell",
+      "command": "python3 -m webbrowser http://localhost:8000/",
+      "windows": {
+        "command": "python -m webbrowser http://localhost:8000/"
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

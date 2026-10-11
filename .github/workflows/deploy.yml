@@ -1,12 +1,17 @@
-name: Deploy MkDocs Site
+name: Deploy website
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -15,10 +20,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      # Publishes the static site in ./website to the gh-pages branch
+      # (same branch the previous MkDocs setup deployed to).
+      - uses: peaceiris/actions-gh-pages@v4
         with:
-          python-version: 3.x
-
-      - run: pip install mkdocs-material
-
-      - run: mkdocs gh-deploy --force
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./website
+          publish_branch: gh-pages
+          cname: systemfromscratch.com
+          force_orphan: true
