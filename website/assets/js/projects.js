@@ -73,8 +73,30 @@ window.SFS_PROJECTS = [
     categories: ["Automotive", "Libraries"],
     tags: ["C", "CAN", "ISO 15765-2", "CMake", "MISRA C"],
     links: {
+      docs: "https://antonvynohradov.github.io/isotp-c/",
       repo: "https://github.com/AntonVynohradov/isotp-c",
     },
     art: "can",
+  },
+  {
+    title: "DXL2-C",
+    summary:
+      "Portable C11 library implementing the ROBOTIS DYNAMIXEL Protocol 2.0 wire format for embedded targets — heap-free, transport-agnostic and built with MISRA C:2012 in mind.",
+    features: [
+      "CRC-16, byte stuffing and an incremental parser that recovers from line noise",
+      "Bounded packet encoder and transport-independent link layer via callbacks",
+      "GoogleTest unit tests, pytest integration tests and a Python reference codec",
+      "Cppcheck MISRA addon, CodeQL and DXL2 Studio GUI for simulation and debugging",
+    ],
+    status: "In progress",
+    stable: false,
+    featured: false,
+    categories: ["Robotics", "Libraries"],
+    tags: ["C", "DYNAMIXEL", "MISRA C", "CMake", "GoogleTest", "Python"],
+    links: {
+      docs: "https://antonvynohradov.github.io/DXL2-C/",
+      repo: "https://github.com/AntonVynohradov/DXL2-C",
+    },
+    art: "chip",
   },
 ];
