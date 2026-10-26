@@ -8,11 +8,23 @@
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2Z"/><path d="M8 7h6M8 11h6"/></svg>',
     repo:
       '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>',
+    manual:
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M14 3v5h5M12 11v6M9 14l3 3 3-3"/></svg>',
+    article:
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>',
     demo:
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>',
   };
+  ICONS.read = ICONS.article;
 
-  var LINK_LABELS = { docs: "Documentation", repo: "Source code", demo: "Live demo" };
+  var LINK_LABELS = {
+    docs: "Documentation",
+    manual: "PDF manual",
+    article: "Article",
+    read: "Read the article",
+    repo: "Source code",
+    demo: "Live demo",
+  };
 
   var ART = {
     robot:
@@ -23,13 +35,16 @@
       '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 46h22v-16h18v16h14v-16h26v16h10v-16h18v16h14v-16h18v16h32"/><path d="M14 74h22v16h18v-16h14v16h26v-16h10v16h18v-16h14v16h18v-16h32" opacity=".55"/><path d="M14 104h172" opacity=".3" stroke-dasharray="4 6"/></svg>',
     chip:
       '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="68" y="28" width="64" height="64" rx="6"/><rect x="84" y="44" width="32" height="32" rx="3"/><path d="M80 28V16M100 28V16M120 28V16M80 104V92M100 104V92M120 104V92M68 40H56M68 60H56M68 80H56M144 40h-12M144 60h-12M144 80h-12"/></svg>',
+    bus:
+      '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 86h168"/><rect x="22" y="30" width="36" height="28" rx="4"/><rect x="82" y="30" width="36" height="28" rx="4"/><rect x="142" y="30" width="36" height="28" rx="4"/><path d="M40 58v28M100 58v28M160 58v28"/><circle cx="100" cy="86" r="5" fill="currentColor"/><path d="M58 20q21-12 42 0M118 20q21-12 42 0" opacity=".55"/><path d="m94 18 6 2-2 6M154 18l6 2-2 6" opacity=".55"/></svg>',
   };
 
   var CODE_ART = {
     robot: "ping id=1 -> status OK\nwrite goal_position[1] = 2048\nread present_position -> 2047\nwrite goal_position[2] = 1536\ntorque_enable = 1\nros2 control list_controllers\n  arm_controller   active\n  gripper_ctrl     active",
     container: "$ west init -l app\n$ west update\n$ west build -b m2s010_mkr_kit app\n[142/142] Linking C executable zephyr.elf\nMemory region   Used Size\n  FLASH:         48 KB\n  SRAM:          12 KB\n$ ccache -s",
     can: "7E0  [8]  10 14 2E F1 90 57 30 4C\n7E8  [8]  30 00 00 00 00 00 00 00\n7E0  [8]  21 33 32 33 34 35 36 37\n7E0  [8]  22 38 39 41 42 43 44 45\n7E8  [8]  03 6E F1 90 AA AA AA AA\nisotp: rx complete, 20 bytes",
-    chip: "",
+    chip: "FF FF FD 00 01 03 00 01 19 4E\nFF FF FD 00 01 07 00 55 00 06 04 26 65 5D\nping id=1 -> model 1030, fw 38\nFF FF FD 00 01 09 00 03 74 00 00 08 00 00 ..\nwrite goal_position -> status OK",
+    bus: "POLL  01 -> 11  seq=3\nDATA  11 -> 12  [evt 0x21] seq=7\nACK   12 -> 11  seq=7\nRESP  11 -> 01  ok\nPOLL  01 -> 12  seq=4\nRESP  12 -> 01  ok\nPOLL  01 -> 11  seq=4",
   };
 
   function escapeHtml(value) {
@@ -55,6 +70,50 @@
     return '<div class="project-media">' + inner + status + "</div>";
   }
 
+  function renderLinks(links) {
+    return Object.keys(links || {})
+      .map(function (key) {
+        return '<a href="' + escapeHtml(links[key]) + '" target="_blank" rel="noopener">' +
+          (ICONS[key] || ICONS.demo) + (LINK_LABELS[key] || key) + "</a>";
+      })
+      .join("");
+  }
+
+  function renderMetrics(items, className) {
+    if (!items || !items.length) return "";
+    return (
+      '<dl class="' + className + '">' +
+      items.slice(0, 3).map(function (m) {
+        return "<div><dt>" + escapeHtml(m.value) + "</dt><dd>" + escapeHtml(m.label) + "</dd></div>";
+      }).join("") +
+      "</dl>"
+    );
+  }
+
+  function renderArticle(article) {
+    var tags = (article.tags || [])
+      .map(function (t) { return '<li class="tag">' + escapeHtml(t) + "</li>"; })
+      .join("");
+    var media = article.image
+      ? '<a class="article-media" href="' + escapeHtml((article.links || {}).read || "#") +
+        '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="' +
+        escapeHtml(article.image) + '" alt="" loading="lazy"></a>'
+      : "";
+
+    return (
+      '<article class="card article-card reveal">' +
+      media +
+      '<div class="article-body">' +
+      (article.date ? '<span class="article-date">' + escapeHtml(article.date) + "</span>" : "") +
+      "<h3>" + escapeHtml(article.title) + "</h3>" +
+      "<p>" + escapeHtml(article.summary) + "</p>" +
+      renderMetrics(article.results, "article-results") +
+      (tags ? '<ul class="project-tags">' + tags + "</ul>" : "") +
+      '<div class="project-links">' + renderLinks(article.links) + "</div>" +
+      "</div></article>"
+    );
+  }
+
   function renderCard(project, detailed) {
     var tags = (project.tags || [])
       .map(function (t) { return '<li class="tag">' + escapeHtml(t) + "</li>"; })
@@ -66,12 +125,7 @@
         "</ul>"
       : "";
 
-    var links = Object.keys(project.links || {})
-      .map(function (key) {
-        return '<a href="' + escapeHtml(project.links[key]) + '" target="_blank" rel="noopener">' +
-          (ICONS[key] || ICONS.demo) + (LINK_LABELS[key] || key) + "</a>";
-      })
-      .join("");
+    var links = renderLinks(project.links);
 
     return (
       '<article class="card project-card reveal">' +
@@ -79,6 +133,7 @@
       '<div class="project-body">' +
       "<h3>" + escapeHtml(project.title) + "</h3>" +
       "<p>" + escapeHtml(project.summary) + "</p>" +
+      renderMetrics(project.highlights, "project-metrics") +
       features +
       (tags ? '<ul class="project-tags">' + tags + "</ul>" : "") +
       (links ? '<div class="project-links">' + links + "</div>" : "") +
@@ -90,6 +145,11 @@
 
   function initProjects() {
     var projects = window.SFS_PROJECTS || [];
+
+    var articlesEl = document.querySelector("[data-articles]");
+    if (articlesEl) {
+      articlesEl.innerHTML = (window.SFS_ARTICLES || []).map(renderArticle).join("");
+    }
 
     var featuredEl = document.querySelector('[data-projects="featured"]');
     if (featuredEl) {

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects | SystemFromScratch®</title>
-  <meta name="description" content="Open source portfolio of SystemFromScratch®: embedded firmware, Zephyr RTOS tooling, robotics and automotive protocol libraries.">
+  <meta name="description" content="Open source portfolio of SystemFromScratch®: released MISRA C:2012 protocol libraries (Baton-C, ISOTP-C, DXL2-C), Zephyr RTOS tooling and robotics firmware.">
   <meta name="author" content="Anton Vynohradov">
   <meta name="theme-color" content="#050b16">
   <link rel="canonical" href="https://systemfromscratch.github.io/projects.html">
@@ -12,7 +12,7 @@
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Projects | SystemFromScratch®">
-  <meta property="og:description" content="Open source embedded engineering portfolio.">
+  <meta property="og:description" content="Released MISRA C:2012 protocol libraries, Zephyr tooling and robotics firmware.">
   <meta property="og:url" content="https://systemfromscratch.github.io/projects.html">
   <meta property="og:image" content="https://systemfromscratch.github.io/assets/img/logo.png">
 
@@ -39,6 +39,7 @@
         <a href="index.html#services">Services</a>
         <a href="index.html#expertise">Expertise</a>
         <a href="projects.html" class="active" aria-current="page">Projects</a>
+        <a href="index.html#articles">Articles</a>
         <a href="index.html#about">About</a>
         <a href="index.html#contact">Contact</a>
       </nav>
@@ -59,7 +60,13 @@
       <div class="container">
         <span class="eyebrow">Portfolio</span>
         <h1>Projects</h1>
-        <p>Open source embedded work — firmware, build tooling, robotics and protocol libraries. Every project links to its documentation and source code.</p>
+        <p>Open source embedded work — released protocol libraries, robotics firmware and build tooling. Every project links to its documentation and source code; released libraries also ship a PDF user manual.</p>
+        <ul class="quality-bar quality-bar-compact" aria-label="Quality standard shared by every released library">
+          <li><strong>MISRA C:2012</strong><span>0 violations in CI</span></li>
+          <li><strong>100 % coverage</strong><span>Lines and branches</span></li>
+          <li><strong>Python twin</strong><span>C/Python cross-check</span></li>
+          <li><strong>No heap, no RTOS</strong><span>Measured stack &amp; RAM</span></li>
+        </ul>
       </div>
     </section>
 
@@ -106,6 +113,7 @@
           <ul>
             <li><a href="index.html#about">About</a></li>
             <li><a href="projects.html">Projects</a></li>
+            <li><a href="index.html#articles">Articles</a></li>
             <li><a href="index.html#contact">Contact</a></li>
           </ul>
         </div>
@@ -124,9 +132,10 @@
         <div class="footer-col">
           <h4>Resources</h4>
           <ul>
-            <li><a href="projects.html">Portfolio</a></li>
-            <li><a href="https://antonvynohradov.github.io/SmartManipulator-X-Robot-PC/" target="_blank" rel="noopener">SmartManipulator-X docs</a></li>
-            <li><a href="https://github.com/AntonVynohradov" target="_blank" rel="noopener">Open source</a></li>
+            <li><a href="https://antonvynohradov.github.io/Baton-C/" target="_blank" rel="noopener">Baton-C docs</a></li>
+            <li><a href="https://antonvynohradov.github.io/isotp-c/" target="_blank" rel="noopener">ISOTP-C docs</a></li>
+            <li><a href="https://antonvynohradov.github.io/DXL2-C/" target="_blank" rel="noopener">DXL2-C docs</a></li>
+            <li><a href="https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/" target="_blank" rel="noopener">Article: Baton-C on Zephyr</a></li>
           </ul>
         </div>
 
@@ -135,6 +144,7 @@
           <ul>
             <li><a href="https://github.com/SystemFromScratch" target="_blank" rel="noopener">GitHub · Company</a></li>
             <li><a href="https://github.com/AntonVynohradov" target="_blank" rel="noopener">GitHub · Anton</a></li>
+            <li><a href="https://www.linkedin.com/in/vynohradov" target="_blank" rel="noopener">LinkedIn</a></li>
             <li><a href="mailto:avynohradov@systemfromscratch.com">E-mail</a></li>
           </ul>
         </div>

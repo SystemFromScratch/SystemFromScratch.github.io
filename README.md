@@ -31,21 +31,27 @@ This repository contains source files, documentation, branding assets, and deplo
 
 ```
 website/
-├── index.html              Home page (hero, services, expertise, projects, about, contact)
+├── index.html              Home page (hero, services, expertise, projects, articles, about, contact)
 ├── projects.html           Full portfolio with category filters
 └── assets/
     ├── css/style.css
     ├── img/                Logos, favicon (add project photos under img/projects/)
     └── js/
-        ├── projects.js     Portfolio data — edit this to add projects
+        ├── projects.js     Portfolio and article data — edit this to add projects or articles
         └── main.js         Navigation and project rendering
 ```
 
 ## Adding a project
 
 Add an entry to `website/assets/js/projects.js`. Set `featured: true` to show it on the
-home page (the first three featured entries are shown). Optionally set `image` to a photo
-path to replace the built-in illustration.
+home page (the first three featured entries are shown). `highlights` adds up to three
+measured numbers to the card, and `links` accepts `docs`, `manual`, `article`, `repo` and
+`demo`. Optionally set `image` to a photo path to replace the built-in illustration.
+
+## Adding an article
+
+Add an entry to `window.SFS_ARTICLES` in the same file. Articles appear in the
+**Articles** section of the home page, newest first in the order of the list.
 
 ## Local preview
 
