@@ -37,6 +37,8 @@
       '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="68" y="28" width="64" height="64" rx="6"/><rect x="84" y="44" width="32" height="32" rx="3"/><path d="M80 28V16M100 28V16M120 28V16M80 104V92M100 104V92M120 104V92M68 40H56M68 60H56M68 80H56M144 40h-12M144 60h-12M144 80h-12"/></svg>',
     bus:
       '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 86h168"/><rect x="22" y="30" width="36" height="28" rx="4"/><rect x="82" y="30" width="36" height="28" rx="4"/><rect x="142" y="30" width="36" height="28" rx="4"/><path d="M40 58v28M100 58v28M160 58v28"/><circle cx="100" cy="86" r="5" fill="currentColor"/><path d="M58 20q21-12 42 0M118 20q21-12 42 0" opacity=".55"/><path d="m94 18 6 2-2 6M154 18l6 2-2 6" opacity=".55"/></svg>',
+    stepper:
+      '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="28" width="64" height="64" rx="6"/><circle cx="52" cy="60" r="20"/><circle cx="52" cy="60" r="5" fill="currentColor"/><path d="M84 60h14"/><path d="M110 60q11-30 22 0t22 0 22 0"/><path d="M110 60q11 30 22 0t22 0 22 0" opacity=".55"/><path d="M110 98h66" opacity=".3" stroke-dasharray="4 6"/></svg>',
   };
 
   var CODE_ART = {
@@ -44,6 +46,7 @@
     container: "$ west init -l app\n$ west update\n$ west build -b m2s010_mkr_kit app\n[142/142] Linking C executable zephyr.elf\nMemory region   Used Size\n  FLASH:         48 KB\n  SRAM:          12 KB\n$ ccache -s",
     can: "7E0  [8]  10 14 2E F1 90 57 30 4C\n7E8  [8]  30 00 00 00 00 00 00 00\n7E0  [8]  21 33 32 33 34 35 36 37\n7E0  [8]  22 38 39 41 42 43 44 45\n7E8  [8]  03 6E F1 90 AA AA AA AA\nisotp: rx complete, 20 bytes",
     chip: "FF FF FD 00 01 03 00 01 19 4E\nFF FF FD 00 01 07 00 55 00 06 04 26 65 5D\nping id=1 -> model 1030, fw 38\nFF FF FD 00 01 09 00 03 74 00 00 08 00 00 ..\nwrite goal_position -> status OK",
+    stepper: "move_to(3200)  1/16 microstep\nfast loop 20 kHz  slow loop 1 kHz\nia_ref = +1.414 A  ia = +1.409 A\nib_ref = -0.000 A  ib = +0.003 A\nvbus = 24.0 V  state = RUN\nposition = 3200  -> target reached",
     bus: "POLL  01 -> 11  seq=3\nDATA  11 -> 12  [evt 0x21] seq=7\nACK   12 -> 11  seq=7\nRESP  11 -> 01  ok\nPOLL  01 -> 12  seq=4\nRESP  12 -> 01  ok\nPOLL  01 -> 11  seq=4",
   };
 
@@ -148,7 +151,9 @@
 
     var articlesEl = document.querySelector("[data-articles]");
     if (articlesEl) {
-      articlesEl.innerHTML = (window.SFS_ARTICLES || []).map(renderArticle).join("");
+      var articles = window.SFS_ARTICLES || [];
+      if (articlesEl.getAttribute("data-articles") === "latest") articles = articles.slice(0, 3);
+      articlesEl.innerHTML = articles.map(renderArticle).join("");
     }
 
     var featuredEl = document.querySelector('[data-projects="featured"]');

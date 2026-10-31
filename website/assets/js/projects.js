@@ -12,7 +12,8 @@
  *   highlights  - optional measured numbers, up to three { value, label } pairs
  *   tags        - technology badges
  *   links       - any of: docs, manual, release, article, repo, demo (full URLs)
- *   art         - built-in illustration: "robot", "container", "can", "chip", "bus"
+ *   art         - built-in illustration: "robot", "container", "can", "chip", "bus",
+ *                 "stepper"
  *   image       - optional path to a photo (e.g. "assets/img/projects/foo.jpg");
  *                 when set it replaces the illustration
  */
@@ -100,6 +101,54 @@ window.SFS_PROJECTS = [
     art: "chip",
   },
   {
+    title: "Stepper-C",
+    summary:
+      "Hardware-agnostic closed-loop microstepping current control for two-phase stepper motors in C11: from a position command to phase voltages, with the hardware reached only through callbacks.",
+    features: [
+      "Per-phase PI current control tuned from R, L and one bandwidth; back-EMF feed-forward, anti-windup, bus voltage compensation",
+      "1–256 microsteps, trapezoidal motion planning, homing and exact integer positions; fixed-point or float backend",
+      "Two H-bridges or three half-bridges; overcurrent, over/undervoltage and fault protection",
+      "Software-in-the-loop against a Scilab/Xcos motor model; 100 % line and branch coverage, 0 MISRA C:2012 violations",
+    ],
+    status: "v1.0.0 · Stable",
+    stable: true,
+    featured: false,
+    categories: ["Libraries", "Robotics"],
+    highlights: [
+      { value: "336 B", label: "RAM per motor" },
+      { value: "184 B", label: "worst-case stack" },
+      { value: "0", label: "MISRA violations" },
+    ],
+    tags: ["C11", "Stepper motor", "Motor control", "STM32G4", "MISRA C:2012", "Apache-2.0"],
+    links: {
+      docs: "https://antonvynohradov.github.io/Stepper-C/",
+      manual: "https://antonvynohradov.github.io/Stepper-C/downloads/Stepper-C_User_Manual.pdf",
+      article: "https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/",
+      repo: "https://github.com/AntonVynohradov/Stepper-C",
+    },
+    art: "stepper",
+  },
+  {
+    title: "DYNAMIXEL X430 Control Table Emulator",
+    summary:
+      "Device-side emulation of ROBOTIS DYNAMIXEL X430 actuators over Protocol 2.0 in portable C11: an MCU or PC answers the host as an X430 servo while your own code drives the motor.",
+    features: [
+      "All 17 X430-family models, selected at build time via Kconfig or CMake; control tables generated from YAML",
+      "PING, READ, WRITE, sync, bulk and fast read; access rights, value ranges, EEPROM lock, Indirect Address and Bus Watchdog",
+      "Built on DXL2-C; no heap, RTOS or driver dependencies, optional mutex, clock and storage hooks",
+      "x430_sim host simulator on a pseudo-terminal or serial port, verified with ROBOTIS DynamixelSDK",
+    ],
+    status: "In progress",
+    stable: false,
+    featured: false,
+    categories: ["Libraries", "Robotics"],
+    tags: ["C11", "DYNAMIXEL", "Robotics", "Kconfig", "CMake", "Apache-2.0"],
+    links: {
+      repo: "https://github.com/AntonVynohradov/DYNAMIXEL-X430-Control-Table-Emulator",
+    },
+    art: "chip",
+  },
+  {
     title: "SmartManipulator-X",
     summary:
       "6+1 axis robotic arm: BCN3D Moveo mechanics driven by a SmartFusion2 controller that emulates DYNAMIXEL servos, so the ROBOTIS OpenMANIPULATOR-X ROS 2 stack controls it unchanged.",
@@ -149,6 +198,24 @@ window.SFS_PROJECTS = [
  *   tags, links (read, repo)
  */
 window.SFS_ARTICLES = [
+  {
+    title: "Stepper-C: stepper motor control from model to metal",
+    summary:
+      "An open-source C library that turns a position command into phase voltages for two-phase stepper motors. The same C code is verified in a Scilab/Xcos motor model and a transistor-level power-stage model before it drives a 17HS19 motor on the B-G431B-ESC1 board.",
+    date: "October 2026",
+    image:
+      "https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/assets/images/hero-3d.svg",
+    results: [
+      { value: "100 %", label: "line and branch coverage from 76 unit tests" },
+      { value: "8.2 kB", label: "of code behind a 15-function control API" },
+      { value: "20 kHz / 1 kHz", label: "current loop and motion loop rates" },
+    ],
+    tags: ["Stepper motor", "Microstepping", "Scilab/Xcos", "ngspice", "Software-in-the-loop"],
+    links: {
+      read: "https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/",
+      repo: "https://github.com/SystemFromScratch-Articles/Stepper-C-Motor-Control-Library",
+    },
+  },
   {
     title: "One wire, many MCUs, no lost messages: Baton-C as a Zephyr module",
     summary:

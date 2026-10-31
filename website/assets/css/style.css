@@ -200,27 +200,6 @@ ul {
   gap: 8px;
 }
 
-.icon-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  color: var(--text);
-  transition: background 0.15s;
-}
-
-.icon-link:hover {
-  color: var(--text);
-  background: var(--surface-2);
-}
-
-.icon-link svg {
-  width: 24px;
-  height: 24px;
-}
-
 .nav-toggle {
   display: none;
   width: 40px;

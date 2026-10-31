@@ -33,6 +33,7 @@ This repository contains source files, documentation, branding assets, and deplo
 website/
 ├── index.html              Home page (hero, services, expertise, projects, articles, about, contact)
 ├── projects.html           Full portfolio with category filters
+├── articles.html           Full list of articles
 └── assets/
     ├── css/style.css
     ├── img/                Logos, favicon (add project photos under img/projects/)
@@ -51,7 +52,8 @@ measured numbers to the card, and `links` accepts `docs`, `manual`, `article`, `
 ## Adding an article
 
 Add an entry to `window.SFS_ARTICLES` in the same file. Articles appear in the
-**Articles** section of the home page, newest first in the order of the list.
+**Articles** section of the home page (the first three entries) and on the
+**Articles** page (all entries), newest first in the order of the list.
 
 ## Local preview
 
