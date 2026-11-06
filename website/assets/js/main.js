@@ -39,6 +39,10 @@
       '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 86h168"/><rect x="22" y="30" width="36" height="28" rx="4"/><rect x="82" y="30" width="36" height="28" rx="4"/><rect x="142" y="30" width="36" height="28" rx="4"/><path d="M40 58v28M100 58v28M160 58v28"/><circle cx="100" cy="86" r="5" fill="currentColor"/><path d="M58 20q21-12 42 0M118 20q21-12 42 0" opacity=".55"/><path d="m94 18 6 2-2 6M154 18l6 2-2 6" opacity=".55"/></svg>',
     stepper:
       '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="28" width="64" height="64" rx="6"/><circle cx="52" cy="60" r="20"/><circle cx="52" cy="60" r="5" fill="currentColor"/><path d="M84 60h14"/><path d="M110 60q11-30 22 0t22 0 22 0"/><path d="M110 60q11 30 22 0t22 0 22 0" opacity=".55"/><path d="M110 98h66" opacity=".3" stroke-dasharray="4 6"/></svg>',
+    scope:
+      '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="24" y="16" width="152" height="88" rx="6"/><path d="M24 60h152M100 16v88" opacity=".3" stroke-dasharray="4 6"/><path d="M36 60q16-60 32 0t32 0 32 0 32 0"/><path d="M52 60q16-60 32 0t32 0 32 0" opacity=".55"/></svg>',
+    halfbridge:
+      '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M72 12h56M100 12v10"/><rect x="88" y="22" width="24" height="20" rx="3"/><path d="M100 42v28"/><circle cx="100" cy="56" r="4" fill="currentColor"/><rect x="88" y="70" width="24" height="20" rx="3"/><path d="M100 90v3l-6 2.5 12 5-12 5 6 2.5v2M72 110h56"/><path d="M100 56h28a5 5 0 0 1 10 0a5 5 0 0 1 10 0a5 5 0 0 1 10 0h14"/><path d="M28 32h12v-10h16v10h32M28 70h12v10h16v-10h12v10h20" opacity=".55"/></svg>',
   };
 
   var CODE_ART = {
@@ -47,6 +51,8 @@
     can: "7E0  [8]  10 14 2E F1 90 57 30 4C\n7E8  [8]  30 00 00 00 00 00 00 00\n7E0  [8]  21 33 32 33 34 35 36 37\n7E0  [8]  22 38 39 41 42 43 44 45\n7E8  [8]  03 6E F1 90 AA AA AA AA\nisotp: rx complete, 20 bytes",
     chip: "FF FF FD 00 01 03 00 01 19 4E\nFF FF FD 00 01 07 00 55 00 06 04 26 65 5D\nping id=1 -> model 1030, fw 38\nFF FF FD 00 01 09 00 03 74 00 00 08 00 00 ..\nwrite goal_position -> status OK",
     stepper: "move_to(3200)  1/16 microstep\nfast loop 20 kHz  slow loop 1 kHz\nia_ref = +1.414 A  ia = +1.409 A\nib_ref = -0.000 A  ib = +0.003 A\nvbus = 24.0 V  state = RUN\nposition = 3200  -> target reached",
+    scope: "exec(\"loader.sce\", -1);\nres = lab_run(\"SIL\", 3);\nd = sil_report_data(res);\n\n$ scilab-cli -quit -f tests/run_all.sce\n433 PASS, 0 FAIL, 0 SKIP",
+    halfbridge: "$ python tools/run_tests.py --export\nRds(on)              1.90 mOhm\nleg resistance       3.4 mOhm\nbody diode at 2 A    0.73 V\neffective dead time  133 ns\nshunt settled        345 ns",
     bus: "POLL  01 -> 11  seq=3\nDATA  11 -> 12  [evt 0x21] seq=7\nACK   12 -> 11  seq=7\nRESP  11 -> 01  ok\nPOLL  01 -> 12  seq=4\nRESP  12 -> 01  ok\nPOLL  01 -> 11  seq=4",
   };
 
@@ -164,6 +170,14 @@
         .map(function (p) { return renderCard(p, false); })
         .join("");
     }
+
+    document.querySelectorAll("[data-projects-section]").forEach(function (el) {
+      var section = el.getAttribute("data-projects-section");
+      el.innerHTML = projects
+        .filter(function (p) { return p.homeSection === section; })
+        .map(function (p) { return renderCard(p, false); })
+        .join("");
+    });
 
     var allEl = document.querySelector('[data-projects="all"]');
     if (!allEl) return;

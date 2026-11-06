@@ -57,9 +57,9 @@
     <section class="hero">
       <div class="container">
         <div class="hero-content">
-          <a class="hero-news" href="https://antonvynohradov.github.io/Baton-C/" target="_blank" rel="noopener">
+          <a class="hero-news" href="https://antonvynohradov.github.io/Stepper-C/" target="_blank" rel="noopener">
             <span class="hero-news-badge">New</span>
-            <span>Baton-C 1.0.0 — deterministic single-wire UART bus in MISRA C</span>
+            <span>Stepper-C 1.2.0 — stepper motor control with sensorless stall detection</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
           <h1>Embedded systems <span class="accent">built from scratch</span></h1>
@@ -419,6 +419,22 @@
       </div>
     </section>
 
+    <!-- ================= Motor control ================= -->
+    <section class="section" id="motor-control">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Motor control</span>
+            <h2 class="section-title">Stepper motor control, tested before it reaches hardware</h2>
+            <p class="section-intro">Stepper-C is the released control library. Stepper-Lab runs its C code against a model of the motor and power stage on a PC, and sfs-stepper-power-spice supplies the power stage values from ngspice.</p>
+          </div>
+        </div>
+
+        <div class="projects-grid" data-projects-section="motor-control"></div>
+        <noscript><p class="empty-note">Enable JavaScript to see the projects, or browse them on <a href="https://github.com/AntonVynohradov" target="_blank" rel="noopener">GitHub</a>.</p></noscript>
+      </div>
+    </section>
+
     <!-- ================= Articles ================= -->
     <section class="section section-alt" id="articles">
       <div class="container">
@@ -449,7 +465,7 @@
           <p>SystemFromScratch® was founded by <strong>Anton Vynohradov</strong>, an embedded systems engineer based in Poland. The company combines deep embedded engineering with cybersecurity and certification-focused product development.</p>
           <p>We work with industrial IoT, automotive, robotics, medical and consumer electronics teams who need a partner that understands the whole stack — silicon, firmware, operating system and the regulations that govern them.</p>
           <div class="stats">
-            <div class="stat"><strong>3 libraries</strong><span>Released in 2026: Baton-C, ISOTP-C, DXL2-C</span></div>
+            <div class="stat"><strong>4 libraries</strong><span>Released in 2026: Baton-C, ISOTP-C, DXL2-C, Stepper-C</span></div>
             <div class="stat"><strong>0 violations</strong><span>MISRA C:2012, checked in CI</span></div>
             <div class="stat"><strong>100 % coverage</strong><span>Lines and branches, every library</span></div>
           </div>
@@ -541,6 +557,7 @@
             <li><a href="https://antonvynohradov.github.io/isotp-c/" target="_blank" rel="noopener">ISOTP-C docs</a></li>
             <li><a href="https://antonvynohradov.github.io/DXL2-C/" target="_blank" rel="noopener">DXL2-C docs</a></li>
             <li><a href="https://antonvynohradov.github.io/Stepper-C/" target="_blank" rel="noopener">Stepper-C docs</a></li>
+            <li><a href="https://antonvynohradov.github.io/Stepper-Lab/" target="_blank" rel="noopener">Stepper-Lab docs</a></li>
             <li><a href="https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/" target="_blank" rel="noopener">Article: Stepper-C from model to metal</a></li>
             <li><a href="https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/" target="_blank" rel="noopener">Article: Baton-C on Zephyr</a></li>
           </ul>

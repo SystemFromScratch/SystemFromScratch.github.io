@@ -45,7 +45,8 @@ website/
 ## Adding a project
 
 Add an entry to `website/assets/js/projects.js`. Set `featured: true` to show it on the
-home page (the first three featured entries are shown). `highlights` adds up to three
+home page (the first three featured entries are shown), or `homeSection: "motor-control"`
+to show it in that section of the home page. `highlights` adds up to three
 measured numbers to the card, and `links` accepts `docs`, `manual`, `article`, `repo` and
 `demo`. Optionally set `image` to a photo path to replace the built-in illustration.
 

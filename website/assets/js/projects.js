@@ -8,12 +8,14 @@
  *   status      - short label, e.g. "In progress", "Active", "v1.0.0 · Stable"
  *   stable      - true shows a green status dot, false an amber one
  *   featured    - true shows the project on the home page (max. 3 are shown)
+ *   homeSection - optional home page section for the project, e.g. "motor-control"
+ *                 (matches data-projects-section in index.html)
  *   categories  - used by the filters on the Projects page
  *   highlights  - optional measured numbers, up to three { value, label } pairs
  *   tags        - technology badges
  *   links       - any of: docs, manual, release, article, repo, demo (full URLs)
  *   art         - built-in illustration: "robot", "container", "can", "chip", "bus",
- *                 "stepper"
+ *                 "stepper", "scope", "halfbridge"
  *   image       - optional path to a photo (e.g. "assets/img/projects/foo.jpg");
  *                 when set it replaces the illustration
  */
@@ -103,20 +105,22 @@ window.SFS_PROJECTS = [
   {
     title: "Stepper-C",
     summary:
-      "Hardware-agnostic closed-loop microstepping current control for two-phase stepper motors in C11: from a position command to phase voltages, with the hardware reached only through callbacks.",
+      "Hardware-agnostic closed-loop microstepping current control for two-phase stepper motors in C11, with sensorless stall detection: from a position command to phase voltages, with the hardware reached only through callbacks.",
     features: [
       "Per-phase PI current control tuned from R, L and one bandwidth; back-EMF feed-forward, anti-windup, bus voltage compensation",
+      "Sensorless stall detection: a back-EMF observer reports a stalled rotor or lost synchronism, 43 to 60 ms after the load angle passes 90° on the motor model",
       "1–256 microsteps, trapezoidal motion planning, homing and exact integer positions; fixed-point or float backend",
       "Two H-bridges or three half-bridges; overcurrent, over/undervoltage and fault protection",
-      "Software-in-the-loop against a Scilab/Xcos motor model; 100 % line and branch coverage, 0 MISRA C:2012 violations",
+      "100 % line and branch coverage in both backends, 0 MISRA C:2012 violations; run in the loop against a motor model in Stepper-Lab",
     ],
-    status: "v1.0.0 · Stable",
+    status: "v1.2.0 · Stable",
     stable: true,
     featured: false,
+    homeSection: "motor-control",
     categories: ["Libraries", "Robotics"],
     highlights: [
-      { value: "336 B", label: "RAM per motor" },
-      { value: "184 B", label: "worst-case stack" },
+      { value: "432 B", label: "RAM per motor" },
+      { value: "216 B", label: "worst-case stack" },
       { value: "0", label: "MISRA violations" },
     ],
     tags: ["C11", "Stepper motor", "Motor control", "STM32G4", "MISRA C:2012", "Apache-2.0"],
@@ -127,6 +131,60 @@ window.SFS_PROJECTS = [
       repo: "https://github.com/AntonVynohradov/Stepper-C",
     },
     art: "stepper",
+  },
+  {
+    title: "Stepper-Lab",
+    summary:
+      "Scilab/Xcos model of a two-phase stepper motor, its power stage and current measurement: run the real C code of Stepper-C, or a Scilab prototype of it, on a PC before the code reaches hardware.",
+    features: [
+      "Software in the loop with the compiled library, or model in the loop with the Scilab prototype, in the same diagram layout",
+      "One window selects the library, the stage file, MIL or SIL and a scenario; any Xcos source drives the motion command, run current or load torque",
+      "Averaged or switching power stage, with leg resistance, diode voltage and dead time taken from the ngspice models of sfs-stepper-power-spice",
+      "Checked against theory, a separate Python twin and between MIL and SIL. Simulation results: not yet compared with a measured motor",
+    ],
+    status: "Pre-release",
+    stable: false,
+    featured: false,
+    homeSection: "motor-control",
+    categories: ["Simulation", "Tooling"],
+    highlights: [
+      { value: "433", label: "checks passed" },
+      { value: "0", label: "failures" },
+      { value: "< 5 mA", label: "C library vs. prototype" },
+    ],
+    tags: ["Scilab/Xcos", "SIL", "MIL", "Stepper motor", "ngspice", "Apache-2.0"],
+    links: {
+      docs: "https://antonvynohradov.github.io/Stepper-Lab/",
+      manual: "https://antonvynohradov.github.io/Stepper-Lab/downloads/Stepper-Lab_User_Manual.pdf",
+      repo: "https://github.com/AntonVynohradov/Stepper-Lab",
+    },
+    art: "scope",
+  },
+  {
+    title: "sfs-stepper-power-spice",
+    summary:
+      "ngspice model of one power stage leg of the B-G431B-ESC1 (L6387E driver, two STL180N6F7 MOSFETs, low-side shunt): finds the hardware values that Stepper-Lab and Stepper-C need.",
+    features: [
+      "STL180N6F7 model fitted to the datasheet and checked against it by automated tests; behavioural L6387E driver model",
+      "Measures effective dead time, leg resistance, body diode drop, dead time margin and shunt settling at 24 V and 20 kHz",
+      "Exports a stage file with a leg voltage error table for the Stepper-Lab power stage",
+      "Several board values, such as gate resistors and shunt, are assumptions until checked against the board schematic",
+    ],
+    status: "In progress",
+    stable: false,
+    featured: false,
+    homeSection: "motor-control",
+    categories: ["Simulation", "Tooling"],
+    highlights: [
+      { value: "133 ns", label: "effective dead time" },
+      { value: "3.4 mΩ", label: "leg resistance" },
+      { value: "345 ns", label: "shunt settling" },
+    ],
+    tags: ["ngspice", "Power stage", "MOSFET", "B-G431B-ESC1", "Python", "Apache-2.0"],
+    links: {
+      repo: "https://github.com/AntonVynohradov/sfs-stepper-power-spice",
+    },
+    art: "halfbridge",
   },
   {
     title: "DYNAMIXEL X430 Control Table Emulator",
