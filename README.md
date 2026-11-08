@@ -7,7 +7,7 @@ Official corporate website repository for SystemFromScratch®.
 SystemFromScratch® is a premium engineering consultancy specializing in:
 
 - Embedded firmware
-- Hardware/software integration
+- Hardware bring-up and integration (hardware design with partner engineers)
 - Cybersecurity engineering
 - MISRA compliance
 - CRA readiness
@@ -15,7 +15,7 @@ SystemFromScratch® is a premium engineering consultancy specializing in:
 
 ## Website
 
-🌐 http://SystemFromScratch.com
+🌐 https://systemfromscratch.github.io
 
 ## Purpose
 
