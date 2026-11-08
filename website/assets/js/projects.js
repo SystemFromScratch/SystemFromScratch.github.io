@@ -8,14 +8,14 @@
  *   status      - short label, e.g. "In progress", "Active", "v1.0.0 · Stable"
  *   stable      - true shows a green status dot, false an amber one
  *   featured    - true shows the project on the home page (max. 3 are shown)
- *   homeSection - optional home page section for the project, e.g. "motor-control"
+ *   homeSection - optional home page section for the project: "motor-control" or "robotics"
  *                 (matches data-projects-section in index.html)
  *   categories  - used by the filters on the Projects page
  *   highlights  - optional measured numbers, up to three { value, label } pairs
  *   tags        - technology badges
  *   links       - any of: docs, manual, release, article, repo, demo (full URLs)
  *   art         - built-in illustration: "robot", "container", "can", "chip", "bus",
- *                 "stepper", "scope", "halfbridge"
+ *                 "stepper", "scope", "halfbridge", "servo", "planner"
  *   image       - optional path to a photo (e.g. "assets/img/projects/foo.jpg");
  *                 when set it replaces the illustration
  */
@@ -207,25 +207,88 @@ window.SFS_PROJECTS = [
     art: "chip",
   },
   {
-    title: "SmartManipulator-X",
+    title: "Doppelstep",
     summary:
-      "6+1 axis robotic arm: BCN3D Moveo mechanics driven by a SmartFusion2 controller that emulates DYNAMIXEL servos, so the ROBOTIS OpenMANIPULATOR-X ROS 2 stack controls it unchanged.",
+      "Zephyr RTOS firmware that turns a two-phase stepper motor and a small STM32 motor-control board into a DYNAMIXEL XM430-W350 smart servo: ROS 2, DynamixelSDK and DYNAMIXEL Wizard control it without changes.",
     features: [
-      "Zephyr RTOS firmware on Microchip SmartFusion2 M2S010 (Cortex-M3 + FPGA)",
-      "DYNAMIXEL Protocol 2.0 emulation of six stepper axes and a servo gripper",
-      "ROS 2 Jazzy, ros2_control and MoveIt 2 on a Dockerised Robot PC",
-      "TMC5160 stepper drivers, Python diagnostics and conformance checks",
+      "Full XM430-W350 (model 1020) Control Table over Protocol 2.0; ros2_control loop at 100 Hz tested with the official DynamixelSDK",
+      "Closed-loop microstepping current control in a 20 kHz interrupt; overcurrent, bus voltage and shared-leg faults switch the outputs off inside it",
+      "Simulated motor and power stage on the board or on a PC (native_sim), so motion and protocol work before a motor is connected",
+      "MCUboot checks an RSA-2048 signature at every start and accepts new firmware over the DYNAMIXEL bus",
     ],
     status: "In progress",
     stable: false,
     featured: false,
-    categories: ["Robotics", "RTOS", "FPGA"],
-    tags: ["Zephyr", "SmartFusion2", "ROS 2", "DYNAMIXEL", "C", "Python", "Docker"],
+    homeSection: "robotics",
+    categories: ["Robotics", "RTOS"],
+    highlights: [
+      { value: "20 kHz", label: "current loop" },
+      { value: "91", label: "tests per CI run" },
+      { value: "75.5 KiB", label: "application flash" },
+    ],
+    tags: ["Zephyr", "STM32", "DYNAMIXEL", "ROS 2", "MCUboot", "Apache-2.0"],
     links: {
-      docs: "https://antonvynohradov.github.io/SmartManipulator-X-Robot-PC/",
-      repo: "https://github.com/AntonVynohradov/SmartManipulator-X-Robot-PC",
+      docs: "https://systemfromscratch.github.io/sfs-doppelstep/",
+      manual: "https://systemfromscratch.github.io/sfs-doppelstep/Doppelstep.pdf",
+      repo: "https://github.com/SystemFromScratch/sfs-doppelstep",
+    },
+    art: "servo",
+  },
+  {
+    title: "SmartManipulator-X",
+    summary:
+      "The unchanged ROBOTIS OpenMANIPULATOR-X ROS 2 stack controls a BCN3D Moveo arm: a SmartFusion2 controller answers as virtual DYNAMIXEL servos and drives the steppers, while the Robot PC runs ros2_control in Docker.",
+    features: [
+      "Controller presents itself as DYNAMIXEL Protocol 2.0 servos, so the ROS 2 side needs no porting",
+      "ros2_control with mock hardware in Docker; a second container checks discovery, controllers and a trajectory over DDS",
+      "Robot description generated from the Moveo CAD: joint axes, link lengths, meshes and the gripper linkage",
+      "Robot PC, firmware, hardware and mechanics documented together, with a smoke test, protocol conformance check and motor tester GUI",
+    ],
+    status: "In progress",
+    stable: false,
+    featured: false,
+    homeSection: "robotics",
+    categories: ["Robotics", "RTOS", "FPGA"],
+    highlights: [
+      { value: "6 + 1", label: "stepper axes + gripper" },
+      { value: "49 / 49", label: "protocol checks on native_sim" },
+      { value: "460800", label: "bps host link" },
+    ],
+    tags: ["ROS 2 Jazzy", "ros2_control", "Zephyr", "SmartFusion2", "DYNAMIXEL", "Docker", "Apache-2.0"],
+    links: {
+      docs: "https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/",
+      manual: "https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/downloads/SmartManipulator-X_User_Manual.pdf",
+      repo: "https://github.com/SystemFromScratch/sfs-smartmanipulator-x-robot",
     },
     art: "robot",
+  },
+  {
+    title: "SmartManipulator-X Operator PC",
+    summary:
+      "Motion planning station for the SmartManipulator-X arm: MoveIt 2 and RViz2 in Docker, sending trajectories to the Robot PC over ROS 2 DDS without ever touching the motor hardware.",
+    features: [
+      "URDF/Xacro model and Fast DDS profile taken from the Robot PC repository, so joint names, limits and transport match",
+      "pick_ik solves for tool position only on the five-joint Moveo, so RViz2 interactive markers always find a plannable pose",
+      "RViz2 in a container through WSLg on Windows 11 or X11 on Linux, software OpenGL by default",
+      "One image, two Compose services: move_group with the Moveo MoveIt configuration and RViz2 with the MotionPlanning panel",
+    ],
+    status: "In progress",
+    stable: false,
+    featured: false,
+    homeSection: "robotics",
+    categories: ["Robotics", "Tooling"],
+    highlights: [
+      { value: "5 + 1", label: "arm joints + gripper" },
+      { value: "2", label: "trajectory controllers over DDS" },
+      { value: "0", label: "hardware connections" },
+    ],
+    tags: ["ROS 2 Jazzy", "MoveIt 2", "RViz2", "Fast DDS", "Docker", "Apache-2.0"],
+    links: {
+      docs: "https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/",
+      manual: "https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/downloads/SmartManipulator-X_Operator_PC_User_Manual.pdf",
+      repo: "https://github.com/SystemFromScratch/sfs-smartmanipulator-x-operator",
+    },
+    art: "planner",
   },
   {
     title: "Zephyr SmartFusion2 Workspace",

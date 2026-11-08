@@ -31,7 +31,7 @@ This repository contains source files, documentation, branding assets, and deplo
 
 ```
 website/
-├── index.html              Home page (hero, services, expertise, projects, articles, about, contact)
+├── index.html              Home page (hero, services, CRA, expertise, projects, motor control, robotics, articles, about, contact)
 ├── projects.html           Full portfolio with category filters
 ├── articles.html           Full list of articles
 └── assets/
@@ -45,7 +45,7 @@ website/
 ## Adding a project
 
 Add an entry to `website/assets/js/projects.js`. Set `featured: true` to show it on the
-home page (the first three featured entries are shown), or `homeSection: "motor-control"`
+home page (the first three featured entries are shown), or `homeSection: "motor-control"` / `"robotics"`
 to show it in that section of the home page. `highlights` adds up to three
 measured numbers to the card, and `links` accepts `docs`, `manual`, `article`, `repo` and
 `demo`. Optionally set `image` to a photo path to replace the built-in illustration.

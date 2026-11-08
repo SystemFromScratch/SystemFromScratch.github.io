@@ -43,6 +43,10 @@
       '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="24" y="16" width="152" height="88" rx="6"/><path d="M24 60h152M100 16v88" opacity=".3" stroke-dasharray="4 6"/><path d="M36 60q16-60 32 0t32 0 32 0 32 0"/><path d="M52 60q16-60 32 0t32 0 32 0" opacity=".55"/></svg>',
     halfbridge:
       '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M72 12h56M100 12v10"/><rect x="88" y="22" width="24" height="20" rx="3"/><path d="M100 42v28"/><circle cx="100" cy="56" r="4" fill="currentColor"/><rect x="88" y="70" width="24" height="20" rx="3"/><path d="M100 90v3l-6 2.5 12 5-12 5 6 2.5v2M72 110h56"/><path d="M100 56h28a5 5 0 0 1 10 0a5 5 0 0 1 10 0a5 5 0 0 1 10 0h14"/><path d="M28 32h12v-10h16v10h32M28 70h12v10h16v-10h12v10h20" opacity=".55"/></svg>',
+    servo:
+      '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="24" y="30" width="60" height="60" rx="6"/><circle cx="54" cy="60" r="18"/><circle cx="54" cy="60" r="4" fill="currentColor"/><rect x="84" y="40" width="34" height="40" rx="4"/><path d="M92 50h18M92 60h18M92 70h10" opacity=".55"/><path d="M118 60h20"/><circle cx="142" cy="60" r="4" fill="currentColor"/><path d="M146 60h38M160 48v24M176 48v24" opacity=".55"/><path d="M28 104h152" opacity=".3" stroke-dasharray="4 6"/></svg>',
+    planner:
+      '<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="14" width="168" height="92" rx="6"/><path d="M60 92h40"/><circle cx="80" cy="86" r="5"/><path d="M80 81 98 54"/><circle cx="100" cy="50" r="5"/><path d="M105 48 134 40"/><path d="M138 40h8M146 40l6-6M146 40l6 6"/><path d="M80 81 64 50" opacity=".45" stroke-dasharray="4 5"/><path d="M64 50 96 32" opacity=".45" stroke-dasharray="4 5"/><path d="M98 54q24-34 48-14" opacity=".55" stroke-dasharray="2 6"/><circle cx="160" cy="34" r="6" opacity=".7"/><path d="M160 24v-4M160 48v-4M150 34h-4M174 34h-4" opacity=".7"/></svg>',
   };
 
   var CODE_ART = {
@@ -53,6 +57,8 @@
     stepper: "move_to(3200)  1/16 microstep\nfast loop 20 kHz  slow loop 1 kHz\nia_ref = +1.414 A  ia = +1.409 A\nib_ref = -0.000 A  ib = +0.003 A\nvbus = 24.0 V  state = RUN\nposition = 3200  -> target reached",
     scope: "exec(\"loader.sce\", -1);\nres = lab_run(\"SIL\", 3);\nd = sil_report_data(res);\n\n$ scilab-cli -quit -f tests/run_all.sce\n433 PASS, 0 FAIL, 0 SKIP",
     halfbridge: "$ python tools/run_tests.py --export\nRds(on)              1.90 mOhm\nleg resistance       3.4 mOhm\nbody diode at 2 A    0.73 V\neffective dead time  133 ns\nshunt settled        345 ns",
+    servo: "ping id=1 -> model 1020 (XM430-W350)\noperating_mode = 3  position\ntorque_enable = 1\nwrite goal_position = 2048\ncurrent loop 20 kHz  vbus 24.0 V\nread present_position -> 2048\nmcuboot: image signature OK",
+    planner: "$ docker compose up move_group rviz\n[move_group] planning pipeline: ompl\n[move_group] kinematics: pick_ik (position)\nplan arm -> pose \"ready\"  ok\nexecute via DDS -> arm_controller\ntrajectory finished: SUCCEEDED",
     bus: "POLL  01 -> 11  seq=3\nDATA  11 -> 12  [evt 0x21] seq=7\nACK   12 -> 11  seq=7\nRESP  11 -> 01  ok\nPOLL  01 -> 12  seq=4\nRESP  12 -> 01  ok\nPOLL  01 -> 11  seq=4",
   };
 
