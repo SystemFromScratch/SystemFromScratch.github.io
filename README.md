@@ -15,7 +15,7 @@ SystemFromScratch® is a premium engineering consultancy specializing in:
 
 ## Website
 
-🌐 https://systemfromscratch.github.io
+🌐 https://systemfromscratch.com
 
 ## Purpose
 
@@ -25,7 +25,7 @@ This repository contains source files, documentation, branding assets, and deplo
 
 - Static HTML / CSS / vanilla JavaScript (no build step)
 - GitHub Pages (deployed from `website/` to the `gh-pages` branch by GitHub Actions)
-- Served at https://systemfromscratch.github.io (custom domain temporarily disabled until DNS at nazwa.pl is configured; to re-enable, add `website/CNAME` and `cname:` in the deploy workflow)
+- Served at https://systemfromscratch.com (custom domain set by `cname:` in the deploy workflow)
 
 ## Structure
 

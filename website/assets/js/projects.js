@@ -321,7 +321,7 @@ window.SFS_PROJECTS = [
  */
 window.SFS_ARTICLES = [
   {
-    title: "A robot arm, every layer built from scratch",
+    title: "A robot arm, every layer engineered end to end",
     summary:
       "SmartManipulator-X case study: the unchanged ROBOTIS OpenMANIPULATOR-X ROS 2 stack drives a 3D-printed BCN3D Moveo arm through a SmartFusion2 controller that answers as DYNAMIXEL servos. Seven layers, one command followed from MoveIt 2 to the motor, and three ways to wire the joints compared.",
     date: "November 2026",

@@ -1227,6 +1227,12 @@ ul {
   color: var(--text-dim);
 }
 
+.footer-bottom .footer-tm {
+  flex-basis: 100%;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 /* ---------- Reveal animation ---------- */
 
 .reveal {
