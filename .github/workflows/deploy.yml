@@ -28,3 +28,5 @@ jobs:
           publish_dir: ./website
           publish_branch: gh-pages
           force_orphan: true
+          # Keeps the custom domain set after each deploy (force_orphan wipes gh-pages).
+          cname: systemfromscratch.com
