@@ -316,9 +316,28 @@ window.SFS_PROJECTS = [
  * Technical articles. Fields:
  *   title, summary, date ("Month YYYY"), image (full URL or path),
  *   results  - up to three { value, label } pairs quoted from the article
- *   tags, links (read, repo)
+ *   tags, links (read, repo; case for a case study page on this site)
+ *   cta      - optional label of the main button (default "Explore the article")
  */
 window.SFS_ARTICLES = [
+  {
+    title: "A robot arm, every layer built from scratch",
+    summary:
+      "SmartManipulator-X case study: the unchanged ROBOTIS OpenMANIPULATOR-X ROS 2 stack drives a 3D-printed BCN3D Moveo arm through a SmartFusion2 controller that answers as DYNAMIXEL servos. Seven layers, one command followed from MoveIt 2 to the motor, and three ways to wire the joints compared.",
+    date: "November 2026",
+    image: "assets/img/robot/article-robot.webp",
+    cta: "Explore the robot",
+    results: [
+      { value: "7", label: "layers, from mechanics to quality and security" },
+      { value: "0", label: "lines changed in the ROBOTIS robot software" },
+      { value: "3", label: "wiring architectures compared: central, RS-485, CAN" },
+    ],
+    tags: ["ROS 2", "MoveIt 2", "DYNAMIXEL", "Zephyr", "SmartFusion2", "Case study"],
+    links: {
+      case: "robot.html",
+      repo: "https://github.com/SystemFromScratch/sfs-smartmanipulator-x-robot",
+    },
+  },
   {
     title: "Stepper-C: stepper motor control from model to metal",
     summary:

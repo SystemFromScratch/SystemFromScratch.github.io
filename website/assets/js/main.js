@@ -16,12 +16,14 @@
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>',
   };
   ICONS.read = ICONS.article;
+  ICONS["case"] = ICONS.article;
 
   var LINK_LABELS = {
     docs: "Documentation",
     manual: "PDF manual",
     article: "Article",
     read: "Read the article",
+    case: "Read the case study",
     repo: "Source code",
     demo: "Live demo",
   };
@@ -105,14 +107,34 @@
     );
   }
 
+  var ARROW =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+  /* Links to other sites open in a new tab; pages of this site open in place. */
+  function linkTarget(url) {
+    return /^https?:\/\//.test(url) ? ' target="_blank" rel="noopener"' : "";
+  }
+
   function renderArticle(article) {
+    var links = article.links || {};
+    var mainKey = links.read ? "read" : links["case"] ? "case" : null;
+    var mainUrl = mainKey ? links[mainKey] : "#";
+    var cta = article.cta || (mainKey === "case" ? "Explore the case study" : "Explore the article");
+    var otherLinks = {};
+    Object.keys(links).forEach(function (k) {
+      if (k !== mainKey) otherLinks[k] = links[k];
+    });
+
     var tags = (article.tags || [])
       .map(function (t) { return '<li class="tag">' + escapeHtml(t) + "</li>"; })
       .join("");
     var media = article.image
-      ? '<a class="article-media" href="' + escapeHtml((article.links || {}).read || "#") +
-        '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="' +
-        escapeHtml(article.image) + '" alt="" loading="lazy"></a>'
+      ? '<a class="article-media" href="' + escapeHtml(mainUrl) + '"' + linkTarget(mainUrl) +
+        ' tabindex="-1" aria-hidden="true"><img src="' + escapeHtml(article.image) + '" alt="" loading="lazy"></a>'
+      : "";
+    var button = mainKey
+      ? '<a class="btn btn-primary" href="' + escapeHtml(mainUrl) + '"' + linkTarget(mainUrl) + ">" +
+        escapeHtml(cta) + ARROW + "</a>"
       : "";
 
     return (
@@ -124,7 +146,8 @@
       "<p>" + escapeHtml(article.summary) + "</p>" +
       renderMetrics(article.results, "article-results") +
       (tags ? '<ul class="project-tags">' + tags + "</ul>" : "") +
-      '<div class="project-links">' + renderLinks(article.links) + "</div>" +
+      '<div class="article-actions">' + button +
+      '<div class="project-links">' + renderLinks(otherLinks) + "</div></div>" +
       "</div></article>"
     );
   }
