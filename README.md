@@ -100,4 +100,4 @@ Unauthorized copying, reproduction, or commercial use is prohibited.
 
 ## Contact
 
-📩 avynohradov@systemfromscratch.com
+📩 contact@systemfromscratch.com
