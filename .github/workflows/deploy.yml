@@ -20,6 +20,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Writes the project and article cards into the HTML so search
+      # engines see them without running JavaScript.
+      - name: Prerender cards
+        run: node tools/prerender.mjs
+
       # Publishes the static site in ./website to the gh-pages branch
       # (same branch the previous MkDocs setup deployed to).
       - uses: peaceiris/actions-gh-pages@v4

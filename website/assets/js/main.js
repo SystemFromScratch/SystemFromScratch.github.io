@@ -179,6 +179,9 @@
     );
   }
 
+  /* Used by tools/prerender.mjs to write the cards into the HTML at build time. */
+  window.SFS_RENDER = { card: renderCard, article: renderArticle };
+
   /* ---------- Projects rendering ---------- */
 
   function initProjects() {

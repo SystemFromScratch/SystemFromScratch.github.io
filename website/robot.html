@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Robot Arm Case Study | SystemFromScratch®</title>
-  <meta name="description" content="SmartManipulator-X: a BCN3D Moveo robot arm where every layer — electronics, FPGA, Zephyr RTOS, DYNAMIXEL servo emulation and ROS 2 integration — is engineered by SystemFromScratch®; the full stack runs in simulation today.">
+  <meta name="description" content="SmartManipulator-X case study: a robot arm engineered layer by layer, from SmartFusion2 FPGA and Zephyr RTOS to DYNAMIXEL servo emulation and ROS 2.">
   <meta name="author" content="Anton Vynohradov">
   <meta name="theme-color" content="#050b16">
   <link rel="canonical" href="https://systemfromscratch.com/robot.html">
@@ -15,6 +15,12 @@
   <meta property="og:description" content="Robot software written for premium servos runs unchanged on our servo emulation — today in simulation, next on low-cost motors and a 3D-printed arm. Take it apart layer by layer.">
   <meta property="og:url" content="https://systemfromscratch.com/robot.html">
   <meta property="og:image" content="https://systemfromscratch.com/assets/img/robot/og-robot.png">
+  <meta property="og:site_name" content="SystemFromScratch®">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="A robot arm, every layer engineered end to end | SystemFromScratch®">
+  <meta name="twitter:description" content="Robot software written for premium servos runs unchanged on our servo emulation — today in simulation, next on low-cost motors and a 3D-printed arm. Take it apart layer by layer.">
+  <meta name="twitter:image" content="https://systemfromscratch.com/assets/img/robot/og-robot.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +32,7 @@
 
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="index.html" aria-label="SystemFromScratch® home">
+      <a class="brand" href="/" aria-label="SystemFromScratch® home">
         <svg class="brand-mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
           <rect x="9" y="9" width="22" height="22" rx="3"/>
           <rect x="14.5" y="14.5" width="11" height="11" rx="1.5"/>
@@ -36,13 +42,13 @@
       </a>
 
       <nav class="nav" id="site-nav" aria-label="Main">
-        <a href="index.html">Home</a>
+        <a href="/">Home</a>
         <a href="#robot" class="active">Case study</a>
         <a href="#layers">Layers</a>
         <a href="#signal">Signal path</a>
         <a href="#architecture">Architectures</a>
         <a href="#doppelstep">Doppelstep</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="/#contact">Contact</a>
       </nav>
 
       <div class="header-actions">
@@ -62,7 +68,7 @@
           <p class="lead">The robot’s software expects expensive proprietary servos. We are building a controller that speaks their language, so low-cost motors and a 3D-printed arm can run the same software unchanged. In simulation, it already does.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#layers">Explore the layers <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <a class="btn btn-outline" href="index.html#contact">Talk about your product <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn btn-outline" href="/#contact">Talk about your product <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
           <div class="hero-stats">
             <div><strong>7</strong><span>layers, one point of contact</span></div>
@@ -135,7 +141,7 @@
               <span class="panel-label muted">See the work</span>
               <div class="link-list"><a href="https://github.com/BCN3D/BCN3D-Moveo" target="_blank" rel="noopener">BCN3D Moveo CAD ↗</a><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/" target="_blank" rel="noopener">Mechanical description ↗</a></div>
             </div>
-            <div class="service-line"><span>Service: <strong>Hardware design with partner engineers</strong></span><a href="index.html#contact">Need this layer? →</a></div>
+            <div class="service-line"><span>Service: <strong>Hardware design with partner engineers</strong></span><a href="/#contact">Need this layer? →</a></div>
           </div>
           <div class="layer-panel" role="tabpanel" id="panel-elec" aria-labelledby="tab-elec" data-img="assets/img/robot/arm-dim.webp" data-parts="ctrl">
             <div class="panel-head"><span>LAYER 02</span><span class="badge badge-hw">Hardware in progress</span></div>
@@ -153,7 +159,7 @@
               <span class="panel-label muted">See the work</span>
               <div class="link-list"><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/" target="_blank" rel="noopener">SmartManipulator-X docs ↗</a><a href="https://systemfromscratch.github.io/sfs-doppelstep/hardware-checklist/" target="_blank" rel="noopener">Doppelstep hardware checklist ↗</a></div>
             </div>
-            <div class="service-line"><span>Service: <strong>Hardware bring-up &amp; integration</strong></span><a href="index.html#contact">Need this layer? →</a></div>
+            <div class="service-line"><span>Service: <strong>Hardware bring-up &amp; integration</strong></span><a href="/#contact">Need this layer? →</a></div>
           </div>
           <div class="layer-panel" role="tabpanel" id="panel-fpga" aria-labelledby="tab-fpga" data-img="assets/img/robot/arm-dim.webp" data-parts="ctrl">
             <div class="panel-head"><span>LAYER 03</span><span class="badge badge-hw">Hardware in progress</span></div>
@@ -171,7 +177,7 @@
               <span class="panel-label muted">See the work</span>
               <div class="link-list"><a href="https://github.com/AntonVynohradov/Zephyr-SmartFusion2-workspace" target="_blank" rel="noopener">Zephyr SmartFusion2 workspace ↗</a><a href="https://antonvynohradov.github.io/Stepper-C/" target="_blank" rel="noopener">Stepper-C ↗</a></div>
             </div>
-            <div class="service-line"><span>Service: <strong>BSP &amp; device drivers</strong></span><a href="index.html#contact">Need this layer? →</a></div>
+            <div class="service-line"><span>Service: <strong>BSP &amp; device drivers</strong></span><a href="/#contact">Need this layer? →</a></div>
           </div>
           <div class="layer-panel" role="tabpanel" id="panel-os" aria-labelledby="tab-os" data-img="assets/img/robot/arm-dim.webp" data-parts="ctrl">
             <div class="panel-head"><span>LAYER 04</span><span class="badge badge-hw">Hardware in progress</span></div>
@@ -189,7 +195,7 @@
               <span class="panel-label muted">See the work</span>
               <div class="link-list"><a href="https://github.com/AntonVynohradov/Zephyr-SmartFusion2-workspace" target="_blank" rel="noopener">Zephyr SmartFusion2 workspace ↗</a><a href="https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/" target="_blank" rel="noopener">Baton-C on Zephyr (article) ↗</a></div>
             </div>
-            <div class="service-line"><span>Service: <strong>RTOS &amp; Embedded Linux</strong></span><a href="index.html#contact">Need this layer? →</a></div>
+            <div class="service-line"><span>Service: <strong>RTOS &amp; Embedded Linux</strong></span><a href="/#contact">Need this layer? →</a></div>
           </div>
           <div class="layer-panel" role="tabpanel" id="panel-emul" aria-labelledby="tab-emul" data-img="assets/img/robot/arm-motors.webp" data-parts="motor ctrl">
             <div class="panel-head"><span>LAYER 05</span><span class="badge badge-sim">Runs in simulation</span></div>
@@ -207,7 +213,7 @@
               <span class="panel-label muted">See the work</span>
               <div class="link-list"><a href="https://antonvynohradov.github.io/DXL2-C/" target="_blank" rel="noopener">DXL2-C ↗</a><a href="https://github.com/AntonVynohradov/DYNAMIXEL-X430-Control-Table-Emulator" target="_blank" rel="noopener">X430 Control Table Emulator ↗</a><a href="https://systemfromscratch.github.io/sfs-doppelstep/" target="_blank" rel="noopener">Doppelstep ↗</a></div>
             </div>
-            <div class="service-line"><span>Service: <strong>Embedded software development</strong></span><a href="index.html#contact">Need this layer? →</a></div>
+            <div class="service-line"><span>Service: <strong>Embedded software development</strong></span><a href="/#contact">Need this layer? →</a></div>
           </div>
           <div class="layer-panel" role="tabpanel" id="panel-integ" aria-labelledby="tab-integ" data-img="assets/img/robot/arm-dim.webp" data-parts="pc">
             <div class="panel-head"><span>LAYER 06</span><span class="badge badge-sim">Runs in simulation</span></div>
@@ -225,7 +231,7 @@
               <span class="panel-label muted">See the work</span>
               <div class="link-list"><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/" target="_blank" rel="noopener">Robot PC docs ↗</a><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/" target="_blank" rel="noopener">Operator PC docs ↗</a><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/rviz/" target="_blank" rel="noopener">Planning in RViz2 ↗</a></div>
             </div>
-            <div class="service-line"><span>Service: <strong>System integration</strong></span><a href="index.html#contact">Need this layer? →</a></div>
+            <div class="service-line"><span>Service: <strong>System integration</strong></span><a href="/#contact">Need this layer? →</a></div>
           </div>
           <div class="layer-panel" role="tabpanel" id="panel-qual" aria-labelledby="tab-qual" data-img="assets/img/robot/arm-neutral.webp" data-parts="motor ctrl pc">
             <div class="panel-head"><span>LAYER 07</span><span class="badge badge-sim">Built into every library</span></div>
@@ -243,7 +249,7 @@
               <span class="panel-label muted">See the work</span>
               <div class="link-list"><a href="https://antonvynohradov.github.io/Stepper-C/" target="_blank" rel="noopener">Stepper-C ↗</a><a href="https://antonvynohradov.github.io/Stepper-Lab/" target="_blank" rel="noopener">Stepper-Lab ↗</a><a href="https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/" target="_blank" rel="noopener">Stepper-C: model to metal (article) ↗</a></div>
             </div>
-            <div class="service-line"><span>Service: <strong>Cybersecurity, CRA &amp; compliance</strong></span><a href="index.html#contact">Need this layer? →</a></div>
+            <div class="service-line"><span>Service: <strong>Cybersecurity, CRA &amp; compliance</strong></span><a href="/#contact">Need this layer? →</a></div>
           </div>
           </div>
         </div>
@@ -452,7 +458,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a class="brand" href="index.html" aria-label="SystemFromScratch® home">
+          <a class="brand" href="/" aria-label="SystemFromScratch® home">
             <svg class="brand-mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
           <rect x="9" y="9" width="22" height="22" rx="3"/>
           <rect x="14.5" y="14.5" width="11" height="11" rx="1.5"/>
@@ -466,24 +472,24 @@
         <div class="footer-col">
           <h4>Company</h4>
           <ul>
-            <li><a href="index.html#about">About</a></li>
+            <li><a href="/#about">About</a></li>
             <li><a href="robot.html">Robot case study</a></li>
             <li><a href="projects.html">Projects</a></li>
             <li><a href="articles.html">Articles</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="/#contact">Contact</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
           <h4>Services</h4>
           <ul>
-            <li><a href="index.html#services">Hardware design with partners</a></li>
-            <li><a href="index.html#services">Hardware bring-up &amp; integration</a></li>
-            <li><a href="index.html#services">BSP &amp; device drivers</a></li>
-            <li><a href="index.html#services">RTOS &amp; Embedded Linux</a></li>
-            <li><a href="index.html#services">Embedded software development</a></li>
-            <li><a href="index.html#services">System integration</a></li>
-            <li><a href="index.html#cra">Cybersecurity, CRA &amp; compliance</a></li>
+            <li><a href="/#services">Hardware design with partners</a></li>
+            <li><a href="/#services">Hardware bring-up &amp; integration</a></li>
+            <li><a href="/#services">BSP &amp; device drivers</a></li>
+            <li><a href="/#services">RTOS &amp; Embedded Linux</a></li>
+            <li><a href="/#services">Embedded software development</a></li>
+            <li><a href="/#services">System integration</a></li>
+            <li><a href="/#cra">Cybersecurity, CRA &amp; compliance</a></li>
           </ul>
         </div>
 

@@ -15,6 +15,12 @@
   <meta property="og:description" content="Embedded engineering write-ups with reproducible evidence.">
   <meta property="og:url" content="https://systemfromscratch.com/articles.html">
   <meta property="og:image" content="https://systemfromscratch.com/assets/img/logo.png">
+  <meta property="og:site_name" content="SystemFromScratch®">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Articles | SystemFromScratch®">
+  <meta name="twitter:description" content="Embedded engineering write-ups with reproducible evidence.">
+  <meta name="twitter:image" content="https://systemfromscratch.com/assets/img/logo.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +32,7 @@
 
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="index.html" aria-label="SystemFromScratch® home">
+      <a class="brand" href="/" aria-label="SystemFromScratch® home">
         <svg class="brand-mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
           <rect x="9" y="9" width="22" height="22" rx="3"/>
           <rect x="14.5" y="14.5" width="11" height="11" rx="1.5"/>
@@ -36,14 +42,14 @@
       </a>
 
       <nav class="nav" id="site-nav" aria-label="Main">
-        <a href="index.html">Home</a>
-        <a href="index.html#services">Services</a>
-        <a href="index.html#cra">CRA</a>
+        <a href="/">Home</a>
+        <a href="/#services">Services</a>
+        <a href="/#cra">CRA</a>
         <a href="robot.html">Case study</a>
         <a href="projects.html">Projects</a>
         <a href="articles.html" class="active" aria-current="page">Articles</a>
-        <a href="index.html#about">About</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
       </nav>
 
       <div class="header-actions">
@@ -65,8 +71,7 @@
 
     <section class="section">
       <div class="container">
-        <div class="articles-list" data-articles="all"></div>
-        <noscript><p class="empty-note">Enable JavaScript to see the articles.</p></noscript>
+        <div class="articles-list" data-articles="all"><!-- prerender:articles --><article class="card article-card"><a class="article-media" href="robot.html" tabindex="-1" aria-hidden="true"><img src="assets/img/robot/article-robot.webp" alt="" loading="lazy"></a><div class="article-body"><span class="article-date">November 2026</span><h3>A robot arm, every layer engineered end to end</h3><p>SmartManipulator-X case study: the unchanged ROBOTIS OpenMANIPULATOR-X ROS 2 stack drives a 3D-printed BCN3D Moveo arm through a SmartFusion2 controller that answers as DYNAMIXEL servos. Seven layers, one command followed from MoveIt 2 to the motor, and three ways to wire the joints compared.</p><dl class="article-results"><div><dt>7</dt><dd>layers, from mechanics to quality and security</dd></div><div><dt>0</dt><dd>lines changed in the ROBOTIS robot software</dd></div><div><dt>3</dt><dd>wiring architectures compared: central, RS-485, CAN</dd></div></dl><ul class="project-tags"><li class="tag">ROS 2</li><li class="tag">MoveIt 2</li><li class="tag">DYNAMIXEL</li><li class="tag">Zephyr</li><li class="tag">SmartFusion2</li><li class="tag">Case study</li></ul><div class="article-actions"><a class="btn btn-primary" href="robot.html">Explore the robot<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><div class="project-links"><a href="https://github.com/SystemFromScratch/sfs-smartmanipulator-x-robot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>Source code</a></div></div></div></article><article class="card article-card"><a class="article-media" href="https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/assets/images/hero-3d.svg" alt="" loading="lazy"></a><div class="article-body"><span class="article-date">October 2026</span><h3>Stepper-C: stepper motor control from model to metal</h3><p>An open-source C library that turns a position command into phase voltages for two-phase stepper motors. The same C code is verified in a Scilab/Xcos motor model and a transistor-level power-stage model before it drives a 17HS19 motor on the B-G431B-ESC1 board.</p><dl class="article-results"><div><dt>100 %</dt><dd>line and branch coverage from 76 unit tests</dd></div><div><dt>8.2 kB</dt><dd>of code behind a 15-function control API</dd></div><div><dt>20 kHz / 1 kHz</dt><dd>current loop and motion loop rates</dd></div></dl><ul class="project-tags"><li class="tag">Stepper motor</li><li class="tag">Microstepping</li><li class="tag">Scilab/Xcos</li><li class="tag">ngspice</li><li class="tag">Software-in-the-loop</li></ul><div class="article-actions"><a class="btn btn-primary" href="https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/" target="_blank" rel="noopener">Explore the article<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><div class="project-links"><a href="https://github.com/SystemFromScratch-Articles/Stepper-C-Motor-Control-Library" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>Source code</a></div></div></div></article><article class="card article-card"><a class="article-media" href="https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/assets/images/social-card.png" alt="" loading="lazy"></a><div class="article-body"><span class="article-date">October 2026</span><h3>One wire, many MCUs, no lost messages: Baton-C as a Zephyr module</h3><p>How a deterministic single-wire UART bus written in MISRA C became a Zephyr module: devicetree binding, interrupt glue and a three-node bus tested on native_sim under five line-noise patterns. Every number is reproducible from the repository.</p><dl class="article-results"><div><dt>40 / 40</dt><dd>test cases passed across five noise patterns</dd></div><div><dt>200 / 200</dt><dd>events delivered with 1 corrupted byte in 150</dd></div><div><dt>≈ 6 KB</dt><dd>of library code on Cortex-M3 (-Os); the integration replaces ~200 lines of hand-written UART ISR code</dd></div></dl><ul class="project-tags"><li class="tag">Zephyr</li><li class="tag">UART</li><li class="tag">MISRA C</li><li class="tag">native_sim</li><li class="tag">SmartFusion2</li></ul><div class="article-actions"><a class="btn btn-primary" href="https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/" target="_blank" rel="noopener">Explore the article<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><div class="project-links"><a href="https://github.com/SystemFromScratch-Articles/Baton-C-One-wire-many-MCUs-no-lost-messages" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>Source code</a></div></div></div></article><!-- /prerender:articles --></div>
       </div>
     </section>
 
@@ -89,7 +94,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a class="brand" href="index.html" aria-label="SystemFromScratch® home">
+          <a class="brand" href="/" aria-label="SystemFromScratch® home">
             <svg class="brand-mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
               <rect x="9" y="9" width="22" height="22" rx="3"/>
               <rect x="14.5" y="14.5" width="11" height="11" rx="1.5"/>
@@ -103,24 +108,24 @@
         <div class="footer-col">
           <h4>Company</h4>
           <ul>
-            <li><a href="index.html#about">About</a></li>
+            <li><a href="/#about">About</a></li>
             <li><a href="robot.html">Robot case study</a></li>
             <li><a href="projects.html">Projects</a></li>
             <li><a href="articles.html">Articles</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="/#contact">Contact</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
           <h4>Services</h4>
           <ul>
-            <li><a href="index.html#services">Hardware design with partners</a></li>
-            <li><a href="index.html#services">Hardware bring-up &amp; integration</a></li>
-            <li><a href="index.html#services">BSP &amp; device drivers</a></li>
-            <li><a href="index.html#services">RTOS &amp; Embedded Linux</a></li>
-            <li><a href="index.html#services">Embedded software development</a></li>
-            <li><a href="index.html#services">System integration</a></li>
-            <li><a href="index.html#cra">Cybersecurity, CRA &amp; compliance</a></li>
+            <li><a href="/#services">Hardware design with partners</a></li>
+            <li><a href="/#services">Hardware bring-up &amp; integration</a></li>
+            <li><a href="/#services">BSP &amp; device drivers</a></li>
+            <li><a href="/#services">RTOS &amp; Embedded Linux</a></li>
+            <li><a href="/#services">Embedded software development</a></li>
+            <li><a href="/#services">System integration</a></li>
+            <li><a href="/#cra">Cybersecurity, CRA &amp; compliance</a></li>
           </ul>
         </div>
 

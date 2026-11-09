@@ -47,6 +47,17 @@ website/
         └── layers.js       Layer explorer and architecture switch (index.html, robot.html)
 ```
 
+## SEO
+
+- `website/robots.txt` and `website/sitemap.xml` are static; update `<lastmod>` in the sitemap when a page changes and add new pages to it.
+- The home page carries Organization / WebSite structured data (JSON-LD) in its `<head>`.
+- The cards on `projects.html` and `articles.html` are written into the HTML by
+  `node tools/prerender.mjs` (between the `<!-- prerender:... -->` markers), so search engines
+  see them without JavaScript. The deploy workflow runs it; run it locally after editing
+  `projects.js` and commit the result.
+- Internal links to the home page use `/`, which matches the canonical URL. Preview the site
+  through the local server task, not by opening the files directly.
+
 ## Adding a project
 
 Add an entry to `website/assets/js/projects.js`; it appears on the **Projects** page.
