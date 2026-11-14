@@ -515,6 +515,10 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.lib-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .link-card {
   display: flex;
   flex-direction: column;
@@ -1220,6 +1224,10 @@
   .lib-grid,
   .evidence-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lib-grid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 
   .path-steps {

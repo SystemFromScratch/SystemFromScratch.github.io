@@ -103,6 +103,34 @@ window.SFS_PROJECTS = [
     art: "chip",
   },
   {
+    title: "DYNAMIXEL X430 Control Table Emulator",
+    summary:
+      "Device-side emulation of ROBOTIS DYNAMIXEL X430 actuators over Protocol 2.0 in portable C11: your firmware drives any motor and the host sees a genuine X430, so DynamixelSDK, DYNAMIXEL Wizard and ROS 2 work unchanged.",
+    features: [
+      "All 17 X430 models, selected at build time with CMake or Kconfig; Control Tables generated from YAML and checked against the ROBOTIS e-Manual",
+      "PING, READ, WRITE, REG_WRITE/ACTION, sync, bulk and fast read, backup and factory reset; access rights, value ranges, EEPROM lock, Indirect Address and Bus Watchdog",
+      "Built on DXL2-C, no heap or RTOS: 384 B RAM per device and 9,921 B flash on a Cortex-M4",
+      "100 % line and branch coverage, 0 MISRA C:2012 violations; 52 end-to-end checks with the official DynamixelSDK",
+      "Verified on hardware: a Zephyr stepper joint on an STM32G431 answers DYNAMIXEL Wizard 2.0 as an XM430-W350",
+    ],
+    status: "v1.0.0 · Stable",
+    stable: true,
+    featured: false,
+    categories: ["Libraries", "Robotics"],
+    highlights: [
+      { value: "100 %", label: "branch coverage" },
+      { value: "0", label: "MISRA violations" },
+      { value: "384 B", label: "RAM per device" },
+    ],
+    tags: ["C11", "DYNAMIXEL", "Robotics", "Kconfig", "MISRA C:2012", "Apache-2.0"],
+    links: {
+      docs: "https://antonvynohradov.github.io/DYNAMIXEL-X430-Control-Table-Emulator/",
+      manual: "https://antonvynohradov.github.io/DYNAMIXEL-X430-Control-Table-Emulator/downloads/DYNAMIXEL-X430-Control-Table-Emulator_User_Manual.pdf",
+      repo: "https://github.com/AntonVynohradov/DYNAMIXEL-X430-Control-Table-Emulator",
+    },
+    art: "chip",
+  },
+  {
     title: "Stepper-C",
     summary:
       "Hardware-agnostic closed-loop microstepping current control for two-phase stepper motors in C11, with sensorless stall detection: from a position command to phase voltages, with the hardware reached only through callbacks.",
@@ -185,26 +213,6 @@ window.SFS_PROJECTS = [
       repo: "https://github.com/AntonVynohradov/sfs-stepper-power-spice",
     },
     art: "halfbridge",
-  },
-  {
-    title: "DYNAMIXEL X430 Control Table Emulator",
-    summary:
-      "Device-side emulation of ROBOTIS DYNAMIXEL X430 actuators over Protocol 2.0 in portable C11: an MCU or PC answers the host as an X430 servo while your own code drives the motor.",
-    features: [
-      "All 17 X430-family models, selected at build time via Kconfig or CMake; control tables generated from YAML",
-      "PING, READ, WRITE, sync, bulk and fast read; access rights, value ranges, EEPROM lock, Indirect Address and Bus Watchdog",
-      "Built on DXL2-C; no heap, RTOS or driver dependencies, optional mutex, clock and storage hooks",
-      "x430_sim host simulator on a pseudo-terminal or serial port, verified with ROBOTIS DynamixelSDK",
-    ],
-    status: "In progress",
-    stable: false,
-    featured: false,
-    categories: ["Libraries", "Robotics"],
-    tags: ["C11", "DYNAMIXEL", "Robotics", "Kconfig", "CMake", "Apache-2.0"],
-    links: {
-      repo: "https://github.com/AntonVynohradov/DYNAMIXEL-X430-Control-Table-Emulator",
-    },
-    art: "chip",
   },
   {
     title: "Doppelstep",
