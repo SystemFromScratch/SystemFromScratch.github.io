@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SystemFromScratch® | Embedded Software for Connected Products</title>
+  <meta name="description" content="Embedded software for connected products: hardware bring-up, drivers, Zephyr RTOS and Embedded Linux, CAN and RS-485, MISRA C firmware, EU CRA readiness.">
+  <meta name="author" content="Anton Vynohradov">
+  <meta name="theme-color" content="#050b16">
+  <link rel="canonical" href="https://systemfromscratch.com/">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SystemFromScratch® | We build every layer of your connected product">
+  <meta property="og:description" content="Embedded software from the first board on the bench to secure firmware in the field — MISRA C:2012-checked and built for EU Cyber Resilience Act conformity.">
+  <meta property="og:url" content="https://systemfromscratch.com/">
+  <meta property="og:image" content="https://systemfromscratch.com/assets/img/logo.png">
+  <meta property="og:site_name" content="SystemFromScratch®">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SystemFromScratch® | We build every layer of your connected product">
+  <meta name="twitter:description" content="Embedded software from the first board on the bench to secure firmware in the field — MISRA C:2012-checked and built for EU Cyber Resilience Act conformity.">
+  <meta name="twitter:image" content="https://systemfromscratch.com/assets/img/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://systemfromscratch.com/#organization",
+        "name": "SystemFromScratch",
+        "alternateName": "SystemFromScratch®",
+        "url": "https://systemfromscratch.com/",
+        "logo": "https://systemfromscratch.com/assets/img/logo.png",
+        "image": "https://systemfromscratch.com/assets/img/logo.png",
+        "description": "Embedded software for connected products: hardware bring-up, BSP and drivers, Zephyr RTOS and Embedded Linux, CAN and RS-485 protocols, MISRA C:2012 firmware and EU Cyber Resilience Act readiness.",
+        "email": "contact@systemfromscratch.com",
+        "address": { "@type": "PostalAddress", "addressCountry": "PL" },
+        "areaServed": "Worldwide",
+        "founder": {
+          "@type": "Person",
+          "name": "Anton Vynohradov",
+          "jobTitle": "Embedded systems engineer",
+          "sameAs": ["https://www.linkedin.com/in/vynohradov", "https://github.com/AntonVynohradov"]
+        },
+        "sameAs": ["https://github.com/SystemFromScratch", "https://www.linkedin.com/in/vynohradov"],
+        "knowsAbout": ["Embedded software", "Firmware development", "Zephyr RTOS", "FreeRTOS", "Embedded Linux", "Yocto", "Board support packages", "Device drivers", "FPGA", "CAN bus", "ISO-TP", "RS-485", "MISRA C:2012", "Secure boot", "MCUboot", "EU Cyber Resilience Act"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://systemfromscratch.com/#website",
+        "url": "https://systemfromscratch.com/",
+        "name": "SystemFromScratch",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://systemfromscratch.com/#organization" }
+      }
+    ]
+  }
+  </script>
+</head>
+<body id="top">
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="#top" aria-label="SystemFromScratch® home">
+        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <rect x="9" y="9" width="22" height="22" rx="3"/>
+          <rect x="14.5" y="14.5" width="11" height="11" rx="1.5"/>
+          <path d="M14 9V4M20 9V4M26 9V4M14 36v-5M20 36v-5M26 36v-5M9 14H4M9 20H4M9 26H4M36 14h-5M36 20h-5M36 26h-5"/>
+        </svg>
+        <span class="brand-text"><strong>SYSTEM</strong><span>FROM SCRATCH</span></span>
+      </a>
+
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="#top" class="active">Home</a>
+        <a href="#problems">What we solve</a>
+        <a href="#services">Services</a>
+        <a href="#cra">CRA</a>
+        <a href="#work">Our work</a>
+        <a href="projects.html">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= Hero ================= -->
+    <section class="story-hero">
+      <div class="container">
+        <div>
+          <span class="kicker">Embedded software for connected products</span>
+          <h1>We build every layer<br>of your <span class="accent">connected product.</span></h1>
+          <p class="lead">From the first board on the bench to secure software in the field. One point of contact for the whole stack — so the parts fit, the product ships, and it is built for EU Cyber Resilience Act conformity.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Ask for a short call <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn btn-outline" href="#work">See our work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="stage"><svg class="layer-stack" viewBox="0 0 760 530" role="img" aria-label="A connected product shown as seven stacked layers, from hardware at the bottom to quality and security at the top"><g data-layer="mech"><polygon class="ls-side" points="90,440 260,502 260,514 90,452"/><polygon class="ls-side2" points="260,502 430,440 430,452 260,514"/><polygon class="ls-top" points="260,378 430,440 260,502 90,440"/><path class="ls-tick" d="M434 440H466"/><text x="474" y="446" style="font-size:17px">01 Hardware</text></g><g data-layer="elec"><polygon class="ls-side" points="90,382 260,444 260,456 90,394"/><polygon class="ls-side2" points="260,444 430,382 430,394 260,456"/><polygon class="ls-top" points="260,320 430,382 260,444 90,382"/><path class="ls-tick" d="M434 382H466"/><text x="474" y="388" style="font-size:17px">02 Electronics</text></g><g data-layer="fpga"><polygon class="ls-side" points="90,324 260,386 260,398 90,336"/><polygon class="ls-side2" points="260,386 430,324 430,336 260,398"/><polygon class="ls-top" points="260,262 430,324 260,386 90,324"/><path class="ls-tick" d="M434 324H466"/><text x="474" y="330" style="font-size:17px">03 Drivers &amp; FPGA</text></g><g data-layer="os"><polygon class="ls-side" points="90,266 260,328 260,340 90,278"/><polygon class="ls-side2" points="260,328 430,266 430,278 260,340"/><polygon class="ls-top" points="260,204 430,266 260,328 90,266"/><path class="ls-tick" d="M434 266H466"/><text x="474" y="272" style="font-size:17px">04 Operating system</text></g><g data-layer="emul"><polygon class="ls-side" points="90,208 260,270 260,282 90,220"/><polygon class="ls-side2" points="260,270 430,208 430,220 260,282"/><polygon class="ls-top" points="260,146 430,208 260,270 90,208"/><path class="ls-tick" d="M434 208H466"/><text x="474" y="214" style="font-size:17px">05 Protocols</text></g><g data-layer="integ"><polygon class="ls-side" points="90,150 260,212 260,224 90,162"/><polygon class="ls-side2" points="260,212 430,150 430,162 260,224"/><polygon class="ls-top" points="260,88 430,150 260,212 90,150"/><path class="ls-tick" d="M434 150H466"/><text x="474" y="156" style="font-size:17px">06 Integration</text></g><g data-layer="qual"><polygon class="ls-side" points="90,92 260,154 260,166 90,104"/><polygon class="ls-side2" points="260,154 430,92 430,104 260,166"/><polygon class="ls-top" points="260,30 430,92 260,154 90,92"/><path class="ls-tick" d="M434 92H466"/><text x="474" y="98" style="font-size:17px">07 Quality &amp; security</text></g></svg></div>
+      </div>
+    </section>
+
+    <section class="proof">
+      <div class="container">
+        <div class="proof-strip">
+          <div><strong>5 libraries</strong><span>released in 2026, open to audit</span></div>
+          <div><strong>0</strong><span>MISRA C:2012 violations (Cppcheck, in CI)</span></div>
+          <div><strong>100 %</strong><span>line and branch coverage in every library</span></div>
+          <div><strong>Signed</strong><span>firmware updates with MCUboot</span></div>
+        </div>
+        <div class="industries">
+          <span>Industries we build for:</span>
+          <ul><li>Industrial IoT</li><li>Automotive</li><li>Medical devices</li><li>Robotics</li><li>Consumer electronics</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Problems ================= -->
+    <section class="section section-alt" id="problems">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">What we solve</span>
+            <h2 class="section-title">Does one of these sound familiar?</h2>
+          </div>
+        </div>
+        <div class="problems-grid">
+          <article class="card problem-card reveal">
+            <h3>“The hardware is ready. The software isn’t.”</h3>
+            <p>We bring the board to life: first boot, drivers, operating system and a working product, with your hardware team in the loop.</p>
+            <span class="layer-ref">Layers 02–04</span>
+          </article>
+          <article class="card problem-card reveal">
+            <h3>“The CRA deadline is coming and we don’t know where we stand.”</h3>
+            <p>A fixed-scope review shows the gaps in your firmware. Then we close them: secure boot, signed updates, threat model.</p>
+            <span class="layer-ref">Layer 07</span>
+          </article>
+          <article class="card problem-card reveal">
+            <h3>“We’re locked into one supplier’s parts.”</h3>
+            <p>We make alternative hardware speak the same protocol, so your existing software and tools keep working unchanged.</p>
+            <span class="layer-ref">Layers 05–06</span>
+          </article>
+          <article class="card problem-card reveal">
+            <h3>“It works, but nobody dares to touch the code.”</h3>
+            <p>Code and architecture review, MISRA and static analysis, then a plan to make the codebase maintainable for years.</p>
+            <span class="layer-ref">Layer 07</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Services as layers ================= -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Why “from scratch”</span>
+            <h2 class="section-title">Every connected product has the same seven layers.</h2>
+            <p class="section-intro">A sensor node, a medical pump or a vehicle controller: the layers are the same. Most suppliers own one of them and leave you with the gaps in between. We work through all seven.</p>
+          </div>
+        </div>
+
+        <div class="explorer explorer-home">
+          <div class="layer-tabs" role="tablist" aria-label="Product layers" aria-orientation="vertical" data-explorer>
+            <button class="layer-tab" type="button" role="tab" id="tab-mech" aria-controls="panel-mech" aria-selected="false" data-layer="mech" data-name="Hardware &amp; mechanics"><span class="num">01</span><span class="name">Hardware &amp; mechanics</span></button><button class="layer-tab" type="button" role="tab" id="tab-elec" aria-controls="panel-elec" aria-selected="false" data-layer="elec" data-name="Electronics bring-up"><span class="num">02</span><span class="name">Electronics bring-up</span></button><button class="layer-tab" type="button" role="tab" id="tab-fpga" aria-controls="panel-fpga" aria-selected="false" data-layer="fpga" data-name="Drivers &amp; FPGA"><span class="num">03</span><span class="name">Drivers &amp; FPGA</span></button><button class="layer-tab" type="button" role="tab" id="tab-os" aria-controls="panel-os" aria-selected="false" data-layer="os" data-name="Operating system"><span class="num">04</span><span class="name">Operating system</span></button><button class="layer-tab" type="button" role="tab" id="tab-emul" aria-controls="panel-emul" aria-selected="true" data-layer="emul" data-name="Protocols &amp; interfaces"><span class="num">05</span><span class="name">Protocols &amp; interfaces</span></button><button class="layer-tab" type="button" role="tab" id="tab-integ" aria-controls="panel-integ" aria-selected="false" data-layer="integ" data-name="System integration"><span class="num">06</span><span class="name">System integration</span></button><button class="layer-tab" type="button" role="tab" id="tab-qual" aria-controls="panel-qual" aria-selected="false" data-layer="qual" data-name="Quality, security &amp; CRA"><span class="num">07</span><span class="name">Quality, security &amp; CRA</span></button>
+          </div>
+          <div class="layer-display">
+            <div>
+            <div class="layer-panel" role="tabpanel" id="panel-mech" aria-labelledby="tab-mech">
+              <div class="panel-head"><span>LAYER 01</span></div>
+              <h3>Hardware &amp; mechanics</h3>
+              <p class="for-you">We choose proven, available parts with you, so your product is not tied to one expensive supplier.</p>
+              <div class="panel-block">
+                <span class="panel-label">Where we have done it</span>
+                <p>Component choice and second sourcing for gateways, motor drives and sensor nodes, with our partner hardware engineers.</p>
+                <ul class="chip-list"><li>Component selection</li><li>Second sourcing</li><li>Partner hardware design</li></ul>
+                
+              </div>
+              <div class="service-line"><span>Service: <strong>Hardware design with partner engineers</strong></span><a href="#contact">Need this layer? →</a></div>
+            </div>
+            <div class="layer-panel" role="tabpanel" id="panel-elec" aria-labelledby="tab-elec">
+              <div class="panel-head"><span>LAYER 02</span></div>
+              <h3>Electronics bring-up</h3>
+              <p class="for-you">The first power-on of a new board is where schedules slip. We take it from first boot to a working system.</p>
+              <div class="panel-block">
+                <span class="panel-label">Where we have done it</span>
+                <p>STM32 motor-control boards and Microchip SmartFusion2 SoC FPGA controllers, from first boot to validation.</p>
+                <ul class="chip-list"><li>STM32</li><li>SmartFusion2</li><li>First boot</li><li>Validation</li></ul>
+                <div class="link-list"><a href="https://systemfromscratch.github.io/sfs-doppelstep/hardware-checklist/" target="_blank" rel="noopener">Doppelstep hardware checklist ↗</a></div>
+              </div>
+              <div class="service-line"><span>Service: <strong>Hardware bring-up &amp; integration</strong></span><a href="#contact">Need this layer? →</a></div>
+            </div>
+            <div class="layer-panel" role="tabpanel" id="panel-fpga" aria-labelledby="tab-fpga">
+              <div class="panel-head"><span>LAYER 03</span></div>
+              <h3>Drivers &amp; FPGA</h3>
+              <p class="for-you">Board support packages, bootloaders and drivers that make your hardware usable and keep timing exact.</p>
+              <div class="panel-block">
+                <span class="panel-label">Where we have done it</span>
+                <p>Zephyr drivers, MCUboot bootloaders and FPGA logic for time-critical I/O.</p>
+                <ul class="chip-list"><li>BSP</li><li>MCUboot</li><li>Zephyr drivers</li><li>Linux kernel</li><li>FPGA</li></ul>
+                <div class="link-list"><a href="https://github.com/AntonVynohradov/Zephyr-SmartFusion2-workspace" target="_blank" rel="noopener">Zephyr SmartFusion2 workspace ↗</a></div>
+              </div>
+              <div class="service-line"><span>Service: <strong>BSP &amp; device drivers</strong></span><a href="#contact">Need this layer? →</a></div>
+            </div>
+            <div class="layer-panel" role="tabpanel" id="panel-os" aria-labelledby="tab-os">
+              <div class="panel-head"><span>LAYER 04</span></div>
+              <h3>Operating system</h3>
+              <p class="for-you">A maintained, secure foundation — Zephyr, FreeRTOS or Embedded Linux — instead of home-grown code that only one person understands.</p>
+              <div class="panel-block">
+                <span class="panel-label">Where we have done it</span>
+                <p>Zephyr ports and modules, FreeRTOS, Yocto and Buildroot images with reproducible builds.</p>
+                <ul class="chip-list"><li>Zephyr</li><li>FreeRTOS</li><li>Yocto</li><li>Buildroot</li></ul>
+                <div class="link-list"><a href="https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/" target="_blank" rel="noopener">Baton-C as a Zephyr module ↗</a></div>
+              </div>
+              <div class="service-line"><span>Service: <strong>RTOS &amp; Embedded Linux</strong></span><a href="#contact">Need this layer? →</a></div>
+            </div>
+            <div class="layer-panel" role="tabpanel" id="panel-emul" aria-labelledby="tab-emul">
+              <div class="panel-head"><span>LAYER 05</span></div>
+              <h3>Protocols &amp; interfaces</h3>
+              <p class="for-you">Your devices talk to each other reliably — CAN, RS-485, UART, USB — even when the hardware underneath changes.</p>
+              <div class="panel-block">
+                <span class="panel-label">Where we have done it</span>
+                <p>CAN with ISO-TP for automotive diagnostics, RS-485 for industrial buses, DYNAMIXEL for robotics.</p>
+                <ul class="chip-list"><li>CAN</li><li>ISO-TP</li><li>RS-485</li><li>UART</li><li>SPI</li><li>I²C</li></ul>
+                <div class="link-list"><a href="https://antonvynohradov.github.io/isotp-c/" target="_blank" rel="noopener">ISOTP-C ↗</a><a href="https://antonvynohradov.github.io/Baton-C/" target="_blank" rel="noopener">Baton-C ↗</a><a href="https://antonvynohradov.github.io/DXL2-C/" target="_blank" rel="noopener">DXL2-C ↗</a></div>
+              </div>
+              <div class="service-line"><span>Service: <strong>Embedded software development</strong></span><a href="#contact">Need this layer? →</a></div>
+            </div>
+            <div class="layer-panel" role="tabpanel" id="panel-integ" aria-labelledby="tab-integ">
+              <div class="panel-head"><span>LAYER 06</span></div>
+              <h3>System integration</h3>
+              <p class="for-you">Everything works together end to end, and can be tested on a laptop before the hardware exists.</p>
+              <div class="panel-block">
+                <span class="panel-label">Where we have done it</span>
+                <p>Firmware run against simulated hardware in CI; device, gateway and PC software tested together.</p>
+                <ul class="chip-list"><li>Software-in-the-loop</li><li>Docker</li><li>CI/CD</li><li>ROS 2</li></ul>
+                <div class="link-list"><a href="https://antonvynohradov.github.io/Stepper-Lab/" target="_blank" rel="noopener">Stepper-Lab ↗</a><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/" target="_blank" rel="noopener">SmartManipulator-X ↗</a></div>
+              </div>
+              <div class="service-line"><span>Service: <strong>System integration</strong></span><a href="#contact">Need this layer? →</a></div>
+            </div>
+            <div class="layer-panel" role="tabpanel" id="panel-qual" aria-labelledby="tab-qual">
+              <div class="panel-head"><span>LAYER 07</span></div>
+              <h3>Quality, security &amp; CRA</h3>
+              <p class="for-you">Security and code quality designed in from the start — secure boot, signed updates, MISRA — so audits and EU Cyber Resilience Act conformity are not a last-minute patch.</p>
+              <div class="panel-block">
+                <span class="panel-label">Where we have done it</span>
+                <p>MISRA C:2012 gates, 100 % coverage in CI, signed firmware with MCUboot, CRA gap reviews.</p>
+                <ul class="chip-list"><li>MISRA C:2012</li><li>Secure boot</li><li>Threat modelling</li><li>CRA</li></ul>
+                <div class="link-list"><a href="https://antonvynohradov.github.io/Stepper-C/" target="_blank" rel="noopener">Stepper-C quality reports ↗</a></div>
+              </div>
+              <div class="service-line"><span>Service: <strong>Cybersecurity, CRA &amp; compliance</strong></span><a href="#contact">Need this layer? →</a></div>
+            </div>
+            </div>
+            <div class="panel-art" aria-hidden="true"><svg class="layer-stack" viewBox="0 0 760 530" role="img" aria-label=""><g data-layer="mech"><polygon class="ls-side" points="90,440 260,502 260,514 90,452"/><polygon class="ls-side2" points="260,502 430,440 430,452 260,514"/><polygon class="ls-top" points="260,378 430,440 260,502 90,440"/><path class="ls-tick" d="M434 440H466"/><text x="474" y="446" style="font-size:19px">01 Hardware</text></g><g data-layer="elec"><polygon class="ls-side" points="90,382 260,444 260,456 90,394"/><polygon class="ls-side2" points="260,444 430,382 430,394 260,456"/><polygon class="ls-top" points="260,320 430,382 260,444 90,382"/><path class="ls-tick" d="M434 382H466"/><text x="474" y="388" style="font-size:19px">02 Electronics</text></g><g data-layer="fpga"><polygon class="ls-side" points="90,324 260,386 260,398 90,336"/><polygon class="ls-side2" points="260,386 430,324 430,336 260,398"/><polygon class="ls-top" points="260,262 430,324 260,386 90,324"/><path class="ls-tick" d="M434 324H466"/><text x="474" y="330" style="font-size:19px">03 Drivers &amp; FPGA</text></g><g data-layer="os"><polygon class="ls-side" points="90,266 260,328 260,340 90,278"/><polygon class="ls-side2" points="260,328 430,266 430,278 260,340"/><polygon class="ls-top" points="260,204 430,266 260,328 90,266"/><path class="ls-tick" d="M434 266H466"/><text x="474" y="272" style="font-size:19px">04 Operating system</text></g><g data-layer="emul"><polygon class="ls-side" points="90,208 260,270 260,282 90,220"/><polygon class="ls-side2" points="260,270 430,208 430,220 260,282"/><polygon class="ls-top" points="260,146 430,208 260,270 90,208"/><path class="ls-tick" d="M434 208H466"/><text x="474" y="214" style="font-size:19px">05 Protocols</text></g><g data-layer="integ"><polygon class="ls-side" points="90,150 260,212 260,224 90,162"/><polygon class="ls-side2" points="260,212 430,150 430,162 260,224"/><polygon class="ls-top" points="260,88 430,150 260,212 90,150"/><path class="ls-tick" d="M434 150H466"/><text x="474" y="156" style="font-size:19px">06 Integration</text></g><g data-layer="qual"><polygon class="ls-side" points="90,92 260,154 260,166 90,104"/><polygon class="ls-side2" points="260,154 430,92 430,104 260,166"/><polygon class="ls-top" points="260,30 430,92 260,154 90,92"/><path class="ls-tick" d="M434 92H466"/><text x="474" y="98" style="font-size:19px">07 Quality &amp; security</text></g></svg></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CRA ================= -->
+    <section class="section section-alt" id="cra">
+      <div class="container cra-grid">
+        <div>
+          <span class="eyebrow" style="color: var(--warn)">EU Cyber Resilience Act</span>
+          <h2>Selling connected products in the EU? The CRA’s first obligations already apply.</h2>
+          <p>We review your current firmware, show you where the gaps are and help you close them before the deadline. Medical devices and vehicles are covered by their own sector rules rather than the CRA — ask us which rules apply to your product.</p>
+          <a class="btn btn-primary" href="mailto:contact@systemfromscratch.com?subject=CRA%20gap%20review">Ask for a CRA gap review <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="cra-tiles">
+          <div class="is-now"><strong>11 Sep 2026</strong><span>Vulnerability reporting obligations apply — now in force</span></div>
+          <div><strong>11 Dec 2027</strong><span>Full CRA requirements apply</span></div>
+          <div><strong>Gap review</strong><span>Fixed-scope review of your firmware</span></div>
+          <div><strong>Secure lifecycle</strong><span>Secure boot, integrity, threat model, SDL</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Evidence ================= -->
+    <section class="section" id="evidence">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Evidence, not promises</span>
+            <h2 class="section-title">The standard you get, published in the open.</h2>
+            <p class="section-intro">Each library ships with its MISRA report, test coverage and a PDF manual. Your engineers can check our work before we start.</p>
+          </div>
+          <a class="link-arrow" href="projects.html">All projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="lib-grid">
+          <a class="card link-card reveal" href="https://antonvynohradov.github.io/Baton-C/" target="_blank" rel="noopener">
+            <span class="meta is-stable">v1.0.0 · Stable</span>
+            <h3>Baton-C ↗</h3>
+            <p>Several microcontrollers on one wire: events arrive exactly once and in order, and any loss is reported.</p>
+          </a>
+          <a class="card link-card reveal" href="https://antonvynohradov.github.io/isotp-c/" target="_blank" rel="noopener">
+            <span class="meta is-stable">v2.0.1 · Stable</span>
+            <h3>ISOTP-C ↗</h3>
+            <p>Long messages over CAN for vehicle diagnostics and firmware updates.</p>
+          </a>
+          <a class="card link-card reveal" href="https://antonvynohradov.github.io/DXL2-C/" target="_blank" rel="noopener">
+            <span class="meta is-stable">v1.0.0 · Stable</span>
+            <h3>DXL2-C ↗</h3>
+            <p>Build your own actuators that speak the DYNAMIXEL servo protocol.</p>
+          </a>
+          <a class="card link-card reveal" href="https://antonvynohradov.github.io/DYNAMIXEL-X430-Control-Table-Emulator/" target="_blank" rel="noopener">
+            <span class="meta is-stable">v1.0.0 · Stable</span>
+            <h3>X430 Emulator ↗</h3>
+            <p>Any motor answers as a DYNAMIXEL X430 servo; existing robot software works unchanged.</p>
+          </a>
+          <a class="card link-card reveal" href="https://antonvynohradov.github.io/Stepper-C/" target="_blank" rel="noopener">
+            <span class="meta is-stable">v1.2.0 · Stable</span>
+            <h3>Stepper-C ↗</h3>
+            <p>Precise motor control that notices a stalled motor without extra sensors.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Selected work ================= -->
+    <section class="section section-alt" id="work">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Selected work</span>
+            <h2 class="section-title">One robot, taken apart. And the same engineering everywhere else.</h2>
+            <p class="section-intro">Each write-up comes with code that rebuilds every number it quotes.</p>
+          </div>
+          <a class="link-arrow" href="articles.html">All articles <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <a class="featured-case reveal" href="robot.html">
+          <span class="stage">
+            <img src="assets/img/robot/arm-neutral.webp" width="1100" height="1000" alt="SmartManipulator-X robot arm rendered from the BCN3D Moveo CAD model" loading="lazy">
+            <span class="stage-chips"><span>Rendered from CAD</span><span>7 layers</span></span>
+          </span>
+          <span class="case-text">
+            <span style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+              <span class="kicker">Featured case study · Robotics</span>
+              <span class="badge badge-sim">Runs in simulation</span>
+            </span>
+            <h3>A robot arm, every layer engineered end to end.</h3>
+            <p>Robot software written for premium servos runs unchanged on our servo emulation — today in simulation, next on low-cost motors and a 3D-printed arm. Take it apart layer by layer, follow one command from the operator’s click to the motor, and compare three ways to wire it.</p>
+            <span class="case-numbers">
+              <span><strong>7</strong><span>layers, one point of contact</span></span>
+              <span><strong>0</strong><span>lines changed in the robot software</span></span>
+              <span><strong>3</strong><span>architectures compared</span></span>
+            </span>
+            <span class="btn btn-primary">Explore the robot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </a>
+
+        <div class="work-grid">
+          <a class="card link-card reveal" href="https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/" target="_blank" rel="noopener">
+            <span class="meta">Industrial · Multi-MCU bus</span>
+            <h3>One wire, many microcontrollers, no silent losses</h3>
+            <p>Deterministic messaging for several boards on one shared line, running on Zephyr. For machines, sensor networks and building automation.</p>
+            <span class="btn btn-primary btn-sm">Explore the article ↗</span>
+          </a>
+          <a class="card link-card reveal" href="https://antonvynohradov.github.io/isotp-c/" target="_blank" rel="noopener">
+            <span class="meta">Automotive · CAN</span>
+            <h3>Diagnostics and firmware updates over CAN</h3>
+            <p>ISO-TP transport for UDS diagnostics, OBD and CAN bootloaders, tested against an independent reference.</p>
+            <span class="btn btn-primary btn-sm">Explore ISOTP-C ↗</span>
+          </a>
+          <a class="card link-card reveal" href="https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/" target="_blank" rel="noopener">
+            <span class="meta">Motor control</span>
+            <h3>From motor model to real metal</h3>
+            <p>Motor control tested on a PC model before it touches hardware. For pumps, valves, positioning stages and printers.</p>
+            <span class="btn btn-primary btn-sm">Explore the article ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= About + contact ================= -->
+    <section class="section" id="about">
+      <div class="container about-contact">
+        <div>
+          <span class="eyebrow">About</span>
+          <h2>Engineering from first principles.</h2>
+          <p>SystemFromScratch® was founded by <strong>Anton Vynohradov</strong>, an embedded systems engineer based in Poland. Anton leads the engineering; specialist partners join for hardware design and other areas when your project needs them.</p>
+          <p>We build for industrial IoT, automotive, robotics, medical and consumer electronics teams who need one partner for the whole software stack — firmware, operating system, security and the regulations that govern them.</p>
+        </div>
+        <div class="contact-card" id="contact">
+          <h3>Have a project in mind?</h3>
+          <p>Start with a short call or a fixed-scope code, MISRA or CRA review of your current firmware.</p>
+          <a class="btn btn-primary" href="mailto:contact@systemfromscratch.com?subject=Project%20inquiry">Email us <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="address" href="mailto:contact@systemfromscratch.com">contact@systemfromscratch.com</a>
+          <div class="row">
+            <a href="https://www.linkedin.com/in/vynohradov" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a href="https://github.com/SystemFromScratch" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="articles.html">Articles</a>
+            <span style="color: var(--text-muted)">Poland · remote worldwide</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="/" aria-label="SystemFromScratch® home">
+            <svg class="brand-mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <rect x="9" y="9" width="22" height="22" rx="3"/>
+          <rect x="14.5" y="14.5" width="11" height="11" rx="1.5"/>
+          <path d="M14 9V4M20 9V4M26 9V4M14 36v-5M20 36v-5M26 36v-5M9 14H4M9 20H4M9 26H4M36 14h-5M36 20h-5M36 26h-5"/>
+        </svg>
+        <span class="brand-text"><strong>SYSTEM</strong><span>FROM SCRATCH</span></span>
+          </a>
+          <p>Secure embedded systems and compliance-ready engineering — from concept to certification-ready product.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/#about">About</a></li>
+            <li><a href="robot.html">Robot case study</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="articles.html">Articles</a></li>
+            <li><a href="/#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="/#services">Hardware design with partners</a></li>
+            <li><a href="/#services">Hardware bring-up &amp; integration</a></li>
+            <li><a href="/#services">BSP &amp; device drivers</a></li>
+            <li><a href="/#services">RTOS &amp; Embedded Linux</a></li>
+            <li><a href="/#services">Embedded software development</a></li>
+            <li><a href="/#services">System integration</a></li>
+            <li><a href="/#cra">Cybersecurity, CRA &amp; compliance</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://antonvynohradov.github.io/Baton-C/" target="_blank" rel="noopener">Baton-C docs</a></li>
+            <li><a href="https://antonvynohradov.github.io/isotp-c/" target="_blank" rel="noopener">ISOTP-C docs</a></li>
+            <li><a href="https://antonvynohradov.github.io/DXL2-C/" target="_blank" rel="noopener">DXL2-C docs</a></li>
+            <li><a href="https://antonvynohradov.github.io/Stepper-C/" target="_blank" rel="noopener">Stepper-C docs</a></li>
+            <li><a href="https://antonvynohradov.github.io/Stepper-Lab/" target="_blank" rel="noopener">Stepper-Lab docs</a></li>
+            <li><a href="https://systemfromscratch.github.io/sfs-doppelstep/" target="_blank" rel="noopener">Doppelstep docs</a></li>
+            <li><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/" target="_blank" rel="noopener">SmartManipulator-X docs</a></li>
+            <li><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/" target="_blank" rel="noopener">Operator PC docs</a></li>
+            <li><a href="https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/" target="_blank" rel="noopener">Article: Stepper-C from model to metal</a></li>
+            <li><a href="https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/" target="_blank" rel="noopener">Article: Baton-C on Zephyr</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Follow</h4>
+          <ul>
+            <li><a href="https://github.com/SystemFromScratch" target="_blank" rel="noopener">GitHub · Company</a></li>
+            <li><a href="https://github.com/AntonVynohradov" target="_blank" rel="noopener">GitHub · Anton</a></li>
+            <li><a href="https://www.linkedin.com/in/vynohradov" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="mailto:contact@systemfromscratch.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> SystemFromScratch®. All rights reserved.</span>
+        <span>SystemFromScratch® is a registered trademark.</span>
+        <span class="footer-tm">STM32 is a registered trademark of STMicroelectronics International N.V.; ROBOTIS and DYNAMIXEL are trademarks of ROBOTIS Co., Ltd.; SmartFusion2 is a trademark of Microchip Technology Inc.; Zephyr is a trademark of The Linux Foundation. Other names are trademarks of their respective owners. SystemFromScratch® is not affiliated with or endorsed by them.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/layers.js"></script>
+</body>
+</html>

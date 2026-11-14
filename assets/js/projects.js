@@ -1,0 +1,385 @@
+/*
+ * Portfolio data.
+ *
+ * To add a project, copy one entry and adjust it. Fields:
+ *   title       - card heading
+ *   summary     - one or two sentences shown on the card
+ *   features    - optional bullet points (shown on the Projects page only)
+ *   status      - short label, e.g. "In progress", "Active", "v1.0.0 · Stable"
+ *   stable      - true shows a green status dot, false an amber one
+ *   featured    - true shows the project on the home page (max. 3 are shown)
+ *   homeSection - optional home page section for the project: "motor-control" or "robotics"
+ *                 (matches data-projects-section in index.html)
+ *   categories  - used by the filters on the Projects page
+ *   highlights  - optional measured numbers, up to three { value, label } pairs
+ *   tags        - technology badges
+ *   links       - any of: docs, manual, release, article, repo, demo (full URLs)
+ *   art         - built-in illustration: "robot", "container", "can", "chip", "bus",
+ *                 "stepper", "scope", "halfbridge", "servo", "planner"
+ *   image       - optional path to a photo (e.g. "assets/img/projects/foo.jpg");
+ *                 when set it replaces the illustration
+ */
+window.SFS_PROJECTS = [
+  {
+    title: "Baton-C",
+    summary:
+      "Deterministic master/slave messaging for several MCUs on one shared UART line (single-wire half duplex or RS-485): no collisions, a bounded cycle, exactly-once in-order events.",
+    features: [
+      "Token passing: one transmitter at a time, worst-case cycle computed from the configuration",
+      "Exactly-once, in-order events and latest-value states; CRC-16, retries, every loss reported",
+      "Bus simulation with line noise and dead nodes on 100 seeds under ASan/UBSan",
+      "Zephyr module, bare-metal and host examples; Baton Inspector GUI and Python test API",
+    ],
+    status: "v1.0.0 · Stable",
+    stable: true,
+    featured: true,
+    categories: ["Libraries", "RTOS"],
+    highlights: [
+      { value: "1.7 KB", label: "RAM per node" },
+      { value: "280 B", label: "worst-case stack" },
+      { value: "0", label: "MISRA violations" },
+    ],
+    tags: ["C11", "UART", "RS-485", "Zephyr", "MISRA C:2012", "Apache-2.0"],
+    links: {
+      docs: "https://antonvynohradov.github.io/Baton-C/",
+      manual: "https://antonvynohradov.github.io/Baton-C/downloads/Baton-C_User_Manual.pdf",
+      article: "https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/",
+      repo: "https://github.com/AntonVynohradov/Baton-C",
+    },
+    art: "bus",
+  },
+  {
+    title: "ISOTP-C",
+    summary:
+      "ISO 15765-2 (ISO-TP) transport protocol for classical CAN: messages up to 4095 bytes — or longer with 32-bit lengths — for UDS diagnostics, OBD and CAN bootloaders.",
+    features: [
+      "Version 2: rewritten with a layered codec + link API; time is an argument, no clock or platform calls",
+      "82 unit tests at 100 % line and branch coverage, 62 integration tests against a Python twin",
+      "Cppcheck MISRA C:2012 gate in CI with 0 violations and a documented deviation register",
+      "Examples for bare metal, Linux SocketCAN and Zephyr",
+    ],
+    status: "v2.0.1 · Stable",
+    stable: true,
+    featured: true,
+    categories: ["Libraries", "Automotive"],
+    highlights: [
+      { value: "1.8 KB", label: "code size" },
+      { value: "120 B", label: "worst-case stack" },
+      { value: "144", label: "automated tests" },
+    ],
+    tags: ["C11", "CAN", "ISO 15765-2", "UDS", "MISRA C:2012", "MIT"],
+    links: {
+      docs: "https://antonvynohradov.github.io/isotp-c/",
+      manual: "https://antonvynohradov.github.io/isotp-c/downloads/ISOTP-C_User_Manual.pdf",
+      repo: "https://github.com/AntonVynohradov/isotp-c",
+    },
+    art: "can",
+  },
+  {
+    title: "DXL2-C",
+    summary:
+      "ROBOTIS DYNAMIXEL Protocol 2.0 wire format in portable C — for building your own DYNAMIXEL-compatible actuators or controlling servos from any MCU, without a heap or an RTOS.",
+    features: [
+      "CRC-16, byte stuffing and an incremental parser that resynchronises after line noise",
+      "Every instruction and status error code of the specification; ROBOTIS packets as regression vectors",
+      "100 % line and branch coverage, C/Python cross-check, 0 Cppcheck MISRA C:2012 violations",
+      "DXL2 Studio GUI for simulation and serial-port debugging; bare-metal, Zephyr and PC examples",
+    ],
+    status: "v1.0.0 · Stable",
+    stable: true,
+    featured: true,
+    categories: ["Libraries", "Robotics"],
+    highlights: [
+      { value: "100 %", label: "branch coverage" },
+      { value: "0", label: "MISRA violations" },
+      { value: "0 B", label: "heap" },
+    ],
+    tags: ["C11", "DYNAMIXEL", "Robotics", "Zephyr", "MISRA C:2012", "Apache-2.0"],
+    links: {
+      docs: "https://antonvynohradov.github.io/DXL2-C/",
+      manual: "https://antonvynohradov.github.io/DXL2-C/downloads/DXL2-C_User_Manual.pdf",
+      repo: "https://github.com/AntonVynohradov/DXL2-C",
+    },
+    art: "chip",
+  },
+  {
+    title: "DYNAMIXEL X430 Control Table Emulator",
+    summary:
+      "Device-side emulation of ROBOTIS DYNAMIXEL X430 actuators over Protocol 2.0 in portable C11: your firmware drives any motor and the host sees a genuine X430, so DynamixelSDK, DYNAMIXEL Wizard and ROS 2 work unchanged.",
+    features: [
+      "All 17 X430 models, selected at build time with CMake or Kconfig; Control Tables generated from YAML and checked against the ROBOTIS e-Manual",
+      "PING, READ, WRITE, REG_WRITE/ACTION, sync, bulk and fast read, backup and factory reset; access rights, value ranges, EEPROM lock, Indirect Address and Bus Watchdog",
+      "Built on DXL2-C, no heap or RTOS: 384 B RAM per device and 9,921 B flash on a Cortex-M4",
+      "100 % line and branch coverage, 0 MISRA C:2012 violations; 52 end-to-end checks with the official DynamixelSDK",
+      "Verified on hardware: a Zephyr stepper joint on an STM32G431 answers DYNAMIXEL Wizard 2.0 as an XM430-W350",
+    ],
+    status: "v1.0.0 · Stable",
+    stable: true,
+    featured: false,
+    categories: ["Libraries", "Robotics"],
+    highlights: [
+      { value: "100 %", label: "branch coverage" },
+      { value: "0", label: "MISRA violations" },
+      { value: "384 B", label: "RAM per device" },
+    ],
+    tags: ["C11", "DYNAMIXEL", "Robotics", "Kconfig", "MISRA C:2012", "Apache-2.0"],
+    links: {
+      docs: "https://antonvynohradov.github.io/DYNAMIXEL-X430-Control-Table-Emulator/",
+      manual: "https://antonvynohradov.github.io/DYNAMIXEL-X430-Control-Table-Emulator/downloads/DYNAMIXEL-X430-Control-Table-Emulator_User_Manual.pdf",
+      repo: "https://github.com/AntonVynohradov/DYNAMIXEL-X430-Control-Table-Emulator",
+    },
+    art: "chip",
+  },
+  {
+    title: "Stepper-C",
+    summary:
+      "Hardware-agnostic closed-loop microstepping current control for two-phase stepper motors in C11, with sensorless stall detection: from a position command to phase voltages, with the hardware reached only through callbacks.",
+    features: [
+      "Per-phase PI current control tuned from R, L and one bandwidth; back-EMF feed-forward, anti-windup, bus voltage compensation",
+      "Sensorless stall detection: a back-EMF observer reports a stalled rotor or lost synchronism, 43 to 60 ms after the load angle passes 90° on the motor model",
+      "1–256 microsteps, trapezoidal motion planning, homing and exact integer positions; fixed-point or float backend",
+      "Two H-bridges or three half-bridges; overcurrent, over/undervoltage and fault protection",
+      "100 % line and branch coverage in both backends, 0 MISRA C:2012 violations; run in the loop against a motor model in Stepper-Lab",
+    ],
+    status: "v1.2.0 · Stable",
+    stable: true,
+    featured: false,
+    homeSection: "motor-control",
+    categories: ["Libraries", "Robotics"],
+    highlights: [
+      { value: "432 B", label: "RAM per motor" },
+      { value: "216 B", label: "worst-case stack" },
+      { value: "0", label: "MISRA violations" },
+    ],
+    tags: ["C11", "Stepper motor", "Motor control", "STM32G4", "MISRA C:2012", "Apache-2.0"],
+    links: {
+      docs: "https://antonvynohradov.github.io/Stepper-C/",
+      manual: "https://antonvynohradov.github.io/Stepper-C/downloads/Stepper-C_User_Manual.pdf",
+      article: "https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/",
+      repo: "https://github.com/AntonVynohradov/Stepper-C",
+    },
+    art: "stepper",
+  },
+  {
+    title: "Stepper-Lab",
+    summary:
+      "Scilab/Xcos model of a two-phase stepper motor, its power stage and current measurement: run the real C code of Stepper-C, or a Scilab prototype of it, on a PC before the code reaches hardware.",
+    features: [
+      "Software in the loop with the compiled library, or model in the loop with the Scilab prototype, in the same diagram layout",
+      "One window selects the library, the stage file, MIL or SIL and a scenario; any Xcos source drives the motion command, run current or load torque",
+      "Averaged or switching power stage, with leg resistance, diode voltage and dead time taken from the ngspice models of sfs-stepper-power-spice",
+      "Checked against theory, a separate Python twin and between MIL and SIL. Simulation results: not yet compared with a measured motor",
+    ],
+    status: "Pre-release",
+    stable: false,
+    featured: false,
+    homeSection: "motor-control",
+    categories: ["Simulation", "Tooling"],
+    highlights: [
+      { value: "433", label: "checks passed" },
+      { value: "0", label: "failures" },
+      { value: "< 5 mA", label: "C library vs. prototype" },
+    ],
+    tags: ["Scilab/Xcos", "SIL", "MIL", "Stepper motor", "ngspice", "Apache-2.0"],
+    links: {
+      docs: "https://antonvynohradov.github.io/Stepper-Lab/",
+      manual: "https://antonvynohradov.github.io/Stepper-Lab/downloads/Stepper-Lab_User_Manual.pdf",
+      repo: "https://github.com/AntonVynohradov/Stepper-Lab",
+    },
+    art: "scope",
+  },
+  {
+    title: "sfs-stepper-power-spice",
+    summary:
+      "ngspice model of one power stage leg of the B-G431B-ESC1 (L6387E driver, two STL180N6F7 MOSFETs, low-side shunt): finds the hardware values that Stepper-Lab and Stepper-C need.",
+    features: [
+      "STL180N6F7 model fitted to the datasheet and checked against it by automated tests; behavioural L6387E driver model",
+      "Measures effective dead time, leg resistance, body diode drop, dead time margin and shunt settling at 24 V and 20 kHz",
+      "Exports a stage file with a leg voltage error table for the Stepper-Lab power stage",
+      "Several board values, such as gate resistors and shunt, are assumptions until checked against the board schematic",
+    ],
+    status: "In progress",
+    stable: false,
+    featured: false,
+    homeSection: "motor-control",
+    categories: ["Simulation", "Tooling"],
+    highlights: [
+      { value: "133 ns", label: "effective dead time" },
+      { value: "3.4 mΩ", label: "leg resistance" },
+      { value: "345 ns", label: "shunt settling" },
+    ],
+    tags: ["ngspice", "Power stage", "MOSFET", "B-G431B-ESC1", "Python", "Apache-2.0"],
+    links: {
+      repo: "https://github.com/AntonVynohradov/sfs-stepper-power-spice",
+    },
+    art: "halfbridge",
+  },
+  {
+    title: "Doppelstep",
+    summary:
+      "Zephyr RTOS firmware that turns a two-phase stepper motor and a small STM32 motor-control board into a DYNAMIXEL XM430-W350 smart servo: ROS 2, DynamixelSDK and DYNAMIXEL Wizard control it without changes.",
+    features: [
+      "Full XM430-W350 (model 1020) Control Table over Protocol 2.0; ros2_control loop at 100 Hz tested with the official DynamixelSDK",
+      "Closed-loop microstepping current control in a 20 kHz interrupt; overcurrent, bus voltage and shared-leg faults switch the outputs off inside it",
+      "Simulated motor and power stage on the board or on a PC (native_sim), so motion and protocol work before a motor is connected",
+      "MCUboot checks an RSA-2048 signature at every start and accepts new firmware over the DYNAMIXEL bus",
+    ],
+    status: "In progress",
+    stable: false,
+    featured: false,
+    homeSection: "robotics",
+    categories: ["Robotics", "RTOS"],
+    highlights: [
+      { value: "20 kHz", label: "current loop" },
+      { value: "91", label: "tests per CI run" },
+      { value: "75.5 KiB", label: "application flash" },
+    ],
+    tags: ["Zephyr", "STM32", "DYNAMIXEL", "ROS 2", "MCUboot", "Apache-2.0"],
+    links: {
+      docs: "https://systemfromscratch.github.io/sfs-doppelstep/",
+      manual: "https://systemfromscratch.github.io/sfs-doppelstep/Doppelstep.pdf",
+      repo: "https://github.com/SystemFromScratch/sfs-doppelstep",
+    },
+    art: "servo",
+  },
+  {
+    title: "SmartManipulator-X",
+    summary:
+      "The unchanged ROBOTIS OpenMANIPULATOR-X ROS 2 stack controls a BCN3D Moveo arm: a SmartFusion2 controller answers as virtual DYNAMIXEL servos and drives the steppers, while the Robot PC runs ros2_control in Docker.",
+    features: [
+      "Controller presents itself as DYNAMIXEL Protocol 2.0 servos, so the ROS 2 side needs no porting",
+      "ros2_control with mock hardware in Docker; a second container checks discovery, controllers and a trajectory over DDS",
+      "Robot description generated from the Moveo CAD: joint axes, link lengths, meshes and the gripper linkage",
+      "Robot PC, firmware, hardware and mechanics documented together, with a smoke test, protocol conformance check and motor tester GUI",
+    ],
+    status: "In progress",
+    stable: false,
+    featured: false,
+    homeSection: "robotics",
+    categories: ["Robotics", "RTOS", "FPGA"],
+    highlights: [
+      { value: "6 + 1", label: "stepper axes + gripper" },
+      { value: "49 / 49", label: "protocol checks on native_sim" },
+      { value: "460800", label: "bps host link" },
+    ],
+    tags: ["ROS 2 Jazzy", "ros2_control", "Zephyr", "SmartFusion2", "DYNAMIXEL", "Docker", "Apache-2.0"],
+    links: {
+      docs: "https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/",
+      manual: "https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/downloads/SmartManipulator-X_User_Manual.pdf",
+      repo: "https://github.com/SystemFromScratch/sfs-smartmanipulator-x-robot",
+    },
+    art: "robot",
+  },
+  {
+    title: "SmartManipulator-X Operator PC",
+    summary:
+      "Motion planning station for the SmartManipulator-X arm: MoveIt 2 and RViz2 in Docker, sending trajectories to the Robot PC over ROS 2 DDS without ever touching the motor hardware.",
+    features: [
+      "URDF/Xacro model and Fast DDS profile taken from the Robot PC repository, so joint names, limits and transport match",
+      "pick_ik solves for tool position only on the five-joint Moveo, so RViz2 interactive markers always find a plannable pose",
+      "RViz2 in a container through WSLg on Windows 11 or X11 on Linux, software OpenGL by default",
+      "One image, two Compose services: move_group with the Moveo MoveIt configuration and RViz2 with the MotionPlanning panel",
+    ],
+    status: "In progress",
+    stable: false,
+    featured: false,
+    homeSection: "robotics",
+    categories: ["Robotics", "Tooling"],
+    highlights: [
+      { value: "5 + 1", label: "arm joints + gripper" },
+      { value: "2", label: "trajectory controllers over DDS" },
+      { value: "0", label: "hardware connections" },
+    ],
+    tags: ["ROS 2 Jazzy", "MoveIt 2", "RViz2", "Fast DDS", "Docker", "Apache-2.0"],
+    links: {
+      docs: "https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/",
+      manual: "https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/downloads/SmartManipulator-X_Operator_PC_User_Manual.pdf",
+      repo: "https://github.com/SystemFromScratch/sfs-smartmanipulator-x-operator",
+    },
+    art: "planner",
+  },
+  {
+    title: "Zephyr SmartFusion2 Workspace",
+    summary:
+      "Reproducible, Docker-based Zephyr RTOS build environment for the Microchip SmartFusion2 M2S010 (ARM Cortex-M3), ready for VS Code Dev Containers and CI/CD.",
+    features: [
+      "Pinned Zephyr SDK and west versions for bit-exact rebuilds",
+      "VS Code Dev Container with build, pristine-build and debug tasks",
+      "Persistent host-side ccache for fast incremental builds",
+      "CI-ready pipeline producing ELF, HEX and BIN artefacts",
+    ],
+    status: "Active",
+    stable: true,
+    featured: false,
+    categories: ["RTOS", "Tooling"],
+    tags: ["Zephyr", "Cortex-M3", "Docker", "west", "CMake", "CI/CD"],
+    links: {
+      repo: "https://github.com/AntonVynohradov/Zephyr-SmartFusion2-workspace",
+    },
+    art: "container",
+  },
+];
+
+/*
+ * Technical articles. Fields:
+ *   title, summary, date ("Month YYYY"), image (full URL or path),
+ *   results  - up to three { value, label } pairs quoted from the article
+ *   tags, links (read, repo; case for a case study page on this site)
+ *   cta      - optional label of the main button (default "Explore the article")
+ */
+window.SFS_ARTICLES = [
+  {
+    title: "A robot arm, every layer engineered end to end",
+    summary:
+      "SmartManipulator-X case study: the unchanged ROBOTIS OpenMANIPULATOR-X ROS 2 stack drives a 3D-printed BCN3D Moveo arm through a SmartFusion2 controller that answers as DYNAMIXEL servos. Seven layers, one command followed from MoveIt 2 to the motor, and three ways to wire the joints compared.",
+    date: "November 2026",
+    image: "assets/img/robot/article-robot.webp",
+    cta: "Explore the robot",
+    results: [
+      { value: "7", label: "layers, from mechanics to quality and security" },
+      { value: "0", label: "lines changed in the ROBOTIS robot software" },
+      { value: "3", label: "wiring architectures compared: central, RS-485, CAN" },
+    ],
+    tags: ["ROS 2", "MoveIt 2", "DYNAMIXEL", "Zephyr", "SmartFusion2", "Case study"],
+    links: {
+      case: "robot.html",
+      repo: "https://github.com/SystemFromScratch/sfs-smartmanipulator-x-robot",
+    },
+  },
+  {
+    title: "Stepper-C: stepper motor control from model to metal",
+    summary:
+      "An open-source C library that turns a position command into phase voltages for two-phase stepper motors. The same C code is verified in a Scilab/Xcos motor model and a transistor-level power-stage model before it drives a 17HS19 motor on the B-G431B-ESC1 board.",
+    date: "October 2026",
+    image:
+      "https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/assets/images/hero-3d.svg",
+    results: [
+      { value: "100 %", label: "line and branch coverage from 76 unit tests" },
+      { value: "8.2 kB", label: "of code behind a 15-function control API" },
+      { value: "20 kHz / 1 kHz", label: "current loop and motion loop rates" },
+    ],
+    tags: ["Stepper motor", "Microstepping", "Scilab/Xcos", "ngspice", "Software-in-the-loop"],
+    links: {
+      read: "https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/",
+      repo: "https://github.com/SystemFromScratch-Articles/Stepper-C-Motor-Control-Library",
+    },
+  },
+  {
+    title: "One wire, many MCUs, no lost messages: Baton-C as a Zephyr module",
+    summary:
+      "How a deterministic single-wire UART bus written in MISRA C became a Zephyr module: devicetree binding, interrupt glue and a three-node bus tested on native_sim under five line-noise patterns. Every number is reproducible from the repository.",
+    date: "October 2026",
+    image:
+      "https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/assets/images/social-card.png",
+    results: [
+      { value: "40 / 40", label: "test cases passed across five noise patterns" },
+      { value: "200 / 200", label: "events delivered with 1 corrupted byte in 150" },
+      { value: "≈ 6 KB", label: "of library code on Cortex-M3 (-Os); the integration replaces ~200 lines of hand-written UART ISR code" },
+    ],
+    tags: ["Zephyr", "UART", "MISRA C", "native_sim", "SmartFusion2"],
+    links: {
+      read: "https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/",
+      repo: "https://github.com/SystemFromScratch-Articles/Baton-C-One-wire-many-MCUs-no-lost-messages",
+    },
+  },
+];
