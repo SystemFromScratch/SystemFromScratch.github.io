@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learn Robotics on a Six-Axis Arm | SystemFromScratch®</title>
+  <meta name="description" content="Free, open-source robotics kit on a 3D-printed six-axis arm: ROS 2 Jazzy, MoveIt 2 and ros2_control in simulation first, then real stepper drives.">
+  <meta name="author" content="Anton Vynohradov">
+  <meta name="theme-color" content="#050b16">
+  <link rel="canonical" href="https://systemfromscratch.com/learn.html">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Learn Robotics on a Six-Axis Arm | SystemFromScratch®">
+  <meta property="og:description" content="A free, open-source kit: Operator PC, Robot PC and the Doppelstep drive. Start in simulation, then move to the real arm.">
+  <meta property="og:url" content="https://systemfromscratch.com/learn.html">
+  <meta property="og:image" content="https://systemfromscratch.com/assets/img/robot/og-robot.png">
+  <meta property="og:site_name" content="SystemFromScratch®">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Learn Robotics on a Six-Axis Arm | SystemFromScratch®">
+  <meta name="twitter:description" content="A free, open-source kit: Operator PC, Robot PC and the Doppelstep drive. Start in simulation, then move to the real arm.">
+  <meta name="twitter:image" content="https://systemfromscratch.com/assets/img/robot/og-robot.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/learn.css">
+</head>
+<body id="top">
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/" aria-label="SystemFromScratch® home">
+        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <rect x="9" y="9" width="22" height="22" rx="3"/>
+          <rect x="14.5" y="14.5" width="11" height="11" rx="1.5"/>
+          <path d="M14 9V4M20 9V4M26 9V4M14 36v-5M20 36v-5M26 36v-5M9 14H4M9 20H4M9 26H4M36 14h-5M36 20h-5M36 26h-5"/>
+        </svg>
+        <span class="brand-text"><strong>SYSTEM</strong><span>FROM SCRATCH</span></span>
+      </a>
+
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="/">Home</a>
+        <a href="/#services">Services</a>
+        <a href="/#cra">CRA</a>
+        <a href="robot.html">Case study</a>
+        <a href="learn.html" class="active" aria-current="page">Learn</a>
+        <a href="projects.html">Projects</a>
+        <a href="articles.html">Articles</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="story-hero">
+      <div class="container">
+        <div>
+          <span class="kicker">Free · Open source · Apache License 2.0</span>
+          <h1>Learn robotics<br><span class="accent">on a real six-axis arm.</span></h1>
+          <p class="lead">SmartManipulator-X is a free kit of three open-source projects: the Operator PC, the Robot PC and the Doppelstep motor drive. Start in simulation on one computer, then move to a real motor and the whole arm, one level at a time. You can stop at any level.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/beginners/" target="_blank" rel="noopener">Start Level 1: simulation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn btn-outline" href="#kit">How the kit fits together</a>
+          </div>
+          <div class="hero-stats">
+            <div><strong>3</strong><span>projects, one kit</span></div>
+            <div><strong>3</strong><span>levels to the real arm</span></div>
+            <div><strong>0</strong><span>hardware for Level 1</span></div>
+          </div>
+        </div>
+        <div class="stage learn-hero-art">
+          <img src="assets/img/robot/arm-neutral.webp" width="1100" height="1000" alt="SmartManipulator-X, a 3D-printed six-axis robot arm, rendered from its CAD model">
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="kit">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">The kit</span>
+            <h2 class="section-title">Three projects. One signal path.</h2>
+            <p class="section-intro">A motion goal travels from the operator's screen to the motor. Each block is its own project with its own documentation.</p>
+          </div>
+        </div>
+        <div class="kit-path">
+          <a class="kit-node" href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/" target="_blank" rel="noopener">
+            <span class="mono">01 · Plan</span>
+            <strong>Operator PC</strong>
+            <span>MoveIt 2 · RViz2 · your laptop</span>
+            <span class="kit-more">Docs ↗</span>
+          </a>
+          <div class="kit-link" aria-hidden="true"><span>ROS 2</span><span>over the network</span><i>→</i></div>
+          <a class="kit-node" href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/" target="_blank" rel="noopener">
+            <span class="mono">02 · Control</span>
+            <strong>Robot PC</strong>
+            <span>ROS 2 Jazzy · ros2_control · Docker · CM4</span>
+            <span class="kit-more">Docs ↗</span>
+          </a>
+          <div class="kit-link" aria-hidden="true"><span>DYNAMIXEL</span><span>Protocol 2.0 bus</span><i>→</i></div>
+          <a class="kit-node" href="https://systemfromscratch.github.io/sfs-doppelstep/" target="_blank" rel="noopener">
+            <span class="mono">03 · Regulate</span>
+            <strong>Doppelstep ×6</strong>
+            <span>STM32G431 · Zephyr · 20 kHz current loop</span>
+            <span class="kit-more">Docs ↗</span>
+          </a>
+          <div class="kit-link" aria-hidden="true"><span>phase</span><span>currents</span><i>→</i></div>
+          <div class="kit-node kit-node-end">
+            <span class="mono">04 · Move</span>
+            <strong>Stepper motors</strong>
+            <span>3D-printed BCN3D Moveo arm</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mechanics">
+      <div class="container learn-split">
+        <div class="learn-text">
+          <span class="eyebrow">The mechanics</span>
+          <h2 class="section-title">A 3D-printed arm you can build yourself.</h2>
+          <p>The arm is the BCN3D Moveo, an open-source robot arm designed to be printed on a desktop 3D printer. Its parts and assembly are public, which makes it a good base for learning: you can see and change every piece.</p>
+          <p>The robot description the software uses (the URDF) is generated straight from the Moveo CAD files. The arm you plan with in simulation at Level 1 has the same geometry as the printed one at Level 3.</p>
+          <div class="mini-stats">
+            <div><strong>6</strong><span>stepper motors, one per joint</span></div>
+            <div><strong>CAD → URDF</strong><span>one source for the real and the simulated arm</span></div>
+          </div>
+          <div class="learn-note">
+            <h3>Why stepper motors, not servos?</h3>
+            <p>Smart servos with a built-in controller are convenient but expensive. Stepper motors are cheap and strong, but on their own they do not report where they are. The Doppelstep drive closes that gap: it controls the stepper and answers on the bus like a smart servo, so the robot software cannot tell the difference.</p>
+          </div>
+        </div>
+        <div class="learn-gallery">
+          <figure class="learn-gallery-main">
+            <img src="assets/img/robot/arm-mechanics.webp" width="1100" height="1000" alt="SmartManipulator-X arm rendered from the CAD model, mechanical parts highlighted" loading="lazy">
+            <figcaption>The arm, rendered from the CAD model.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/robot/arm-motors.webp" width="1100" height="1000" alt="The arm with its stepper motors highlighted" loading="lazy">
+            <figcaption>Six stepper motors, one per joint.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/robot/arm-dim.webp" width="1100" height="1000" alt="The arm with the joint wiring highlighted" loading="lazy">
+            <figcaption>How the joints are wired to their drives.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="parts">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">What each part teaches</span>
+            <h2 class="section-title">Pick the layer you want to understand.</h2>
+          </div>
+        </div>
+        <div class="learn-cards">
+          <article class="learn-card">
+            <img src="assets/img/robot/rviz-plan-preview.webp" width="600" height="700" alt="RViz2 previewing a planned arm motion" loading="lazy">
+            <div class="learn-card-body">
+              <div class="learn-card-head"><h3>Operator PC</h3><span class="badge badge-sim">Works today</span></div>
+              <p>The operator's side: choose a goal, preview the motion plan and execute it.</p>
+              <ul class="learn-list">
+                <li>Motion planning with MoveIt 2</li>
+                <li>Visualisation and interaction in RViz2</li>
+                <li>ROS 2 communication between machines</li>
+              </ul>
+              <a class="link-arrow" href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/" target="_blank" rel="noopener">Operator PC docs ↗</a>
+            </div>
+          </article>
+          <article class="learn-card">
+            <img class="learn-card-art" src="assets/img/robot/arm-neutral.webp" width="1100" height="1000" alt="SmartManipulator-X arm model used by the Robot PC" loading="lazy">
+            <div class="learn-card-body">
+              <div class="learn-card-head"><h3>Robot PC</h3><span class="badge badge-sim">Works today</span></div>
+              <p>The robot's brain: runs the control stack, in simulation or on a Raspberry Pi CM4.</p>
+              <ul class="learn-list">
+                <li>ROS 2 Jazzy and ros2_control</li>
+                <li>Mock hardware for simulated joints</li>
+                <li>Docker: one command to start</li>
+              </ul>
+              <a class="link-arrow" href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/" target="_blank" rel="noopener">Robot PC docs ↗</a>
+            </div>
+          </article>
+          <article class="learn-card">
+            <img src="assets/img/robot/doppelstep-gui.webp" width="1280" height="820" alt="Doppelstep bench GUI with live plots of position, velocity, current and input voltage" loading="lazy">
+            <div class="learn-card-body">
+              <div class="learn-card-head"><h3>Doppelstep</h3><span class="badge badge-hw">Hardware in progress</span></div>
+              <p>The motor drive: turns a low-cost stepper into a smart servo the robot already speaks to.</p>
+              <ul class="learn-list">
+                <li>Motor control and a 20 kHz current loop</li>
+                <li>Firmware on Zephyr RTOS with MCUboot</li>
+                <li>DYNAMIXEL XM430 servo emulation</li>
+              </ul>
+              <a class="link-arrow" href="https://systemfromscratch.github.io/sfs-doppelstep/" target="_blank" rel="noopener">Doppelstep docs ↗</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ideas">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Key ideas in five minutes</span>
+            <h2 class="section-title">Four concepts you will meet on the way.</h2>
+            <p class="section-intro">Read these before you open the docs. Each one maps to a part of the kit.</p>
+          </div>
+        </div>
+        <div class="idea-grid">
+          <article class="idea-card">
+            <div class="idea-art" aria-hidden="true">
+              <div class="idea-row"><span>planner</span><i>→</i><span class="is-on">/trajectory</span><i>→</i><span>controller</span></div>
+              <div class="idea-row"><span>rviz2</span><i>←</i><span class="is-on">/joint_states</span><i>←</i><span>driver</span></div>
+            </div>
+            <span class="mono">ROS 2</span>
+            <h3>Programs that talk to each other</h3>
+            <p>A robot is many small programs, called nodes. ROS 2 lets them exchange messages, on one machine or across the network. That is how the Operator PC and the Robot PC work together.</p>
+          </article>
+          <article class="idea-card">
+            <img class="idea-shot" src="assets/img/robot/rviz-goal-ready.webp" width="600" height="700" alt="RViz2 showing the goal pose of the arm in orange" loading="lazy">
+            <span class="mono">MoveIt 2</span>
+            <h3>From a goal to a path</h3>
+            <p>You say where the gripper should go. MoveIt 2 works out the joint angles that get it there and a trajectory that avoids collisions, before anything moves.</p>
+          </article>
+          <article class="idea-card">
+            <div class="idea-art idea-stack" aria-hidden="true">
+              <span>controller</span><i>↓</i><span class="is-on">hardware interface</span>
+              <div class="idea-row"><span>mock</span><span>real bus</span></div>
+            </div>
+            <span class="mono">ros2_control</span>
+            <h3>Swap simulation for hardware</h3>
+            <p>Controllers send commands to a hardware interface. At Level 1 that interface is simulated; at Level 3 it is the real bus. Nothing above it changes, so your code moves with you.</p>
+          </article>
+          <article class="idea-card">
+            <div class="idea-art" aria-hidden="true">
+              <span class="is-on idea-host">Robot PC</span>
+              <div class="idea-bus"></div>
+              <div class="idea-row"><span>ID1</span><span>ID2</span><span>ID3</span><span>ID4</span><span>ID5</span><span>ID6</span></div>
+            </div>
+            <span class="mono">DYNAMIXEL bus</span>
+            <h3>Six joints, one cable</h3>
+            <p>All drives share one serial bus. Each has an ID and answers Protocol 2.0 packets. Doppelstep answers like a DYNAMIXEL XM430 servo, so the standard ROBOTIS software drives a stepper motor.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="levels">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Learning path</span>
+            <h2 class="section-title">From simulation to the real arm.</h2>
+            <p class="section-intro">Each level adds hardware, not new software. The code you write at Level 1 runs unchanged at Level 3.</p>
+          </div>
+        </div>
+        <div class="level-cards">
+          <article class="level-card is-current">
+            <div class="learn-card-head"><span class="mono">Level 1</span><span class="badge badge-sim">Available</span></div>
+            <h3>Simulation</h3>
+            <p>Plan and execute arm motions, write ROS 2 nodes and test algorithms against simulated joints.</p>
+            <dl>
+              <div><dt>You need</dt><dd>One computer with Docker</dd></div>
+              <div><dt>Uses</dt><dd>Operator PC · Robot PC</dd></div>
+              <div><dt>Hardware</dt><dd>None</dd></div>
+            </dl>
+            <a class="btn btn-primary" href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/beginners/" target="_blank" rel="noopener">Start Level 1 ↗</a>
+          </article>
+          <article class="level-card">
+            <div class="learn-card-head"><span class="mono">Level 2</span><span class="badge badge-hw">Planned</span></div>
+            <h3>One joint on the desk</h3>
+            <p>Run your trajectories on a real motor and see real timing and limits.</p>
+            <dl>
+              <div><dt>You need</dt><dd>One drive board, one stepper motor and a lab supply</dd></div>
+              <div><dt>Uses</dt><dd>Operator PC · Robot PC · Doppelstep ×1</dd></div>
+            </dl>
+            <a class="btn btn-outline" href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/status/" target="_blank" rel="noopener">Follow progress ↗</a>
+          </article>
+          <article class="level-card">
+            <div class="learn-card-head"><span class="mono">Level 3</span><span class="badge badge-hw">Planned</span></div>
+            <h3>The whole robot</h3>
+            <p>Run your algorithms on the real six-axis arm.</p>
+            <dl>
+              <div><dt>You need</dt><dd>The arm, six drives, the CM4-Duino and a small bus interface</dd></div>
+              <div><dt>Uses</dt><dd>All three projects</dd></div>
+            </dl>
+            <a class="btn btn-outline" href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/hardware/wiring/" target="_blank" rel="noopener">See the wiring ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="level-1">
+      <div class="container">
+        <div class="shots-head">
+          <div>
+            <span class="eyebrow">What Level 1 looks like</span>
+            <h2 class="section-title">Choose a goal. Preview. Execute.</h2>
+          </div>
+        </div>
+        <div class="shots">
+          <figure><img src="assets/img/robot/rviz-goal-ready.webp" width="600" height="700" alt="RViz2: the orange goal arm bends forward while the current arm stands upright" loading="lazy"><figcaption><span class="mono">STEP 1</span><strong>Choose the goal</strong><span>Pick a target pose; the orange arm shows where it will go.</span></figcaption></figure>
+          <figure><img src="assets/img/robot/rviz-plan-preview.webp" width="600" height="700" alt="RViz2: preview of the planned motion from upright to the ready pose" loading="lazy"><figcaption><span class="mono">STEP 2</span><strong>Preview the plan</strong><span>MoveIt 2 finds a collision-free path and plays it back first.</span></figcaption></figure>
+          <figure><img src="assets/img/robot/rviz-executed.webp" width="600" height="700" alt="RViz2: the arm has executed the motion and reached the ready pose" loading="lazy"><figcaption><span class="mono">STEP 3</span><strong>Execute</strong><span>The simulated joints follow the plan through ros2_control.</span></figcaption></figure>
+        </div>
+        <p class="source-note">Screenshots from the Operator PC documentation. <a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/rviz/" target="_blank" rel="noopener">See the full RViz2 walkthrough ↗</a></p>
+      </div>
+    </section>
+
+    <section class="section" id="reading">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Further reading</span>
+            <h2 class="section-title">Other builds worth reading.</h2>
+            <p class="section-intro">Building the mechanics? These pages cover printing and assembling arms of the same family. They belong to their authors: we link to them and describe them in our own words.</p>
+          </div>
+        </div>
+        <div class="work-grid">
+          <a class="card link-card" href="https://github.com/BCN3D/BCN3D-Moveo" target="_blank" rel="noopener">
+            <span class="meta">GitHub · Original design</span>
+            <h3>BCN3D Moveo</h3>
+            <p>The open-source arm this robot is built on: printable parts, assembly instructions and the CAD files.</p>
+            <span class="more">By BCN3D Technologies ↗</span>
+          </a>
+          <a class="card link-card" href="https://www.instructables.com/Build-a-Giant-3D-Printed-Robot-Arm/" target="_blank" rel="noopener">
+            <span class="meta">Instructables · Build guide</span>
+            <h3>Build a Giant 3D Printed Robot Arm</h3>
+            <p>A long step-by-step guide to a large, mostly 3D-printed six-axis arm driven by stepper motors.</p>
+            <span class="more">Read on Instructables ↗</span>
+          </a>
+          <a class="card link-card" href="https://www.maheemal.com/portfolio-content/6-axis-robotic-arm" target="_blank" rel="noopener">
+            <span class="meta">Project write-up · 2019</span>
+            <h3>6-Axis Robotic Arm</h3>
+            <p>A Moveo-based arm with an added wrist axis, print-friendly parts, Raspberry Pi control and a first MoveIt simulation.</p>
+            <span class="more">By Maheemal KB ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="faq">
+      <div class="container learn-faq">
+        <div>
+          <span class="eyebrow">FAQ</span>
+          <h2 class="section-title">Before you start.</h2>
+        </div>
+        <div class="faq-list">
+          <div>
+            <h3>Do I need any hardware?</h3>
+            <p>Not for Level 1. Everything runs in simulation on one computer with Docker.</p>
+          </div>
+          <div>
+            <h3>Is it really free?</h3>
+            <p>Yes. The Robot PC, the Operator PC and the Doppelstep firmware are open source under the Apache License 2.0.</p>
+          </div>
+          <div>
+            <h3>Where do I start?</h3>
+            <p>With the <a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/beginners/" target="_blank" rel="noopener">connection guide for beginners ↗</a>. It walks you through Level 1 in pictures.</p>
+          </div>
+          <div>
+            <h3>I am stuck. Where do I ask?</h3>
+            <p>Open an issue in the project's repository on <a href="https://github.com/SystemFromScratch" target="_blank" rel="noopener">GitHub ↗</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section learn-credits">
+      <div class="container">
+        <p class="attribution">Arm renders and robot description from the <a href="https://github.com/BCN3D/BCN3D-Moveo" target="_blank" rel="noopener">BCN3D Moveo</a> CAD (MIT licence). Curious how every layer is engineered? <a href="robot.html">Read the SmartManipulator-X case study</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="/" aria-label="SystemFromScratch® home">
+            <svg class="brand-mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <rect x="9" y="9" width="22" height="22" rx="3"/>
+          <rect x="14.5" y="14.5" width="11" height="11" rx="1.5"/>
+          <path d="M14 9V4M20 9V4M26 9V4M14 36v-5M20 36v-5M26 36v-5M9 14H4M9 20H4M9 26H4M36 14h-5M36 20h-5M36 26h-5"/>
+        </svg>
+        <span class="brand-text"><strong>SYSTEM</strong><span>FROM SCRATCH</span></span>
+          </a>
+          <p>Secure embedded systems and compliance-ready engineering — from concept to certification-ready product.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/#about">About</a></li>
+            <li><a href="robot.html">Robot case study</a></li>
+            <li><a href="learn.html">Learn robotics</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="articles.html">Articles</a></li>
+            <li><a href="/#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="/#services">Hardware design with partners</a></li>
+            <li><a href="/#services">Hardware bring-up &amp; integration</a></li>
+            <li><a href="/#services">BSP &amp; device drivers</a></li>
+            <li><a href="/#services">RTOS &amp; Embedded Linux</a></li>
+            <li><a href="/#services">Embedded software development</a></li>
+            <li><a href="/#services">System integration</a></li>
+            <li><a href="/#cra">Cybersecurity, CRA &amp; compliance</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://antonvynohradov.github.io/Baton-C/" target="_blank" rel="noopener">Baton-C docs</a></li>
+            <li><a href="https://antonvynohradov.github.io/isotp-c/" target="_blank" rel="noopener">ISOTP-C docs</a></li>
+            <li><a href="https://antonvynohradov.github.io/DXL2-C/" target="_blank" rel="noopener">DXL2-C docs</a></li>
+            <li><a href="https://antonvynohradov.github.io/Stepper-C/" target="_blank" rel="noopener">Stepper-C docs</a></li>
+            <li><a href="https://antonvynohradov.github.io/Stepper-Lab/" target="_blank" rel="noopener">Stepper-Lab docs</a></li>
+            <li><a href="https://systemfromscratch.github.io/sfs-doppelstep/" target="_blank" rel="noopener">Doppelstep docs</a></li>
+            <li><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/" target="_blank" rel="noopener">SmartManipulator-X docs</a></li>
+            <li><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/" target="_blank" rel="noopener">Operator PC docs</a></li>
+            <li><a href="https://systemfromscratch-articles.github.io/Stepper-C-Motor-Control-Library/" target="_blank" rel="noopener">Article: Stepper-C from model to metal</a></li>
+            <li><a href="https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/" target="_blank" rel="noopener">Article: Baton-C on Zephyr</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Follow</h4>
+          <ul>
+            <li><a href="https://github.com/SystemFromScratch" target="_blank" rel="noopener">GitHub · Company</a></li>
+            <li><a href="https://github.com/AntonVynohradov" target="_blank" rel="noopener">GitHub · Anton</a></li>
+            <li><a href="https://www.linkedin.com/in/vynohradov" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="mailto:contact@systemfromscratch.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> SystemFromScratch®. All rights reserved.</span>
+        <span>SystemFromScratch® is a registered trademark.</span>
+        <span class="footer-tm">STM32 is a registered trademark of STMicroelectronics International N.V.; ROBOTIS and DYNAMIXEL are trademarks of ROBOTIS Co., Ltd.; SmartFusion2 is a trademark of Microchip Technology Inc.; Zephyr is a trademark of The Linux Foundation. Other names are trademarks of their respective owners. SystemFromScratch® is not affiliated with or endorsed by them.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
