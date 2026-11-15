@@ -32,13 +32,15 @@ This repository contains source files, documentation, branding assets, and deplo
 ```
 website/
 ├── index.html              Home page (hero, problems, the seven layers / services, CRA, released libraries, selected work, about, contact)
-├── robot.html              SmartManipulator-X case study (layers, signal path, architectures, Doppelstep, learning levels, evidence)
+├── robot.html              SmartManipulator-X case study (layers, signal path, architectures, Doppelstep, learning teaser, evidence)
+├── learn.html              Free learning kit: Operator PC, Robot PC and Doppelstep, three levels, key ideas, further reading
 ├── projects.html           Full portfolio with category filters
 ├── articles.html           Full list of articles
 └── assets/
     ├── css/
     │   ├── style.css       Site-wide styles and tokens
-    │   └── pages.css       Home page layers and robot case study
+    │   ├── pages.css       Home page layers and robot case study
+    │   └── learn.css       Learn page (learn.html)
     ├── img/
     │   └── robot/          Arm renders (from the BCN3D Moveo CAD), RViz2 and Doppelstep images
     └── js/

@@ -1,0 +1,509 @@
+/* ==========================================================================
+   SystemFromScratch® — Learn page (learn.html)
+   Loaded after style.css and pages.css; uses their tokens.
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+
+.learn-hero-art img {
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- The kit: signal path ---------- */
+
+.kit-path {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.kit-node {
+  display: flex;
+  flex: 1 1 160px;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  transition: background 0.15s;
+}
+
+a.kit-node:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+.kit-node .mono {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.kit-node strong {
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.kit-node > span:not(.mono):not(.kit-more) {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.kit-more {
+  margin-top: auto;
+  padding-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.kit-node-end {
+  flex: 1 1 140px;
+  border-style: dashed;
+  border-color: var(--border-strong);
+  background: transparent;
+}
+
+.kit-node-end .mono {
+  color: var(--text-muted);
+}
+
+.kit-link {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 84px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.kit-link i {
+  font-style: normal;
+  font-size: 22px;
+  color: var(--accent);
+}
+
+/* ---------- Mechanics ---------- */
+
+.learn-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.learn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.learn-text .section-title {
+  margin-bottom: 4px;
+}
+
+.learn-text > p {
+  font-size: 17px;
+  color: var(--text-muted);
+}
+
+.learn-text .mini-stats {
+  margin: 8px 0 0;
+}
+
+.learn-text .mini-stats span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.learn-note {
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.learn-note h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.learn-note p {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.learn-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.learn-gallery figure {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.learn-gallery-main {
+  grid-column: 1 / -1;
+}
+
+.learn-gallery img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: radial-gradient(circle at 50% 45%, #0d2547 0%, var(--bg-alt) 70%);
+}
+
+.learn-gallery figcaption {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ---------- Part cards ---------- */
+
+.learn-cards,
+.level-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.learn-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.learn-card > img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.learn-card > img.learn-card-art {
+  object-fit: contain;
+  background: radial-gradient(circle at 50% 50%, #0d2547 0%, var(--surface-2) 70%);
+}
+
+.learn-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+}
+
+.learn-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+}
+
+.learn-card-head h3 {
+  font-size: 22px;
+}
+
+.learn-card-body > p {
+  color: var(--text-muted);
+}
+
+.learn-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+}
+
+.learn-list li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.learn-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.65em;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.learn-card-body .link-arrow {
+  margin-top: auto;
+}
+
+/* ---------- Key ideas ---------- */
+
+.idea-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.idea-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.idea-card > .mono {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.idea-card h3 {
+  font-size: 20px;
+}
+
+.idea-card p {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.idea-art,
+.idea-shot {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+}
+
+.idea-shot {
+  height: auto;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.idea-art {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text);
+}
+
+.idea-art span {
+  min-width: 0;
+  overflow: hidden;
+  padding: 6px 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.idea-art span.is-on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.idea-art i {
+  flex: 0 0 auto;
+  font-style: normal;
+  color: var(--accent);
+}
+
+.idea-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.idea-row span {
+  flex: 1 1 0;
+}
+
+.idea-stack {
+  align-items: center;
+}
+
+.idea-stack > span,
+.idea-stack .idea-row {
+  width: 70%;
+}
+
+.idea-host {
+  align-self: flex-start;
+}
+
+.idea-bus {
+  height: 2px;
+  background: var(--accent);
+}
+
+/* ---------- Levels ---------- */
+
+.level-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.level-card.is-current {
+  border: 2px solid var(--accent);
+}
+
+.level-card .mono {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.level-card.is-current .mono {
+  color: var(--accent);
+}
+
+.level-card h3 {
+  font-size: 24px;
+}
+
+.level-card > p {
+  color: var(--text-muted);
+}
+
+.level-card dl {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  font-size: 14px;
+}
+
+.level-card dl div {
+  display: flex;
+  gap: 8px;
+}
+
+.level-card dt {
+  flex: 0 0 76px;
+  color: var(--text-muted);
+}
+
+.level-card dd {
+  margin: 0;
+}
+
+.level-card .btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+/* ---------- FAQ ---------- */
+
+.learn-faq {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+  gap: 48px;
+}
+
+.faq-list > div {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-list > div:first-child {
+  padding-top: 0;
+}
+
+.faq-list > div:last-child {
+  border-bottom: 0;
+}
+
+.faq-list h3 {
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
+.faq-list p {
+  color: var(--text-muted);
+}
+
+/* ---------- Credits ---------- */
+
+.section.learn-credits {
+  padding: 28px 0;
+}
+
+.learn-credits .attribution {
+  margin-top: 0;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1080px) {
+  .learn-cards,
+  .level-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .learn-split,
+  .learn-faq {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .kit-link {
+    flex-basis: 100%;
+    flex-direction: row;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .kit-link i {
+    transform: rotate(90deg);
+  }
+
+  .kit-node,
+  .kit-node-end {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .learn-cards,
+  .level-cards,
+  .idea-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
