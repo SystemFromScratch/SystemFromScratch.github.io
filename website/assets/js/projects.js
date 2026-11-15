@@ -245,24 +245,24 @@ window.SFS_PROJECTS = [
   {
     title: "SmartManipulator-X",
     summary:
-      "The unchanged ROBOTIS OpenMANIPULATOR-X ROS 2 stack controls a BCN3D Moveo arm: a SmartFusion2 controller answers as virtual DYNAMIXEL servos and drives the steppers, while the Robot PC runs ros2_control in Docker.",
+      "Built so that the unchanged ROBOTIS OpenMANIPULATOR-X ROS 2 stack can drive a BCN3D Moveo arm: one Doppelstep stepper drive per joint answers as a DYNAMIXEL XM430-W350 on a shared bus, and the Robot PC runs ros2_control in Docker on a Raspberry Pi CM4. Also teaching material, from simulation to the real arm.",
     features: [
-      "Controller presents itself as DYNAMIXEL Protocol 2.0 servos, so the ROS 2 side needs no porting",
+      "One Doppelstep drive per stepper answers as a DYNAMIXEL XM430-W350 on one Protocol 2.0 bus, so the ROS 2 side needs no porting",
       "ros2_control with mock hardware in Docker; a second container checks discovery, controllers and a trajectory over DDS",
       "Robot description generated from the Moveo CAD: joint axes, link lengths, meshes and the gripper linkage",
-      "Robot PC, firmware, hardware and mechanics documented together, with a smoke test, protocol conformance check and motor tester GUI",
+      "Connection guide for beginners in three levels; wiring, bus, CM4-Duino board and a staged integration plan documented together",
     ],
     status: "In progress",
     stable: false,
     featured: false,
     homeSection: "robotics",
-    categories: ["Robotics", "RTOS", "FPGA"],
+    categories: ["Robotics", "RTOS"],
     highlights: [
-      { value: "6 + 1", label: "stepper axes + gripper" },
-      { value: "49 / 49", label: "protocol checks on native_sim" },
-      { value: "460800", label: "bps host link" },
+      { value: "6 + 1", label: "drives on one bus: joints + gripper" },
+      { value: "XM430", label: "emulated by each drive" },
+      { value: "3", label: "learning levels, simulation to real arm" },
     ],
-    tags: ["ROS 2 Jazzy", "ros2_control", "Zephyr", "SmartFusion2", "DYNAMIXEL", "Docker", "Apache-2.0"],
+    tags: ["ROS 2 Jazzy", "ros2_control", "DYNAMIXEL", "Doppelstep", "Raspberry Pi CM4", "Docker", "Apache-2.0"],
     links: {
       docs: "https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/",
       manual: "https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/downloads/SmartManipulator-X_User_Manual.pdf",
@@ -331,16 +331,16 @@ window.SFS_ARTICLES = [
   {
     title: "A robot arm, every layer engineered end to end",
     summary:
-      "SmartManipulator-X case study: the unchanged ROBOTIS OpenMANIPULATOR-X ROS 2 stack drives a 3D-printed BCN3D Moveo arm through a SmartFusion2 controller that answers as DYNAMIXEL servos. Seven layers, one command followed from MoveIt 2 to the motor, and three ways to wire the joints compared.",
+      "SmartManipulator-X case study: the unchanged ROBOTIS OpenMANIPULATOR-X ROS 2 stack is built to drive a 3D-printed BCN3D Moveo arm through Doppelstep stepper drives that answer as DYNAMIXEL servos. Seven layers, one command followed from MoveIt 2 to the motor, three ways to wire the joints compared, and three levels to learn on it.",
     date: "November 2026",
     image: "assets/img/robot/article-robot.webp",
     cta: "Explore the robot",
     results: [
       { value: "7", label: "layers, from mechanics to quality and security" },
       { value: "0", label: "lines changed in the ROBOTIS robot software" },
-      { value: "3", label: "wiring architectures compared: central, RS-485, CAN" },
+      { value: "3", label: "wiring architectures compared: central, shared bus, CAN" },
     ],
-    tags: ["ROS 2", "MoveIt 2", "DYNAMIXEL", "Zephyr", "SmartFusion2", "Case study"],
+    tags: ["ROS 2", "MoveIt 2", "DYNAMIXEL", "Doppelstep", "Education", "Case study"],
     links: {
       case: "robot.html",
       repo: "https://github.com/SystemFromScratch/sfs-smartmanipulator-x-robot",

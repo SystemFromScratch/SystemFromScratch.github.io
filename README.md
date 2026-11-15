@@ -32,7 +32,7 @@ This repository contains source files, documentation, branding assets, and deplo
 ```
 website/
 ├── index.html              Home page (hero, problems, the seven layers / services, CRA, released libraries, selected work, about, contact)
-├── robot.html              SmartManipulator-X case study (layers, signal path, architectures, Doppelstep, evidence)
+├── robot.html              SmartManipulator-X case study (layers, signal path, architectures, Doppelstep, learning levels, evidence)
 ├── projects.html           Full portfolio with category filters
 ├── articles.html           Full list of articles
 └── assets/

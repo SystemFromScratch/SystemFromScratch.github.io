@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Robot Arm Case Study | SystemFromScratch®</title>
-  <meta name="description" content="SmartManipulator-X case study: a robot arm engineered layer by layer, from SmartFusion2 FPGA and Zephyr RTOS to DYNAMIXEL servo emulation and ROS 2.">
+  <meta name="description" content="SmartManipulator-X case study: a robot arm engineered layer by layer, from Doppelstep stepper drives on Zephyr RTOS and DYNAMIXEL servo emulation to ROS 2 on a Raspberry Pi CM4.">
   <meta name="author" content="Anton Vynohradov">
   <meta name="theme-color" content="#050b16">
   <link rel="canonical" href="https://systemfromscratch.com/robot.html">
@@ -12,14 +12,14 @@
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="A robot arm, every layer engineered end to end | SystemFromScratch®">
-  <meta property="og:description" content="Robot software written for premium servos runs unchanged on our servo emulation — today in simulation, next on low-cost motors and a 3D-printed arm. Take it apart layer by layer.">
+  <meta property="og:description" content="Robot software written for premium servos, built to run unchanged on low-cost stepper drives that answer like those servos. The ROS 2 side and the drives already run in simulation. Take it apart layer by layer.">
   <meta property="og:url" content="https://systemfromscratch.com/robot.html">
   <meta property="og:image" content="https://systemfromscratch.com/assets/img/robot/og-robot.png">
   <meta property="og:site_name" content="SystemFromScratch®">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="A robot arm, every layer engineered end to end | SystemFromScratch®">
-  <meta name="twitter:description" content="Robot software written for premium servos runs unchanged on our servo emulation — today in simulation, next on low-cost motors and a 3D-printed arm. Take it apart layer by layer.">
+  <meta name="twitter:description" content="Robot software written for premium servos, built to run unchanged on low-cost stepper drives that answer like those servos. The ROS 2 side and the drives already run in simulation. Take it apart layer by layer.">
   <meta name="twitter:image" content="https://systemfromscratch.com/assets/img/robot/og-robot.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,6 +48,7 @@
         <a href="#signal">Signal path</a>
         <a href="#architecture">Architectures</a>
         <a href="#doppelstep">Doppelstep</a>
+        <a href="#learn">Learn</a>
         <a href="/#contact">Contact</a>
       </nav>
 
@@ -65,20 +66,20 @@
         <div>
           <span class="kicker">Case study · SmartManipulator-X</span>
           <h1>One robot arm.<br><span class="accent">Every layer engineered end to end.</span></h1>
-          <p class="lead">The robot’s software expects expensive proprietary servos. We are building a controller that speaks their language, so low-cost motors and a 3D-printed arm can run the same software unchanged. In simulation, it already does.</p>
+          <p class="lead">The robot’s software expects expensive proprietary servos. We are building stepper drives that speak their language, so low-cost motors and a 3D-printed arm can run the same software unchanged. In simulation, the ROBOTIS stack already runs unchanged and each drive already answers as a DYNAMIXEL servo; joining the two is the next step.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#layers">Explore the layers <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a class="btn btn-outline" href="/#contact">Talk about your product <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
           <div class="hero-stats">
             <div><strong>7</strong><span>layers, one point of contact</span></div>
-            <div><strong>0</strong><span>lines changed in the robot software</span></div>
-            <div><strong>5</strong><span>released libraries underneath</span></div>
+            <div><strong>0</strong><span>lines changed in the ROBOTIS stack</span></div>
+            <div><strong>6 + 1</strong><span>drives on one bus</span></div>
           </div>
         </div>
         <div class="stage robot-stage">
           <div class="stage-bar"><span>Rendered from the CAD model</span><strong>Layer: <span data-layer-name>Servo emulation</span></strong></div>
-          <div class="arm-frame" data-parts="motor ctrl" data-arch="A">
+          <div class="arm-frame" data-parts="motor ctrl" data-arch="B">
             <img data-arm-img src="assets/img/robot/arm-motors.webp" width="1100" height="1000" alt="SmartManipulator-X arm, servo emulation highlighted">
             <svg viewBox="0 0 1100 1000" aria-hidden="true">
               <g class="wire wire-star">
@@ -99,13 +100,13 @@
               <path d="M840 848C810 860 790 860 762 850" fill="none" stroke="#2a4a7a" stroke-width="3" stroke-dasharray="4 8"/>
               <rect class="box box-ctrl" x="560" y="790" width="200" height="112" rx="10"/>
               <rect x="628" y="814" width="64" height="64" rx="4" fill="#050b16" stroke="#2a4a7a" stroke-width="2"/>
-              <text class="label" x="660" y="936" text-anchor="middle">SmartFusion2</text>
+              <text class="label" x="660" y="936" text-anchor="middle">Robot PC · CM4</text>
               <rect class="box box-pc" x="852" y="780" width="170" height="104" rx="8"/>
               <path d="M834 902H1040" stroke="#2a4a7a" stroke-width="6" stroke-linecap="round"/>
-              <text class="label" x="937" y="936" text-anchor="middle">ROS 2 PC</text>
+              <text class="label" x="937" y="936" text-anchor="middle">Operator PC</text>
             </svg>
           </div>
-          <div class="stage-pills"><span>Wiring: <span data-arch-name>A · central</span></span><span>Pick a layer below to see what we built</span></div>
+          <div class="stage-pills"><span>Wiring: <span data-arch-name>B · DYNAMIXEL bus</span></span><span>Pick a layer below to see what we built</span></div>
         </div>
       </div>
     </section>
@@ -122,7 +123,7 @@
 
         <div class="explorer" data-explorer>
           <div class="layer-tabs" role="tablist" aria-label="Robot layers" aria-orientation="vertical">
-            <button class="layer-tab" type="button" role="tab" id="tab-mech" aria-controls="panel-mech" aria-selected="false" data-layer="mech" data-name="Mechanics"><span class="num">01</span><span class="name">Mechanics<small>Open-source, 3D-printed arm</small></span></button><button class="layer-tab" type="button" role="tab" id="tab-elec" aria-controls="panel-elec" aria-selected="false" data-layer="elec" data-name="Electronics"><span class="num">02</span><span class="name">Electronics<small>Controller and six motor drivers</small></span></button><button class="layer-tab" type="button" role="tab" id="tab-fpga" aria-controls="panel-fpga" aria-selected="false" data-layer="fpga" data-name="FPGA &amp; drivers"><span class="num">03</span><span class="name">FPGA &amp; drivers<small>Precise timing in hardware</small></span></button><button class="layer-tab" type="button" role="tab" id="tab-os" aria-controls="panel-os" aria-selected="false" data-layer="os" data-name="Operating system"><span class="num">04</span><span class="name">Operating system<small>Zephyr RTOS on the controller</small></span></button><button class="layer-tab" type="button" role="tab" id="tab-emul" aria-controls="panel-emul" aria-selected="true" data-layer="emul" data-name="Servo emulation"><span class="num">05</span><span class="name">Servo emulation<small>Low-cost motors that answer like premium servos</small></span></button><button class="layer-tab" type="button" role="tab" id="tab-integ" aria-controls="panel-integ" aria-selected="false" data-layer="integ" data-name="Integration"><span class="num">06</span><span class="name">Integration<small>The unchanged robot software on top</small></span></button><button class="layer-tab" type="button" role="tab" id="tab-qual" aria-controls="panel-qual" aria-selected="false" data-layer="qual" data-name="Quality &amp; security"><span class="num">07</span><span class="name">Quality &amp; security<small>Rules that hold for every layer</small></span></button>
+            <button class="layer-tab" type="button" role="tab" id="tab-mech" aria-controls="panel-mech" aria-selected="false" data-layer="mech" data-name="Mechanics"><span class="num">01</span><span class="name">Mechanics<small>Open-source, 3D-printed arm</small></span></button><button class="layer-tab" type="button" role="tab" id="tab-elec" aria-controls="panel-elec" aria-selected="false" data-layer="elec" data-name="Electronics"><span class="num">02</span><span class="name">Electronics<small>Six drive boards and the Robot PC</small></span></button><button class="layer-tab" type="button" role="tab" id="tab-fpga" aria-controls="panel-fpga" aria-selected="false" data-layer="fpga" data-name="Motor control &amp; drivers"><span class="num">03</span><span class="name">Motor control &amp; drivers<small>Current loop in every drive</small></span></button><button class="layer-tab" type="button" role="tab" id="tab-os" aria-controls="panel-os" aria-selected="false" data-layer="os" data-name="Operating system"><span class="num">04</span><span class="name">Operating system<small>Zephyr on the drives, Linux on the Robot PC</small></span></button><button class="layer-tab" type="button" role="tab" id="tab-emul" aria-controls="panel-emul" aria-selected="true" data-layer="emul" data-name="Servo emulation"><span class="num">05</span><span class="name">Servo emulation<small>Low-cost motors that answer like premium servos</small></span></button><button class="layer-tab" type="button" role="tab" id="tab-integ" aria-controls="panel-integ" aria-selected="false" data-layer="integ" data-name="Integration"><span class="num">06</span><span class="name">Integration<small>The unchanged robot software on top</small></span></button><button class="layer-tab" type="button" role="tab" id="tab-qual" aria-controls="panel-qual" aria-selected="false" data-layer="qual" data-name="Quality &amp; security"><span class="num">07</span><span class="name">Quality &amp; security<small>Rules that hold for every layer</small></span></button>
           </div>
           <div>
           <div class="layer-panel" role="tabpanel" id="panel-mech" aria-labelledby="tab-mech" data-img="assets/img/robot/arm-mechanics.webp" data-parts="">
@@ -152,35 +153,35 @@
             </div>
             <div class="panel-block">
               <span class="panel-label muted">For your engineers</span>
-              <p>Microchip SmartFusion2 SoC FPGA with six TMC5160 stepper drivers.</p>
-              <ul class="chip-list"><li>SmartFusion2</li><li>TMC5160 × 6</li><li>Bring-up</li></ul>
+              <p>One ST B-G431B-ESC1 motor-control board per stepper, six on one DYNAMIXEL bus, and a Raspberry Pi CM4 on a CM4-Duino board as the Robot PC. Wiring, bus interface and power distribution are designed; bring-up on the bench is next.</p>
+              <ul class="chip-list"><li>B-G431B-ESC1 × 6</li><li>CM4-Duino</li><li>Bring-up</li></ul>
             </div>
             <div class="panel-block">
               <span class="panel-label muted">See the work</span>
-              <div class="link-list"><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/" target="_blank" rel="noopener">SmartManipulator-X docs ↗</a><a href="https://systemfromscratch.github.io/sfs-doppelstep/hardware-checklist/" target="_blank" rel="noopener">Doppelstep hardware checklist ↗</a></div>
+              <div class="link-list"><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/hardware/wiring/" target="_blank" rel="noopener">Wiring ↗</a><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/hardware/cm4-duino/" target="_blank" rel="noopener">CM4-Duino board ↗</a><a href="https://systemfromscratch.github.io/sfs-doppelstep/hardware-checklist/" target="_blank" rel="noopener">Doppelstep hardware checklist ↗</a></div>
             </div>
             <div class="service-line"><span>Service: <strong>Hardware bring-up &amp; integration</strong></span><a href="/#contact">Need this layer? →</a></div>
           </div>
           <div class="layer-panel" role="tabpanel" id="panel-fpga" aria-labelledby="tab-fpga" data-img="assets/img/robot/arm-dim.webp" data-parts="ctrl">
-            <div class="panel-head"><span>LAYER 03</span><span class="badge badge-hw">Hardware in progress</span></div>
-            <h3>FPGA &amp; drivers</h3>
+            <div class="panel-head"><span>LAYER 03</span><span class="badge badge-sim">Runs in simulation</span></div>
+            <h3>Motor control &amp; drivers</h3>
             <div class="panel-block" style="border-top: 0; padding-top: 0">
               <span class="panel-label">Why it matters for your product</span>
-              <p class="for-you" style="color: var(--text)">Time-critical work moves into hardware, so motion stays smooth even when the processor is busy.</p>
+              <p class="for-you" style="color: var(--text)">Time-critical control runs inside each drive, so motion stays smooth whatever the bus and the host are doing.</p>
             </div>
             <div class="panel-block">
               <span class="panel-label muted">For your engineers</span>
-              <p>Step generation and driver interfaces in the FPGA fabric (Libero design), with low-level drivers for the processor side.</p>
-              <ul class="chip-list"><li>Libero</li><li>FPGA</li><li>Device drivers</li></ul>
+              <p>Each Doppelstep drive runs a 20 kHz current loop and 1 kHz motion profiles with 16 microsteps per full step on an STM32G431. Overcurrent, bus-voltage and shared-leg faults switch the outputs off inside the current-loop interrupt.</p>
+              <ul class="chip-list"><li>STM32G431</li><li>20 kHz current loop</li><li>Zephyr drivers</li></ul>
             </div>
             <div class="panel-block">
               <span class="panel-label muted">See the work</span>
-              <div class="link-list"><a href="https://github.com/AntonVynohradov/Zephyr-SmartFusion2-workspace" target="_blank" rel="noopener">Zephyr SmartFusion2 workspace ↗</a><a href="https://antonvynohradov.github.io/Stepper-C/" target="_blank" rel="noopener">Stepper-C ↗</a></div>
+              <div class="link-list"><a href="https://systemfromscratch.github.io/sfs-doppelstep/architecture/" target="_blank" rel="noopener">Doppelstep architecture ↗</a><a href="https://systemfromscratch.github.io/sfs-doppelstep/protection/" target="_blank" rel="noopener">Protection ↗</a></div>
             </div>
             <div class="service-line"><span>Service: <strong>BSP &amp; device drivers</strong></span><a href="/#contact">Need this layer? →</a></div>
           </div>
           <div class="layer-panel" role="tabpanel" id="panel-os" aria-labelledby="tab-os" data-img="assets/img/robot/arm-dim.webp" data-parts="ctrl">
-            <div class="panel-head"><span>LAYER 04</span><span class="badge badge-hw">Hardware in progress</span></div>
+            <div class="panel-head"><span>LAYER 04</span><span class="badge badge-sim">Runs in simulation</span></div>
             <h3>Operating system</h3>
             <div class="panel-block" style="border-top: 0; padding-top: 0">
               <span class="panel-label">Why it matters for your product</span>
@@ -188,12 +189,12 @@
             </div>
             <div class="panel-block">
               <span class="panel-label muted">For your engineers</span>
-              <p>Zephyr RTOS ported to SmartFusion2, with a reproducible workspace and builds.</p>
-              <ul class="chip-list"><li>Zephyr</li><li>SmartFusion2 port</li><li>Reproducible builds</li></ul>
+              <p>Zephyr RTOS with MCUboot on every drive (signed images, recovery over the DYNAMIXEL bus); ROS 2 Jazzy in Docker on Raspberry Pi OS on the Robot PC.</p>
+              <ul class="chip-list"><li>Zephyr</li><li>MCUboot</li><li>Raspberry Pi OS</li><li>Docker</li></ul>
             </div>
             <div class="panel-block">
               <span class="panel-label muted">See the work</span>
-              <div class="link-list"><a href="https://github.com/AntonVynohradov/Zephyr-SmartFusion2-workspace" target="_blank" rel="noopener">Zephyr SmartFusion2 workspace ↗</a><a href="https://systemfromscratch-articles.github.io/Baton-C-One-wire-many-MCUs-no-lost-messages/" target="_blank" rel="noopener">Baton-C on Zephyr (article) ↗</a></div>
+              <div class="link-list"><a href="https://systemfromscratch.github.io/sfs-doppelstep/" target="_blank" rel="noopener">Doppelstep firmware ↗</a><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/robot-pc/cm4-duino/" target="_blank" rel="noopener">Robot PC on the CM4-Duino ↗</a></div>
             </div>
             <div class="service-line"><span>Service: <strong>RTOS &amp; Embedded Linux</strong></span><a href="/#contact">Need this layer? →</a></div>
           </div>
@@ -206,7 +207,7 @@
             </div>
             <div class="panel-block">
               <span class="panel-label muted">For your engineers</span>
-              <p>The controller presents each stepper as a DYNAMIXEL device over Protocol 2.0, with an X430 Control Table emulator built on the DXL2-C library.</p>
+              <p>Each Doppelstep drive presents its stepper as a DYNAMIXEL XM430-W350 over Protocol 2.0, with the X430 Control Table emulator built on the DXL2-C library.</p>
               <ul class="chip-list"><li>DXL2-C</li><li>DYNAMIXEL Protocol 2.0</li><li>X430 Control Table</li></ul>
             </div>
             <div class="panel-block">
@@ -224,12 +225,12 @@
             </div>
             <div class="panel-block">
               <span class="panel-label muted">For your engineers</span>
-              <p>Robot PC with ROS 2 Jazzy in Docker and the unchanged ROBOTIS OpenMANIPULATOR-X stack; the Operator PC plans motion in MoveIt 2.</p>
+              <p>Robot PC with ROS 2 Jazzy in Docker and the unchanged ROBOTIS OpenMANIPULATOR-X stack, on mock hardware today; the Operator PC plans motion in MoveIt 2 over DDS. Next: the Robot PC on simulated Doppelstep drives.</p>
               <ul class="chip-list"><li>ROS 2 Jazzy</li><li>ros2_control</li><li>MoveIt 2</li><li>Docker</li></ul>
             </div>
             <div class="panel-block">
               <span class="panel-label muted">See the work</span>
-              <div class="link-list"><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/" target="_blank" rel="noopener">Robot PC docs ↗</a><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/" target="_blank" rel="noopener">Operator PC docs ↗</a><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/rviz/" target="_blank" rel="noopener">Planning in RViz2 ↗</a></div>
+              <div class="link-list"><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/" target="_blank" rel="noopener">Robot PC docs ↗</a><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/" target="_blank" rel="noopener">Operator PC docs ↗</a><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/rviz/" target="_blank" rel="noopener">Planning in RViz2 ↗</a><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/status/" target="_blank" rel="noopener">Project status ↗</a></div>
             </div>
             <div class="service-line"><span>Service: <strong>System integration</strong></span><a href="/#contact">Need this layer? →</a></div>
           </div>
@@ -266,16 +267,16 @@
           </div>
         </div>
         <ol class="path-steps">
-          <li class="path-step" data-layer="integ"><span class="mono">01</span><strong>Plan</strong><span>MoveIt 2 plans a smooth path</span></li><li class="path-step" data-layer="integ"><span class="mono">02</span><strong>Control</strong><span>ROS 2 sends joint goals</span></li><li class="path-step" data-layer="emul"><span class="mono">03</span><strong>Translate</strong><span>Goals become DYNAMIXEL packets</span></li><li class="path-step" data-layer="os"><span class="mono">04</span><strong>Decide</strong><span>Zephyr checks and schedules</span></li><li class="path-step" data-layer="fpga"><span class="mono">05</span><strong>Time</strong><span>The FPGA generates exact steps</span></li><li class="path-step" data-layer="elec"><span class="mono">06</span><strong>Move</strong><span>Drivers turn the motor</span></li>
+          <li class="path-step" data-layer="integ"><span class="mono">01</span><strong>Plan</strong><span>MoveIt 2 plans a smooth path</span></li><li class="path-step" data-layer="integ"><span class="mono">02</span><strong>Control</strong><span>ROS 2 sends joint goals</span></li><li class="path-step" data-layer="emul"><span class="mono">03</span><strong>Translate</strong><span>Goals become DYNAMIXEL packets</span></li><li class="path-step" data-layer="os"><span class="mono">04</span><strong>Decide</strong><span>Zephyr on the drive checks and schedules</span></li><li class="path-step" data-layer="fpga"><span class="mono">05</span><strong>Regulate</strong><span>The 20 kHz current loop sets the coil currents</span></li><li class="path-step" data-layer="elec"><span class="mono">06</span><strong>Move</strong><span>The power stage turns the motor</span></li>
         </ol>
-        <div class="packet-line">DXL2 · ID 03 · WRITE · Goal Position = 2048 · CRC OK → TMC5160 #3 · 1 600 steps · elbow +45°</div>
+        <div class="packet-line">DXL2 · ID 04 · WRITE · Goal Position = 2560 · CRC OK → Doppelstep ID 4 · elbow +45°</div>
 
         <div class="shots-head">
           <h3>Running today, in simulation</h3>
           <span class="badge badge-sim">Runs in simulation</span>
         </div>
         <div class="shots">
-          <figure><img src="assets/img/robot/rviz-goal-ready.webp" width="600" height="700" alt="RViz2: the orange goal arm bends forward while the current arm stands upright" loading="lazy"><figcaption><span class="mono">STEP 1</span><strong>Choose the goal</strong><span>The operator picks a target pose; the orange arm shows where it will go.</span></figcaption></figure><figure><img src="assets/img/robot/rviz-plan-preview.webp" width="600" height="700" alt="RViz2: preview of the planned motion from upright to the ready pose" loading="lazy"><figcaption><span class="mono">STEP 2</span><strong>Preview the plan</strong><span>MoveIt 2 finds a collision-free path and plays it back first.</span></figcaption></figure><figure><img src="assets/img/robot/rviz-executed.webp" width="600" height="700" alt="RViz2: the arm has executed the motion and reached the ready pose" loading="lazy"><figcaption><span class="mono">STEP 3</span><strong>Execute</strong><span>The unchanged ROBOTIS stack drives the joints and reports the goal reached.</span></figcaption></figure>
+          <figure><img src="assets/img/robot/rviz-goal-ready.webp" width="600" height="700" alt="RViz2: the orange goal arm bends forward while the current arm stands upright" loading="lazy"><figcaption><span class="mono">STEP 1</span><strong>Choose the goal</strong><span>The operator picks a target pose; the orange arm shows where it will go.</span></figcaption></figure><figure><img src="assets/img/robot/rviz-plan-preview.webp" width="600" height="700" alt="RViz2: preview of the planned motion from upright to the ready pose" loading="lazy"><figcaption><span class="mono">STEP 2</span><strong>Preview the plan</strong><span>MoveIt 2 finds a collision-free path and plays it back first.</span></figcaption></figure><figure><img src="assets/img/robot/rviz-executed.webp" width="600" height="700" alt="RViz2: the arm has executed the motion and reached the ready pose" loading="lazy"><figcaption><span class="mono">STEP 3</span><strong>Execute</strong><span>The unchanged ROBOTIS stack drives the simulated joints and reports the goal reached.</span></figcaption></figure>
         </div>
         <p class="source-note">Screenshots from the Operator PC documentation: MoveIt 2 and RViz2 on the robot description generated from the BCN3D Moveo CAD. <a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-operator/rviz/" target="_blank" rel="noopener">See the full walkthrough ↗</a></p>
       </div>
@@ -287,16 +288,16 @@
           <div>
             <span class="eyebrow">Architecture choices</span>
             <h2 class="section-title">The same arm, three ways to wire it.</h2>
-            <p class="section-intro">Choosing the architecture decides cost, wiring and how failures behave — long before code is written. Switch an option and watch the wiring on the arm change.</p>
+            <p class="section-intro">Choosing the architecture decides cost, wiring and how failures behave — long before code is written. We chose B. Switch an option and watch the wiring on the arm change.</p>
           </div>
         </div>
 
-        <div class="arch-tabs" role="tablist" aria-label="Architecture options" data-arch-switch><button class="arch-tab" type="button" role="tab" id="arch-tab-A" aria-controls="arch-A" aria-selected="true" data-arch="A" data-short="A · central">A · Central controller</button><button class="arch-tab" type="button" role="tab" id="arch-tab-B" aria-controls="arch-B" aria-selected="false" data-arch="B" data-short="B · RS-485 chain">B · Smart joints on RS-485</button><button class="arch-tab" type="button" role="tab" id="arch-tab-C" aria-controls="arch-C" aria-selected="false" data-arch="C" data-short="C · CAN bus">C · Smart joints on CAN</button></div>
+        <div class="arch-tabs" role="tablist" aria-label="Architecture options" data-arch-switch><button class="arch-tab" type="button" role="tab" id="arch-tab-A" aria-controls="arch-A" aria-selected="false" data-arch="A" data-short="A · central">A · Central controller</button><button class="arch-tab" type="button" role="tab" id="arch-tab-B" aria-controls="arch-B" aria-selected="true" data-arch="B" data-short="B · DYNAMIXEL bus">B · Smart joints on one bus (chosen)</button><button class="arch-tab" type="button" role="tab" id="arch-tab-C" aria-controls="arch-C" aria-selected="false" data-arch="C" data-short="C · CAN bus">C · Smart joints on CAN</button></div>
         <div class="arch-body">
           <figure class="arch-figure">
             <div class="stage robot-stage">
-              <div class="stage-bar"><span>Wiring on the arm</span><strong data-arch-name>A · central</strong></div>
-              <div class="arm-frame" data-parts="motor ctrl" data-arch="A">
+              <div class="stage-bar"><span>Wiring on the arm</span><strong data-arch-name>B · DYNAMIXEL bus</strong></div>
+              <div class="arm-frame" data-parts="motor ctrl" data-arch="B">
                 <img src="assets/img/robot/arm-dim.webp" width="1100" height="1000" alt="SmartManipulator-X arm with the joint wiring of the selected architecture" loading="lazy">
                 <svg viewBox="0 0 1100 1000" aria-hidden="true">
               <g class="wire wire-star">
@@ -317,7 +318,7 @@
               <path d="M840 848C810 860 790 860 762 850" fill="none" stroke="#2a4a7a" stroke-width="3" stroke-dasharray="4 8"/>
               <rect class="box box-ctrl" x="560" y="790" width="200" height="112" rx="10"/>
               <rect x="628" y="814" width="64" height="64" rx="4" fill="#050b16" stroke="#2a4a7a" stroke-width="2"/>
-              <text class="label" x="660" y="936" text-anchor="middle">SmartFusion2</text>
+              <text class="label" x="660" y="936" text-anchor="middle">Controller</text>
               <rect class="box box-pc" x="852" y="780" width="170" height="104" rx="8"/>
               <path d="M834 902H1040" stroke="#2a4a7a" stroke-width="6" stroke-linecap="round"/>
               <text class="label" x="937" y="936" text-anchor="middle">ROS 2 PC</text>
@@ -325,7 +326,7 @@
               </div>
               <div class="legend arch-legend">
                 <span><i class="sw sw-star"></i>One cable per joint</span>
-                <span><i class="sw sw-bus"></i>One shared RS-485 bus</span>
+                <span><i class="sw sw-bus"></i>One shared DYNAMIXEL bus</span>
                 <span><i class="sw sw-can"></i>One shared CAN bus</span>
               </div>
             </div>
@@ -333,18 +334,18 @@
           <div class="arch-side">
             <div>
             <div class="arch-panel" role="tabpanel" id="arch-A" aria-labelledby="arch-tab-A">
-              <span class="badge badge-sim">Runs in simulation</span>
+              <span class="badge badge-opt">Design option</span>
               <h3>One central controller</h3>
-              <p>One SmartFusion2 board drives all six motors directly. Simple and inexpensive for a single arm, but every joint needs its own cable back to the controller.</p>
+              <p>One controller board drives all six motors directly. Simple and inexpensive for a single arm, but every joint needs its own cable back to the controller, and one fault stops every joint.</p>
               <span class="panel-label muted">Built on</span>
-              <div class="link-list"><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/" target="_blank" rel="noopener">SmartManipulator-X ↗</a><a href="https://antonvynohradov.github.io/Stepper-C/" target="_blank" rel="noopener">Stepper-C ↗</a></div>
+              <div class="link-list"><a href="https://antonvynohradov.github.io/Stepper-C/" target="_blank" rel="noopener">Stepper-C ↗</a></div>
             </div>
             <div class="arch-panel" role="tabpanel" id="arch-B" aria-labelledby="arch-tab-B">
-              <span class="badge badge-opt">Design option · smart joint in development</span>
+              <span class="badge badge-hw">Chosen · hardware in progress</span>
               <h3>Smart joints on one shared bus</h3>
-              <p>Each joint gets its own small controller (Doppelstep) and they share one cable, talking DYNAMIXEL Protocol 2.0 or Baton-C. Fewer wires, and a faulty joint can be swapped on its own.</p>
+              <p>Each joint gets its own Doppelstep drive, and all of them share one cable that carries plain DYNAMIXEL Protocol 2.0 from the Robot PC, a Raspberry Pi CM4 on a CM4-Duino board. Fewer wires, a faulty joint can be swapped on its own, and the bus is built for the stock ROBOTIS tools. Single-wire TTL first; RS-485 if noise measurements on the arm require it.</p>
               <span class="panel-label muted">Built on</span>
-              <div class="link-list"><a href="https://systemfromscratch.github.io/sfs-doppelstep/" target="_blank" rel="noopener">Doppelstep ↗</a><a href="https://antonvynohradov.github.io/DXL2-C/" target="_blank" rel="noopener">DXL2-C ↗</a><a href="https://antonvynohradov.github.io/Baton-C/" target="_blank" rel="noopener">Baton-C ↗</a></div>
+              <div class="link-list"><a href="https://systemfromscratch.github.io/sfs-doppelstep/" target="_blank" rel="noopener">Doppelstep ↗</a><a href="https://antonvynohradov.github.io/DXL2-C/" target="_blank" rel="noopener">DXL2-C ↗</a><a href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/dynamixel/bus/" target="_blank" rel="noopener">DYNAMIXEL bus ↗</a></div>
             </div>
             <div class="arch-panel" role="tabpanel" id="arch-C" aria-labelledby="arch-tab-C">
               <span class="badge badge-opt">Design option</span>
@@ -355,9 +356,9 @@
             </div>
             </div>
             <div class="table-wrap">
-            <table class="arch-table" data-arch="A">
+            <table class="arch-table" data-arch="B">
               <caption class="sr-only">Architecture trade-offs</caption>
-              <thead><tr><th scope="col">Decision factor</th><th scope="col">A · Central</th><th scope="col">B · RS-485</th><th scope="col">C · CAN</th></tr></thead>
+              <thead><tr><th scope="col">Decision factor</th><th scope="col">A · Central</th><th scope="col">B · DYNAMIXEL bus</th><th scope="col">C · CAN</th></tr></thead>
               <tbody><tr><th scope="row">Cables to the joints</th><td>One bundle per joint</td><td>One shared cable</td><td>One shared cable</td></tr><tr><th scope="row">If one joint fails</th><td>Whole controller affected</td><td>That joint fails on its own</td><td>That joint fails on its own and reports why</td></tr><tr><th scope="row">Adding a joint</th><td>New driver channel on the board</td><td>Plug in another module</td><td>Plug in, update over the bus</td></tr></tbody>
             </table>
             </div>
@@ -371,7 +372,7 @@
         <div class="dopp-top">
           <div>
             <span style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
-              <span class="kicker">The smart joint behind option B</span>
+              <span class="kicker">The smart joint in every SmartManipulator-X joint</span>
               <span class="badge badge-hw">In development</span>
             </span>
             <h2>Doppelstep: a low-cost motor that behaves like a premium servo.</h2>
@@ -413,7 +414,41 @@
       </div>
     </section>
 
-    <section class="section section-alt" id="evidence">
+    <section class="section section-alt" id="learn">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Open source and education</span>
+            <h2 class="section-title">Learn robotics on it, at your own level.</h2>
+            <p class="section-intro">Every part is open source under the Apache License 2.0: the Robot PC, the Operator PC and the Doppelstep drive firmware. A connection guide in pictures takes you from simulation to the real arm, one level at a time. You can stop at any level.</p>
+          </div>
+        </div>
+        <div class="levels-grid">
+          <div>
+            <span class="badge badge-sim">Works today</span>
+            <strong>1 · Simulation</strong>
+            <span>One computer with Docker. Plan and execute arm motions, write ROS 2 nodes and test algorithms against simulated joints.</span>
+          </div>
+          <div>
+            <span class="badge badge-hw">Planned</span>
+            <strong>2 · One joint on the desk</strong>
+            <span>One drive board, one stepper motor and a lab supply. Run your trajectories on a real motor and see real timing and limits.</span>
+          </div>
+          <div>
+            <span class="badge badge-hw">Planned</span>
+            <strong>3 · The whole robot</strong>
+            <span>The arm, six drives, the CM4-Duino and a small bus interface. Run your algorithms on the real arm.</span>
+          </div>
+        </div>
+        <div class="btn-row" style="margin-top: 24px">
+          <a class="btn btn-primary btn-sm" href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/beginners/" target="_blank" rel="noopener">Connection guide for beginners ↗</a>
+          <a class="btn btn-outline btn-sm" href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/getting-started/" target="_blank" rel="noopener">Getting started ↗</a>
+          <a class="btn btn-outline btn-sm" href="https://systemfromscratch.github.io/sfs-smartmanipulator-x-robot/status/" target="_blank" rel="noopener">Project status ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="evidence">
       <div class="container">
         <div class="section-head">
           <div>
@@ -425,7 +460,7 @@
           <div><strong>5</strong><span>libraries released in 2026</span></div>
           <div><strong>0</strong><span>MISRA C:2012 violations (Cppcheck, in CI)</span></div>
           <div><strong>100 %</strong><span>line and branch coverage in every library</span></div>
-          <div><strong>1 command</strong><span>to run the whole robot in simulation</span></div>
+          <div><strong>1 command</strong><span>to start the Robot PC in simulation</span></div>
         </div>
         <div class="legend">
           <span><i style="background: var(--success)"></i>Runs in simulation</span>
@@ -437,11 +472,11 @@
           <a class="btn btn-outline btn-sm" href="articles.html">Engineering articles</a>
           <a class="btn btn-outline btn-sm" href="https://github.com/SystemFromScratch" target="_blank" rel="noopener">GitHub · SystemFromScratch ↗</a>
         </div>
-        <p class="attribution">Arm renders and robot description from the <a href="https://github.com/BCN3D/BCN3D-Moveo" target="_blank" rel="noopener">BCN3D Moveo</a> CAD (MIT licence). ROBOTIS, DYNAMIXEL and OpenMANIPULATOR are trademarks of ROBOTIS Co., Ltd.; SmartFusion2 is a trademark of Microchip Technology Inc. SmartManipulator-X is not affiliated with or endorsed by them.</p>
+        <p class="attribution">Arm renders and robot description from the <a href="https://github.com/BCN3D/BCN3D-Moveo" target="_blank" rel="noopener">BCN3D Moveo</a> CAD (MIT licence). ROBOTIS, DYNAMIXEL and OpenMANIPULATOR are trademarks of ROBOTIS Co., Ltd.; Raspberry Pi is a trademark of Raspberry Pi Ltd; STM32 is a registered trademark of STMicroelectronics International N.V. SmartManipulator-X is not affiliated with or endorsed by them.</p>
       </div>
     </section>
 
-    <section class="section" id="contact">
+    <section class="section section-alt" id="contact">
       <div class="container">
         <div class="cta reveal">
           <div class="cta-text">
