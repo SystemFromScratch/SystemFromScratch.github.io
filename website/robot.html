@@ -153,7 +153,7 @@
             </div>
             <div class="panel-block">
               <span class="panel-label muted">For your engineers</span>
-              <p>One ST B-G431B-ESC1 motor-control board per stepper, six on one DYNAMIXEL bus, and a Raspberry Pi CM4 on a CM4-Duino board as the Robot PC. Wiring, bus interface and power distribution are designed; bring-up on the bench is next.</p>
+              <p>One ST B-G431B-ESC1 motor-control board per stepper, six on one DYNAMIXEL bus, and a Raspberry Pi CM4 on a CM4-Duino board as the Robot PC. Wiring, bus interface and power distribution are designed; one Doppelstep drive already turns a real stepper on the bench, bring-up of the arm is next.</p>
               <ul class="chip-list"><li>B-G431B-ESC1 × 6</li><li>CM4-Duino</li><li>Bring-up</li></ul>
             </div>
             <div class="panel-block">
@@ -171,7 +171,7 @@
             </div>
             <div class="panel-block">
               <span class="panel-label muted">For your engineers</span>
-              <p>Each Doppelstep drive runs a 20 kHz current loop and 1 kHz motion profiles with 16 microsteps per full step on an STM32G431. Overcurrent, bus-voltage and shared-leg faults switch the outputs off inside the current-loop interrupt.</p>
+              <p>Each Doppelstep drive runs a 20 kHz current loop and 1 kHz motion profiles with 16 microsteps per full step on an STM32G431. Hardware comparators switch the gates off within 0.5 µs, overcurrent, bus-voltage and leg faults inside the current-loop interrupt, and a self-test checks the bridge and the wiring before the first Torque Enable. Checked on the bench with a real stepper at 12 V and 24 V.</p>
               <ul class="chip-list"><li>STM32G431</li><li>20 kHz current loop</li><li>Zephyr drivers</li></ul>
             </div>
             <div class="panel-block">
@@ -207,7 +207,7 @@
             </div>
             <div class="panel-block">
               <span class="panel-label muted">For your engineers</span>
-              <p>Each Doppelstep drive presents its stepper as a DYNAMIXEL XM430-W350 over Protocol 2.0, with the X430 Control Table emulator built on the DXL2-C library.</p>
+              <p>Each Doppelstep drive presents its stepper as a DYNAMIXEL XM430-W350 over Protocol 2.0, with the X430 Control Table emulator built on the DXL2-C library. DYNAMIXEL Wizard 2.0 finds it, reads its whole Control Table and moves it in position, extended position and velocity mode.</p>
               <ul class="chip-list"><li>DXL2-C</li><li>DYNAMIXEL Protocol 2.0</li><li>X430 Control Table</li></ul>
             </div>
             <div class="panel-block">
@@ -373,13 +373,13 @@
           <div>
             <span style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
               <span class="kicker">The smart joint in every SmartManipulator-X joint</span>
-              <span class="badge badge-hw">In development</span>
+              <span class="badge badge-hw">v0.3.0 · Pre-release</span>
             </span>
             <h2>Doppelstep: a low-cost motor that behaves like a premium servo.</h2>
             <p>A small motor-control board and an ordinary stepper motor, turned into a DYNAMIXEL smart servo by our firmware. Existing robot software, SDKs and tools talk to it without a single change — the same idea as the arm, shrunk into one joint.</p>
             <div class="mini-stats">
               <div><strong>20 kHz</strong><span>current control loop</span></div>
-              <div><strong>91</strong><span>automated tests per build</span></div>
+              <div><strong>157</strong><span>automated tests per build</span></div>
               <div><strong>75.5 KiB</strong><span>application flash</span></div>
               <div><strong>Signed</strong><span>firmware updates over the bus</span></div>
             </div>
@@ -402,11 +402,11 @@
           <div class="status-card">
             <div>
               <span class="panel-label done-label">Done</span>
-              <ul class="done" style="margin-top: 10px"><li>Answers as a DYNAMIXEL XM430-W350 over Protocol 2.0</li><li>Closed-loop current control with protection in the interrupt</li><li>91 automated tests on every build, on a simulated motor</li><li>Signed firmware (MCUboot), updates over the bus</li><li>Documentation website and PDF manual</li></ul>
+              <ul class="done" style="margin-top: 10px"><li>Answers as a DYNAMIXEL XM430-W350 over Protocol 2.0, checked with DYNAMIXEL Wizard 2.0</li><li>Drives a real stepper (17HS19-2004S1) at 12 V and 24 V</li><li>Closed-loop current control; hardware comparators, self-test and overheating trip</li><li>Power-stage dead time measured on the board</li><li>157 automated tests on every build, on a simulated motor</li><li>Signed firmware (MCUboot), updates over the bus</li><li>Documentation website and PDF manual</li></ul>
             </div>
             <div class="next-block">
               <span class="panel-label next-label">Next</span>
-              <ul class="next"><li>Power-stage dead time set and verified on the board</li><li>Latest driver refactor checked on the bench</li><li>Lost-step reporting (the motor has no encoder)</li><li>Temperature sensor and overheating trip</li><li>Shared single-wire bus with real DYNAMIXEL servos</li></ul>
+              <ul class="next"><li>Dead-time compensation released (Stepper-C 1.5.0)</li><li>Gate timing checked with an oscilloscope</li><li>Lost-step reporting (the motor has no encoder)</li><li>PWM Limit applied</li><li>Shared single-wire bus with real DYNAMIXEL servos</li></ul>
             </div>
             <a href="https://github.com/SystemFromScratch/sfs-doppelstep#project-status" target="_blank" rel="noopener">Live status on GitHub ↗</a>
           </div>
