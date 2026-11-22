@@ -5,13 +5,23 @@ on:
     branches:
       - main
   workflow_dispatch:
+  # Sent by .github/workflows/library-release.yml when a library publishes a release.
+  repository_dispatch:
+    types:
+      - library-released
+  # Safety net: picks up any release whose notification did not arrive
+  # (expired token, Actions outage). Makes no commit when nothing changed.
+  schedule:
+    - cron: "23 4 * * *"
 
 permissions:
   contents: write
 
+# Runs one after another and never cancels a run halfway through a push.
+# Every run reads all libraries again, so a queued run always ends up current.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -19,9 +29,46 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
-      # Writes the project and article cards into the HTML so search
-      # engines see them without running JavaScript.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install build tools
+        run: |
+          if [ -f package-lock.json ]; then npm ci --no-audit --no-fund; else npm install --no-audit --no-fund; fi
+
+      # Latest release of every library in projects.js and its site.yml at that tag
+      # -> website/assets/js/libraries.js. Keeps the previous data on any error.
+      - name: Read library releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node tools/fetch-libraries.mjs
+
+      # Commits only when a library changed (version, Stable/Pre-release or its
+      # site.yml). Only the generated data goes into the commit; the prerendered
+      # pages (next step) are published but not committed, as before.
+      - name: Commit library changes
+        run: |
+          paths="website/assets/js/libraries.js website/assets/img/projects"
+          if [ -z "$(git status --porcelain -- $paths)" ]; then
+            echo "Libraries unchanged: no commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- website/assets/js/libraries.js
+          if [ -d website/assets/img/projects ]; then git add -- website/assets/img/projects; fi
+          git commit -m "chore: update releases [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      # Writes the project and article cards into the HTML so search engines
+      # see them without running JavaScript, and the release labels marked
+      # with data-release (home page, robot case study).
       - name: Prerender cards
         run: node tools/prerender.mjs
 

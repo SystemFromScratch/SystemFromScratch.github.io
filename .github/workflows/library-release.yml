@@ -1,0 +1,89 @@
+name: Website card
+
+# Reusable workflow for the library repositories. It checks the library's site.yml
+# against tools/site.schema.json and, on a release, asks this repository to rebuild
+# the website (repository_dispatch "library-released").
+#
+# Caller (in each library repository, .github/workflows/website.yml):
+#
+#   name: Website card
+#   on:
+#     release:
+#       types: [published]
+#     pull_request:
+#       paths: [site.yml]
+#     workflow_dispatch:
+#   jobs:
+#     website:
+#       uses: SystemFromScratch/SystemFromScratch.github.io/.github/workflows/library-release.yml@main
+#       secrets:
+#         SITE_DISPATCH_TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
+#
+# See docs/library-integration.md for the token and the site.yml format.
+
+on:
+  workflow_call:
+    inputs:
+      site-path:
+        description: Path of the description file in the library repository
+        type: string
+        default: site.yml
+    secrets:
+      SITE_DISPATCH_TOKEN:
+        description: Fine-grained token with Contents read and write on SystemFromScratch/SystemFromScratch.github.io
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the library
+        uses: actions/checkout@v4
+        with:
+          path: library
+
+      - name: Check out the website tools
+        uses: actions/checkout@v4
+        with:
+          repository: SystemFromScratch/SystemFromScratch.github.io
+          ref: main
+          path: website
+          # Cone mode: files at the root (package.json) are always included.
+          sparse-checkout: tools
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install the validator
+        working-directory: website
+        run: |
+          if [ -f package-lock.json ]; then npm ci --no-audit --no-fund; else npm install --no-audit --no-fund; fi
+
+      # On a release an invalid site.yml does not stop the notification: the
+      # website then shows the new version with the last valid description.
+      - name: Validate ${{ inputs.site-path }}
+        continue-on-error: ${{ github.event_name == 'release' }}
+        run: node website/tools/validate-site.mjs "library/${{ inputs.site-path }}"
+
+      # Only for a published release. The website reads every library again, so
+      # the event carries no data; repo and tag are only shown in its log.
+      - name: Notify the website
+        if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
+          REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::warning::SITE_DISPATCH_TOKEN is not set: the website picks up this release at its next daily run"
+            exit 0
+          fi
+          gh api repos/SystemFromScratch/SystemFromScratch.github.io/dispatches \
+            -f event_type=library-released \
+            -f "client_payload[repo]=$REPO" \
+            -f "client_payload[tag]=$TAG"
+          echo "Website rebuild requested for $REPO $TAG"

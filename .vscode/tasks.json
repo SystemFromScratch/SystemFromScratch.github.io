@@ -49,6 +49,20 @@
         "kind": "build",
         "isDefault": true
       }
+    },
+    {
+      "label": "Website: update libraries",
+      "detail": "Read the latest library releases and site.yml files, then prerender the pages (needs npm install once)",
+      "type": "shell",
+      "command": "npm install --no-audit --no-fund && node tools/fetch-libraries.mjs && node tools/prerender.mjs",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
     }
   ]
 }

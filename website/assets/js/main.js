@@ -15,12 +15,15 @@
     demo:
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>',
   };
+  ICONS.release =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>';
   ICONS.read = ICONS.article;
   ICONS["case"] = ICONS.article;
 
   var LINK_LABELS = {
     docs: "Documentation",
     manual: "PDF manual",
+    release: "Release notes",
     article: "Article",
     read: "Read the article",
     case: "Read the case study",
@@ -179,13 +182,72 @@
     );
   }
 
+  /* ---------- Library releases ---------- */
+
+  /* Fields a library may set in its site.yml (see tools/site.schema.json). */
+  var SITE_FIELDS = ["title", "summary", "features", "highlights", "categories", "tags", "art", "image"];
+  var LINK_ORDER = ["docs", "manual", "release", "article", "demo", "repo"];
+
+  function repoKey(url) {
+    var m = /^https:\/\/github\.com\/([\w.-]+)\/([\w.-]+?)(?:\.git)?\/?$/i.exec(url || "");
+    return m ? (m[1] + "/" + m[2]).toLowerCase() : null;
+  }
+
+  function releaseStatus(release) {
+    return release.version + " \u00b7 " + (release.prerelease ? "Pre-release" : "Stable");
+  }
+
+  /*
+   * Merges window.SFS_LIBRARIES (written by tools/fetch-libraries.mjs) over the
+   * entries of projects.js: the description from the library's site.yml, and the
+   * version, Stable/Pre-release and release link from GitHub Releases. Whatever is
+   * missing stays as written in projects.js.
+   */
+  function mergeLibraries(projects, libraries) {
+    libraries = libraries || {};
+    return (projects || []).map(function (project) {
+      var lib = project.track === false ? null : libraries[repoKey(project.links && project.links.repo)];
+      if (!lib) return project;
+
+      var out = {};
+      Object.keys(project).forEach(function (k) { out[k] = project[k]; });
+      var links = {};
+      Object.keys(project.links || {}).forEach(function (k) { links[k] = project.links[k]; });
+
+      if (lib.site) {
+        SITE_FIELDS.forEach(function (k) {
+          if (lib.site[k] !== undefined) out[k] = lib.site[k];
+        });
+        Object.keys(lib.site.links || {}).forEach(function (k) { links[k] = lib.site.links[k]; });
+        if (lib.site.image === undefined && lib.site.art !== undefined) delete out.image;
+      }
+      if (lib.release) {
+        out.status = releaseStatus(lib.release);
+        out.stable = !lib.release.prerelease;
+        links.release = lib.release.url;
+      }
+
+      out.links = {};
+      LINK_ORDER.concat(Object.keys(links)).forEach(function (k) {
+        if (links[k] && !out.links[k]) out.links[k] = links[k];
+      });
+      return out;
+    });
+  }
+
   /* Used by tools/prerender.mjs to write the cards into the HTML at build time. */
-  window.SFS_RENDER = { card: renderCard, article: renderArticle };
+  window.SFS_RENDER = {
+    card: renderCard,
+    article: renderArticle,
+    merge: mergeLibraries,
+    repoKey: repoKey,
+    releaseStatus: releaseStatus,
+  };
 
   /* ---------- Projects rendering ---------- */
 
   function initProjects() {
-    var projects = window.SFS_PROJECTS || [];
+    var projects = mergeLibraries(window.SFS_PROJECTS, window.SFS_LIBRARIES);
 
     var articlesEl = document.querySelector("[data-articles]");
     if (articlesEl) {

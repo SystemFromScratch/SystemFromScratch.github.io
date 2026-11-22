@@ -1,0 +1,14 @@
+{
+  "name": "systemfromscratch-website",
+  "private": true,
+  "type": "module",
+  "description": "Build tools for systemfromscratch.com (the site itself has no build step)",
+  "scripts": {
+    "libraries": "node tools/fetch-libraries.mjs",
+    "prerender": "node tools/prerender.mjs",
+    "validate-site": "node tools/validate-site.mjs"
+  },
+  "dependencies": {
+    "yaml": "^2.6.0"
+  }
+}

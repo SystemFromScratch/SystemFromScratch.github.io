@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://systemfromscratch.com/schemas/site.schema.json",
+  "title": "SystemFromScratch library card (site.yml)",
+  "description": "Description of a library for its card on systemfromscratch.com. Read from the release tag of the library. Version, release date and Stable/Pre-release come from GitHub Releases; featured, homeSection and card order are set by the website (website/assets/js/projects.js).",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "title": {
+      "description": "Card heading.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "summary": {
+      "description": "One or two sentences shown on the card.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "features": {
+      "description": "Bullet points, shown on the Projects page only.",
+      "type": "array",
+      "maxItems": 8,
+      "items": { "type": "string", "minLength": 1, "maxLength": 300 }
+    },
+    "highlights": {
+      "description": "Up to three measured numbers.",
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["value", "label"],
+        "properties": {
+          "value": { "type": "string", "minLength": 1, "maxLength": 20 },
+          "label": { "type": "string", "minLength": 1, "maxLength": 60 }
+        }
+      }
+    },
+    "categories": {
+      "description": "Used by the filters on the Projects page, e.g. Libraries, RTOS, Automotive, Robotics.",
+      "type": "array",
+      "maxItems": 4,
+      "items": { "type": "string", "minLength": 1, "maxLength": 30 }
+    },
+    "tags": {
+      "description": "Technology badges.",
+      "type": "array",
+      "maxItems": 10,
+      "items": { "type": "string", "minLength": 1, "maxLength": 30 }
+    },
+    "art": {
+      "description": "Built-in illustration.",
+      "type": "string",
+      "enum": ["robot", "container", "can", "chip", "bus", "stepper", "scope", "halfbridge", "servo", "planner"]
+    },
+    "image": {
+      "description": "Optional photo, path relative to the root of the library repository (png, jpg, webp or svg). The website copies it at build time; it replaces the illustration.",
+      "type": "string",
+      "pattern": "^(?!/)(?!.*\\.\\.)[A-Za-z0-9._/-]+\\.(png|jpe?g|webp|svg)$"
+    },
+    "links": {
+      "description": "Full https URLs. The repository and release links are added by the website.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "docs": { "type": "string", "pattern": "^https://" },
+        "manual": { "type": "string", "pattern": "^https://" },
+        "article": { "type": "string", "pattern": "^https://" },
+        "demo": { "type": "string", "pattern": "^https://" }
+      }
+    }
+  }
+}

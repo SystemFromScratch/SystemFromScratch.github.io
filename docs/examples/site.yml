@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/SystemFromScratch/SystemFromScratch.github.io/main/tools/site.schema.json
+#
+# Card of this library on systemfromscratch.com (example: isotp-c).
+# Put this file at the root of the library repository. The website reads it from
+# the tag of the latest release, so edits on main appear with the next release.
+#
+# Not set here: version, Stable/Pre-release and the release link (from GitHub
+# Releases), the repository link, and featured/homeSection/order (set by the
+# website in website/assets/js/projects.js).
+
+title: ISOTP-C
+
+summary: >-
+  ISO 15765-2 (ISO-TP) transport protocol for classical CAN: messages up to 4095
+  bytes — or longer with 32-bit lengths — for UDS diagnostics, OBD and CAN
+  bootloaders.
+
+# Shown on the Projects page only (max. 8).
+features:
+  - "Version 2: rewritten with a layered codec + link API; time is an argument, no clock or platform calls"
+  - "82 unit tests at 100 % line and branch coverage, 62 integration tests against a Python twin"
+  - "Cppcheck MISRA C:2012 gate in CI with 0 violations and a documented deviation register"
+  - "Examples for bare metal, Linux SocketCAN and Zephyr"
+
+# Up to three measured numbers.
+highlights:
+  - { value: "1.8 KB", label: "code size" }
+  - { value: "120 B", label: "worst-case stack" }
+  - { value: "144", label: "automated tests" }
+
+# Filters on the Projects page.
+categories: [Libraries, Automotive]
+
+tags: [C11, CAN, ISO 15765-2, UDS, MISRA C:2012, MIT]
+
+# Built-in illustration: robot, container, can, chip, bus, stepper, scope,
+# halfbridge, servo, planner. Or a photo from this repository, which replaces it:
+# image: docs/assets/card.webp
+art: can
+
+links:
+  docs: https://antonvynohradov.github.io/isotp-c/
+  manual: https://antonvynohradov.github.io/isotp-c/downloads/ISOTP-C_User_Manual.pdf
+  # article: https://systemfromscratch-articles.github.io/...

@@ -45,6 +45,7 @@ website/
     │   └── robot/          Arm renders (from the BCN3D Moveo CAD), RViz2 and Doppelstep images
     └── js/
         ├── projects.js     Portfolio and article data — edit this to add projects or articles
+        ├── libraries.js    Generated: latest library releases and their site.yml (do not edit)
         ├── main.js         Navigation and project rendering
         └── layers.js       Layer explorer and architecture switch (index.html, robot.html)
 ```
@@ -68,6 +69,17 @@ selected-work cards are written in `index.html`, so `featured` and `homeSection`
 are kept only for a future home page section. `highlights` adds up to three
 measured numbers to the card, and `links` accepts `docs`, `manual`, `article`, `repo` and
 `demo`. Optionally set `image` to a photo path to replace the built-in illustration.
+
+## Library releases
+
+The version, Stable / Pre-release and description of each library card follow the
+library's GitHub releases: on a release the library notifies this repository, the
+deploy workflow reads the latest release and the library's `site.yml` at that tag
+into `website/assets/js/libraries.js`, and commits it only when something changed.
+Labels outside the cards follow too when they carry `data-release="owner/repo"`.
+Setup for a library, token and `site.yml` format:
+[docs/library-integration.md](docs/library-integration.md); decision:
+[ADR-001](docs/adr/ADR-001-library-release-sync.md).
 
 ## Adding an article
 

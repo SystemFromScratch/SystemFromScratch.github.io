@@ -18,6 +18,21 @@
  *                 "stepper", "scope", "halfbridge", "servo", "planner"
  *   image       - optional path to a photo (e.g. "assets/img/projects/foo.jpg");
  *                 when set it replaces the illustration
+ *   track       - false stops the release sync for this entry (see below)
+ *   sitePath    - path of the description file in the library repository
+ *                 (default "site.yml")
+ *
+ * Release sync: for every entry whose links.repo is a GitHub repository,
+ * tools/fetch-libraries.mjs reads the latest release and the library's site.yml at
+ * that release tag, and writes them to libraries.js. On the page:
+ *   - status, stable and links.release come from the latest release
+ *     (the latest stable one; the latest pre-release when there is no stable one);
+ *   - title, summary, features, highlights, categories, tags, art, image and
+ *     links.docs/manual/article/demo come from site.yml when the tag has one;
+ *   - everything else, and anything missing above, is taken from this file.
+ * featured, homeSection and the order of the cards are always set here.
+ * Keep the full description here until a release of the library ships a site.yml;
+ * after that the entry can be reduced to its links.repo and website-only fields.
  */
 window.SFS_PROJECTS = [
   {
