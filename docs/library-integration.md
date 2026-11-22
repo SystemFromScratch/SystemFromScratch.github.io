@@ -75,6 +75,13 @@ Add `.github/workflows/website.yml` to the library:
 name: Website card
 
 on:
+  # Releases created by the library's "Release" workflow (gh release create with
+  # GITHUB_TOKEN). Such a release does not start "release" workflows, so the
+  # card follows the end of that workflow instead.
+  workflow_run:
+    workflows: [Release]
+    types: [completed]
+  # Releases created by hand on GitHub.
   release:
     types: [published]
   pull_request:
@@ -83,14 +90,19 @@ on:
 
 jobs:
   website:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     uses: SystemFromScratch/SystemFromScratch.github.io/.github/workflows/library-release.yml@main
     secrets:
       SITE_DISPATCH_TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
 ```
 
+`workflow_run` only fires for workflows on the **default branch**, so this file
+has to be merged there (e.g. `main`) before the next release. If the release
+workflow of a library has another name than `Release`, change `workflows:`.
+
 - On a pull request that changes `site.yml` it only validates the file, so a
   mistake shows up before the release.
-- On a published release (and on a manual run) it validates and then notifies
+- After a successful `Release` run, on a release created by hand and on a manual run it validates and then notifies
   the website. An invalid `site.yml` does not stop the notification: the new
   version appears with the last valid description.
 
