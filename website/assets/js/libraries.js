@@ -3,4 +3,85 @@
  * Latest release of each library (GitHub Releases) and its site.yml at that tag.
  * main.js merges it over the entries in projects.js.
  */
-window.SFS_LIBRARIES = {};
+window.SFS_LIBRARIES = {
+  "antonvynohradov/baton-c": {
+    "release": {
+      "date": "2026-10-25",
+      "prerelease": false,
+      "tag": "v1.0.0",
+      "url": "https://github.com/AntonVynohradov/Baton-C/releases/tag/v1.0.0",
+      "version": "v1.0.0"
+    },
+    "site": null
+  },
+  "antonvynohradov/dxl2-c": {
+    "release": {
+      "date": "2026-11-22",
+      "prerelease": false,
+      "tag": "v2.0.0",
+      "url": "https://github.com/AntonVynohradov/DXL2-C/releases/tag/v2.0.0",
+      "version": "v2.0.0"
+    },
+    "site": null
+  },
+  "antonvynohradov/dynamixel-x430-control-table-emulator": {
+    "release": {
+      "date": "2026-11-22",
+      "prerelease": false,
+      "tag": "v1.2.0",
+      "url": "https://github.com/AntonVynohradov/DYNAMIXEL-X430-Control-Table-Emulator/releases/tag/v1.2.0",
+      "version": "v1.2.0"
+    },
+    "site": null
+  },
+  "antonvynohradov/isotp-c": {
+    "release": {
+      "date": "2026-10-26",
+      "prerelease": false,
+      "tag": "v2.0.1",
+      "url": "https://github.com/AntonVynohradov/isotp-c/releases/tag/v2.0.1",
+      "version": "v2.0.1"
+    },
+    "site": null
+  },
+  "antonvynohradov/sfs-stepper-power-spice": {
+    "release": null,
+    "site": null
+  },
+  "antonvynohradov/stepper-c": {
+    "release": {
+      "date": "2026-11-14",
+      "prerelease": false,
+      "tag": "v1.5.0",
+      "url": "https://github.com/AntonVynohradov/Stepper-C/releases/tag/v1.5.0",
+      "version": "v1.5.0"
+    },
+    "site": null
+  },
+  "antonvynohradov/stepper-lab": {
+    "release": null,
+    "site": null
+  },
+  "antonvynohradov/zephyr-smartfusion2-workspace": {
+    "release": null,
+    "site": null
+  },
+  "systemfromscratch/sfs-doppelstep": {
+    "release": {
+      "date": "2026-11-14",
+      "prerelease": true,
+      "tag": "v0.3.0",
+      "url": "https://github.com/SystemFromScratch/sfs-doppelstep/releases/tag/v0.3.0",
+      "version": "v0.3.0"
+    },
+    "site": null
+  },
+  "systemfromscratch/sfs-smartmanipulator-x-operator": {
+    "release": null,
+    "site": null
+  },
+  "systemfromscratch/sfs-smartmanipulator-x-robot": {
+    "release": null,
+    "site": null
+  }
+};
